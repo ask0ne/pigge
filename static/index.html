@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<style>
+
+body{
+  margin: 0;
+}
+
+.header {
+  background-color: #87CEFA;
+  padding: 20px;
+  text-align: center;
+}
+
+.row{
+  padding: 50px;
+  text-align: center; 
+}
+
+.footer {
+   position: fixed;
+   left: 0;
+   bottom: 0;
+   width: 100%;
+   background-color: black;
+   color: white;
+   text-align: center;
+   padding: 15px;
+}
+
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Student Identity Card Verification</h1>
+</div>
+
+<div class="row">
+  <form action="{{ url_for('main') }}" method="POST" enctype=multipart/form-data>
+    <div class="row">
+        Name <input type="name" name="name" placeholder="Enter your name"><br><br>
+        School ID <input type=file name=file><br><br>
+        <input type="image" alt="Submit" src="{{ url_for('static', filename='image-optical.png') }}" style="width: auto; height: 50px;">
+    </div>
+</form>
+</div>
+
+<div class="footer">
+  <p>G4</p>
+</div>
+
+</body>
+</html>
