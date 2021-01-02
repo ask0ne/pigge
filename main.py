@@ -7,6 +7,7 @@ from werkzeug.utils import secure_filename
 
 
 APP = Flask(__name__, template_folder="static")
+APP.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 
 UPLOAD_FOLDER = "uploads"
 ALLOWED_EXTENSIONS = {"png", "jpg", "jpeg"}

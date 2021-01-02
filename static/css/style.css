@@ -1,24 +1,32 @@
-body{
-    margin: 0;
-    padding: 0;
-    text-align: left;
-  }
-  
-  .header {
-    background-color: #df87fa;
-    padding: 20px;
-    text-align: center;
-  }
-  .container{
-      padding: 0.7em;
-  }
-  .footer {
-     position: fixed;
-     left: 0;
-     bottom: 0;
-     width: 100%;
-     background-color: black;
-     color: white;
-     text-align: center;
-     padding: 15px;
-  }
+body {
+	margin: 0;
+	padding: 0;
+	text-align: left;
+}
+.header {
+	padding: 20px;
+	text-align: center;
+	font-size: 2em;
+}
+body.kid-reg {
+	background-color: #cd72e9;
+}
+.kid-reg-form {
+	text-align: right;
+	margin: 3em;
+	background-color: snow;
+	border-radius: 2em;
+	padding: 1.5em;
+}
+.row {
+	margin: 1.5em;
+}
+.footer {
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	background-color: black;
+	color: white;
+	text-align: center;
+}
