@@ -26,7 +26,7 @@ header("Content-Type: text/html; charset=ISO-8859-1");
   <input type="radio" name="Q2" value="c"> No<br>
 </h3>
 
-<H3>Q. WHAT IS SUITABLE MEANING FOR THE WORD ‘VIGOROUS’ IN THE STORY?</H3>
+<H3>Q. WHAT IS SUITABLE MEANING FOR THE WORD â€˜VIGOROUSâ€™ IN THE STORY?</H3>
 
 <h3>
   <input type="radio" name="Q3" value="a"  required> Strong<br>
@@ -38,16 +38,16 @@ header("Content-Type: text/html; charset=ISO-8859-1");
 
 <h3>
   <input type="radio" name="Q4" value="a"  required> They wanted to see the monkey struggling in the harsh weather.<br>
-  <input type="radio" name="Q4" value="b"> The monkeys didn’t have shelter for themselves.<br>
+  <input type="radio" name="Q4" value="b"> The monkeys didnâ€™t have shelter for themselves.<br>
   <input type="radio" name="Q4" value="c"> Their nests were tiny to help the monkey with shelter.<br>
 </h3>
 
-<H3>Q. HOW DID THE MONKEY REACT TO THE BIRD’S ADVICE?</H3>
+<H3>Q. HOW DID THE MONKEY REACT TO THE BIRDâ€™S ADVICE?</H3>
 
 <h3>
   <input type="radio" name="Q5" value="a"  required> The monkey ran away to avoid irritating advises<br>
-  <input type="radio" name="Q5" value="b"> The monkey angrily pounced on the bird’s nest, tore it and threw it on the ground.<br>
-  <input type="radio" name="Q5" value="c"> The monkey listened to the bird’s advice and regretted his carelessness.<br>
+  <input type="radio" name="Q5" value="b"> The monkey angrily pounced on the birdâ€™s nest, tore it and threw it on the ground.<br>
+  <input type="radio" name="Q5" value="c"> The monkey listened to the birdâ€™s advice and regretted his carelessness.<br>
 </h3>
 
 <br><br><br>
