@@ -1,6 +1,6 @@
 """LP2"""
 import os
-from flask import Flask, flash, request, redirect, render_template
+from flask import Flask, flash, request, redirect, render_template, url_for
 import cv2
 import pytesseract
 from werkzeug.utils import secure_filename
@@ -28,6 +28,7 @@ def check_name(name, scanned_text):
             flag = True
     return flag
 
+
 def return_answer(answer):
     '''Return output'''
     if answer:
@@ -35,14 +36,15 @@ def return_answer(answer):
     else:
         return "Student Verification Failed. Please upload a better photo or recheck entered name."
 
-@APP.route("/", methods=["GET", "POST"])
-def main():
-    """main function"""
+
+@APP.route("/registration-kid", methods=["GET", "POST"])
+def registration_kid():
+    """registration function"""
     if request.method == "GET":
-        return render_template("index.html")
+        return render_template("registration-kid.html")
 
     if request.method == "POST":
-
+        # Collect kid form data here
         if "file" not in request.files:
             flash("No file part")
             return redirect(request.url)
@@ -68,6 +70,23 @@ def main():
             result = check_name(name, scanned_text)
             answer = return_answer(result)
             return render_template("resultpage.html", result=answer)
+
+
+@APP.route("/registration", methods=["GET", "POST"])
+def registration():
+    """parents reg form"""
+    if request.method == "GET":
+        return render_template("registration.html")
+    if request.method == "POST":
+        # Collect parent form data here
+        return redirect(url_for('registration_kid'))
+
+
+@APP.route("/", methods=["GET", "POST"])
+def main():
+    """main function"""
+    if request.method == "GET":
+        return render_template("index.html")
 
 
 if __name__ == "__main__":
