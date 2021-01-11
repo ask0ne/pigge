@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Parent's Registration</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <style>
+    body,
+    html {
+      font-family: Arial, Helvetica, sans-serif;
+      background-image: url(im1.jpg);
+      color: #350c54;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    .bg-img {
+      /* The image used */
+      background-image: url(back.png);
+
+      min-height: 73vh;
+      width: 95%;
+      /* Center and scale the image nicely */
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: contain;
+      position: relative;
+    }
+
+    /* Add styles to the form container */
+    .container {
+      position: absolute;
+      right: 12px;
+      margin: 0.2px;
+      max-width: 400px;
+      height: 100%;
+
+      padding: 16px;
+      background-color: Tan;
+    }
+
+    /* Full-width input fields */
+    input[type=text],
+    input[type=password] {
+      width: 100%;
+      padding: 10px;
+      margin: 5px 0 22px 0;
+      border: none;
+      background: #f1f1f1;
+    }
+
+    input[type=text]:focus,
+    input[type=password]:focus {
+      background-color: #ddd;
+      outline: none;
+    }
+
+    /* Set a style for the submit button */
+    .btn {
+      background-color: #4CAF50;
+      color: white;
+      padding: 16px 20px;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+      opacity: 0.9;
+    }
+
+    .btn:hover {
+      opacity: 1;
+    }
+
+    .footer {
+      position: fixed;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      background-color: black;
+      color: white;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+  <br><br>
+
+  <div class="bg-img">
+    <form action="{{ url_for('registration') }}" method="POST" enctype=multipart/form-data class="container">
+      <br>
+      <b>Name of Parent</b>
+      <input type="text" placeholder="Enter Name" name="pname" required>
+
+      <b>Contact Number</b>
+      <input type="text" placeholder="Enter Phone Number" name="mobile" required>
+
+      <b>Email</b>
+      <input type="text" placeholder="Enter Email" name="email" required>
+
+      <b>Password</b>
+      <input type="password" placeholder="Enter Password" name="psw" required><br><br>
+
+      <button type="submit" class="btn">Register Me!</button><br>
+    </form>
+  </div>
+  <div class="footer">
+    <p>pigge &copy; 2020-2021</p>
+  </div>
+
+
+</body>
+
+</html>
