@@ -21,7 +21,7 @@
       /* The image used */
       background-image: url("{{ url_for('static', filename='back.png') }}");
 
-      min-height: 500px;
+      min-height: 470px;
 
       /* Center and scale the image nicely */
       background-position: center;
@@ -84,10 +84,10 @@
 </head>
 
 <body>
-  <br><br><br>
+  <br><br>
   <div class="bg-img">
     <form action="{{ url_for('registration') }}" method="POST" enctype=multipart/form-data class="container">
-      
+      <br>
       <b>Name of Parent</b>
       <input type="text" placeholder="Enter Name" name="pname" required>
 
@@ -98,7 +98,7 @@
       <input type="text" placeholder="Enter Email" name="email" required>
 
       <b>Password</b>
-      <input type="password" placeholder="Enter Password" name="psw" required><br>
+      <input type="password" placeholder="Enter Password" name="psw" required><br><br>
 
       <button type="submit" class="btn">Register Me!</button><br>
     </form>
