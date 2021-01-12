@@ -5,8 +5,7 @@ import cv2
 import pytesseract
 from werkzeug.utils import secure_filename
 
-
-APP = Flask(__name__, template_folder="static")
+APP = Flask(__name__)
 APP.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 
 UPLOAD_FOLDER = "uploads"
@@ -79,7 +78,7 @@ def registration():
         return render_template("registration.html")
     if request.method == "POST":
         # Collect parent form data here
-        return redirect(url_for('registration_kid'))
+        return redirect(url_for("registration_kid"))
 
 
 @APP.route("/", methods=["GET", "POST"])
