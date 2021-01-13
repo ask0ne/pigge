@@ -15,8 +15,15 @@ def allowed_file(filename):
     """Check if valid file selected"""
     return "." in filename and filename.rsplit(".", 1)[1].lower() in ALLOWED_EXTENSIONS
 
+
+@APP.route("/kids-dashboard", method=["GET", "POST"])
+def kids_dashboard():
+    """Kid's dashboard code here"""
+    return render_template("kids_dash.html")
+
 @APP.route("/dashboard", methods=["GET", "POST"])
 def register_successful():
+    """create user session here and ideally redirect to parent dashboard"""
     return render_template("resultpage.html", result=request.args.get('data'))
 
 @APP.route("/registration-kid", methods=["GET", "POST"])
