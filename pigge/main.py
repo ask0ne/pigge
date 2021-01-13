@@ -16,7 +16,7 @@ def allowed_file(filename):
     return "." in filename and filename.rsplit(".", 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
-@APP.route("/kids-dashboard", method=["GET", "POST"])
+@APP.route("/kids-dashboard", methods=["GET", "POST"])
 def kids_dashboard():
     """Kid's dashboard code here"""
     return render_template("kids_dash.html")
