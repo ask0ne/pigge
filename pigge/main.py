@@ -2,13 +2,25 @@
 import os
 from flask import Flask, flash, request, redirect, render_template, url_for
 from werkzeug.utils import secure_filename
+from pigge.models import db
 from pigge.id_verify import verify_id
 
+# Flask APP configurations
 APP = Flask(__name__)
 APP.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
+APP.config['DEBUG'] = True
 UPLOAD_FOLDER = "pigge/uploads"
 ALLOWED_EXTENSIONS = {"png", "jpg", "jpeg"}
 APP.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
+POSTGRES = {
+    'user': 'postgres',
+    'pw': 'admin',
+    'host': 'localhost',
+    'port': '5432',
+    'db': 'pigge',
+}
+APP.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://%(user)s:\%(pw)s@%(host)s:%(port)s/%(db)s' % POSTGRES
+db.init_app(APP)
 
 
 def allowed_file(filename):
@@ -21,10 +33,12 @@ def kids_dashboard():
     """Kid's dashboard code here"""
     return render_template("kids_dash.html")
 
+
 @APP.route("/dashboard", methods=["GET", "POST"])
 def register_successful():
     """create user session here and ideally redirect to parent dashboard"""
     return render_template("resultpage.html", result=request.args.get('data'))
+
 
 @APP.route("/registration-kid", methods=["GET", "POST"])
 def registration_kid():
