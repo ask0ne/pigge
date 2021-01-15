@@ -14,4 +14,11 @@ class Parent(db.Model):
     phone_number = db.Column(db.String)
     parent_email = db.Column(db.String)
     parent_password = db.Column(db.String)
-    salt = db.Column(db.String)
+
+class Kid(db.Model):
+    __tablename__ = 'kid'
+    id = db.Column(db.Integer, primary_key=True)
+    kid_id = db.Column(db.String)
+    kid_name = db.Column(db.String)
+    kid_email = db.Column(db.String)
+    kid_pin = db.Column(db.String)

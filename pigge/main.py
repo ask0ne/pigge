@@ -12,14 +12,7 @@ APP.config['DEBUG'] = True
 UPLOAD_FOLDER = "pigge/uploads"
 ALLOWED_EXTENSIONS = {"png", "jpg", "jpeg"}
 APP.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
-POSTGRES = {
-    'user': 'postgres',
-    'pw': 'admin',
-    'host': 'localhost',
-    'port': '5432',
-    'db': 'pigge',
-}
-APP.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://%(user)s:\%(pw)s@%(host)s:%(port)s/%(db)s' % POSTGRES
+APP.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:admin@localhost/pigge'
 db.init_app(APP)
 
 
