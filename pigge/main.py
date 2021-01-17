@@ -2,18 +2,12 @@
 import os
 from flask import Flask, flash, request, redirect, render_template, url_for
 from werkzeug.utils import secure_filename
-from pigge.id_verify import verify_id
+from pigge.id_verify import verify_id, allowed_file
 
 APP = Flask(__name__)
 APP.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 UPLOAD_FOLDER = "pigge/uploads"
-ALLOWED_EXTENSIONS = {"png", "jpg", "jpeg"}
 APP.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
-
-
-def allowed_file(filename):
-    """Check if valid file selected"""
-    return "." in filename and filename.rsplit(".", 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
 @APP.route("/kids-dashboard", methods=["GET", "POST"])
@@ -21,10 +15,12 @@ def kids_dashboard():
     """Kid's dashboard code here"""
     return render_template("kids_dash.html")
 
+
 @APP.route("/dashboard", methods=["GET", "POST"])
 def register_successful():
     """create user session here and ideally redirect to parent dashboard"""
     return render_template("resultpage.html", result=request.args.get('data'))
+
 
 @APP.route("/registration-kid", methods=["GET", "POST"])
 def registration_kid():
@@ -66,6 +62,12 @@ def registration():
         return redirect(url_for("registration_kid"))
 
 
+@APP.route("/login", methods=["GET", "POST"])
+def login():
+    if request.method == "GET":
+        return render_template("login.html")
+
+
 @APP.route("/", methods=["GET", "POST"])
 def main():
     """main function"""
@@ -74,4 +76,4 @@ def main():
 
 
 if __name__ == "__main__":
-    APP.run()
+    APP.run(debug=True)

@@ -3,6 +3,13 @@ import os
 import cv2
 import pytesseract
 
+ALLOWED_EXTENSIONS = {"png", "jpg", "jpeg"}
+
+
+def allowed_file(filename):
+    """Check if valid file selected"""
+    return "." in filename and filename.rsplit(".", 1)[1].lower() in ALLOWED_EXTENSIONS
+
 
 def check_name(name, scanned_text):
     """Check input name with scanned file"""
