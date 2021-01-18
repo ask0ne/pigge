@@ -32,7 +32,7 @@
 					<div class="form-row">
 						<label class="form-row-inner">
 							<br>
-							<input type="text" placeholder="Enter Phone Number" name="mobile" required>
+							<input type="text" placeholder="Enter Phone Number" name="mobile" minlength="10" maxlength="10" required>
 							<span class="border"></span>
 							</br>
 						</label>
@@ -42,7 +42,7 @@
 						<label class="form-row-inner">
 							<br>
 
-							<input type="text" placeholder="Enter Email" name="email" required>
+							<input type="email" placeholder="Enter Email" name="email" required>
 							<span class="border"></span>
 							</br>
 						</label>
@@ -50,7 +50,7 @@
 					<div class="form-row">
 						<label class="form-row-inner">
 							<br>
-							<input type="password" placeholder="Enter Password" name="psw" required><br><br>
+							<input type="password" placeholder="Enter Password" name="psw" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required><br><br>
 							<span class="border"></span>
 							</br>
 						</label>
