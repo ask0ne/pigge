@@ -38,7 +38,7 @@ def registration_kid():
         birthdate = request.form["birthdate"]
         email = request.form['email']
         pin = request.form['pin']
-
+        gender = request.form['gender']
         if "file" not in request.files:
             flash("No file part")
             return redirect(request.url)
@@ -59,7 +59,7 @@ def registration_kid():
             answer = verify_id(name, file_path)
             if answer:
                 k_user = Kid(kid_id=calculate_id(
-                    name, birthdate), kid_name=name, kid_dob=birthdate, kid_email=email, kid_pin=pin)
+                    name, birthdate), kid_name=name, kid_dob=birthdate, kid_email=email, kid_pin=pin, kid_gender=gender)
                 # Update parent table here
                 db.session.add(k_user)
                 db.session.commit()

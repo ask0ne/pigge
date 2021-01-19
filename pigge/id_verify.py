@@ -42,18 +42,22 @@ def verify_id(name, file_path):
 
 def cal_name(n):
     '''Encode name'''
-    return ord(n) - 96
+    order = ord(n) - 96
+    return "{0:0=2d}".format(order)
 
 
 def calculate_id(name, dob):
     """Generate ID in form of Uddnnyy00x"""
     generated_id = 'K'
-    dd = dob.date('date')
-    nn = cal_name(name[0])
-    yy = dob.date('year')
+    print(dob)
+    dd = str(dob[-2:])
+    nn = str(cal_name(name[0]))
+    yy = str(dob[2:4])
+    auto_inc_id = db.engine.execute('select count(id) from kid').scalar() + 1
+    auto_inc_id = str("{0:0=2d}".format(auto_inc_id))
     generated_id += dd
     generated_id += nn
     generated_id += yy
-    generated_id += db.engine.execute('select count(id) from kid').scalar()
+    generated_id += auto_inc_id
     print(generated_id)
     return generated_id
