@@ -62,7 +62,7 @@ def registration_kid():
                     name, birthdate), kid_name=name, kid_dob=birthdate, kid_email=email, kid_pin=pin)
                 # Update parent table here
                 db.session.add(k_user)
-                db.session.commit()    
+                db.session.commit()
             return redirect(url_for('register_successful', data=return_answer(answer)))
 
 

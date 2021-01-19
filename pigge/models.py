@@ -1,6 +1,6 @@
 '''Models(Database) Code Here'''
 from flask_sqlalchemy import SQLAlchemy
-
+import bcrypt
 # Database DB configurations
 db = SQLAlchemy()
 
@@ -16,6 +16,11 @@ class Parent(db.Model):
     parent_password = db.Column(db.String)
     acc_status = db.Column(db.Boolean)
 
+    '''@parent_password.setter
+    def parent_password(self, parent_password):
+        self.parent_password_hash = bcrypt.hashpw(parent_password, bcrypt.gensalt())
+    def verify_password(self):
+        return bcrypt.checkpw(self.parent_password, self.parent_password_hash)'''
 
 class Panel(db.Model):
     """Parent Panel : pay_request, two_f_auth and restrict_bal"""

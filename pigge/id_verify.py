@@ -1,9 +1,10 @@
 '''Kid ID Verification Module'''
 import os
 import cv2
+import bcrypt
 import pytesseract
 from datetime import datetime
-
+from pigge.models import db
 ALLOWED_EXTENSIONS = {"png", "jpg", "jpeg"}
 
 
@@ -53,4 +54,6 @@ def calculate_id(name, dob):
     generated_id += dd
     generated_id += nn
     generated_id += yy
+    generated_id += db.engine.execute('select count(id) from kid').scalar()
+    print(generated_id)
     return generated_id
