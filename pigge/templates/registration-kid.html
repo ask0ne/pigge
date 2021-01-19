@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -12,6 +13,8 @@
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+
+  <title>Kid's Registration</title>
 </head>
 
 <body class="kid-reg">
@@ -25,24 +28,47 @@
       </div>
       <div class="row">
         <div class="col-3">Name</div>
-        <div class="col-6"><input type="name" name="name" class="form-control" placeholder="Enter your Kid's Name">
+        <div class="col-6"><input type="name" name="name" class="form-control" placeholder="Enter your Kid's Name"
+            required minlength="2">
         </div>
       </div>
       <div class="row">
         <div class="col-3">Date of Birth</div>
-        <div class="col-6"><input type="date" name="birthdate" placeholder="Birthdate" class="form-control"></div>
-      </div>
-      <div class="row">
-        <div class="col-3">Email ID</div>
-        <div class="col-6"><input type="email" name="email" placeholder="Enter Kid's Email ID" class="form-control">
+        <div class="col-6"><input type="date" name="birthdate" placeholder="Birthdate" required class="form-control">
         </div>
       </div>
       <div class="row">
+
+        <div class="col-3">My Kid is a </div>
+        <div class="col-3">
+          <input type="radio" name="gender" value="girl" required>
+          <img src="{{ url_for('static', filename='images/girl.png') }}" width="80">
+          <input type="radio" name="gender" value="boy">
+          <img src="{{ url_for('static', filename='images/boy.png') }}" width="80">
+
+        </div>
+      </div>
+      <div class="row">
+
+
+        <div class="col-3">Email ID</div>
+        <div class="col-6"><input type="email" name="email" placeholder="Enter Email ID" required class="form-control">
+        </div>
+      </div>
+      <div class="row">
+
+        <div class="col-3">Set Pin for Kid</div>
+        <div class="col-6"><input type="password" name="pin" placeholder="Enter 4 digit Pin" pattern="[0-9]{4}" maxlength="4" class="form-control"
+            required title="Please enter only numeric values (0 to 9)"></div>
+      </div>
+      <div class="row">
+
+
         <div class="col-3">Student ID</div>
-        <div class="col-6"><input type=file name=file class="form-control"></div>
+        <div class="col-6"><input type=file name=file class="form-control" required></div>
       </div>
       <div class="header">
-        <button class="btn btn-primary" alt="Submit">Apply For Registration</button>
+        <button class="btn btn-primary" alt="Submit">Register</button>
       </div>
     </form>
   </div>

@@ -32,7 +32,7 @@
 					<div class="form-row">
 						<label class="form-row-inner">
 							<br>
-							<input type="text" placeholder="Enter Phone Number" name="mobile" required>
+							<input type="text" placeholder="Enter Phone Number" name="mobile" minlength="10" maxlength="10" required>
 							<span class="border"></span>
 							</br>
 						</label>
@@ -50,7 +50,8 @@
 					<div class="form-row">
 						<label class="form-row-inner">
 							<br>
-							<input type="password" placeholder="Enter Password" name="psw" required><br><br>
+							<input type="password" placeholder="Enter Password" name="psw" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" 
+							       title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required><br><br>
 							<span class="border"></span>
 							</br>
 						</label>
