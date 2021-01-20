@@ -29,7 +29,7 @@
       <div class="row">
         <div class="col-3">Name</div>
         <div class="col-6"><input type="name" name="name" class="form-control" placeholder="Enter your Kid's Name"
-            required minlength="2">
+            required minlength="2" style="text-transform:uppercase">
         </div>
       </div>
       <div class="row">
@@ -41,9 +41,9 @@
 
         <div class="col-3">My Kid is a </div>
         <div class="col-3">
-          <input type="radio" name="gender" value="girl" required>
+          <input type="radio" name="gender" value="G" required>
           <img src="{{ url_for('static', filename='images/girl.png') }}" width="80">
-          <input type="radio" name="gender" value="boy">
+          <input type="radio" name="gender" value="B">
           <img src="{{ url_for('static', filename='images/boy.png') }}" width="80">
 
         </div>

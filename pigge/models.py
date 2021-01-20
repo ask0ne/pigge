@@ -9,6 +9,7 @@ class Parent(db.Model):
     '''Parent Personal Details'''
     __tablename__ = 'parent'
     id = db.Column(db.Integer, primary_key=True)
+    parent_id = db.Column(db.String)
     created_on = db.Column(db.DateTime)
     parent_name = db.Column(db.String)
     phone_number = db.Column(db.String)
@@ -28,7 +29,7 @@ class Panel(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     parent_id = db.Column(db.String)
     pay_request = db.Column(db.Boolean)
-    two_f_auth = db.Column(db.Boolean)
+    two_f_auth = db.Column(db.Integer)
     restrict_bal = db.Column(db.Integer)
 
 
@@ -42,3 +43,4 @@ class Kid(db.Model):
     kid_gender = db.Column(db.String)
     kid_email = db.Column(db.String)
     kid_pin = db.Column(db.String)
+    number_of_tries = db.Column(db.Integer)
