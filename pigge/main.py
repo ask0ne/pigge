@@ -29,7 +29,7 @@ def register_successful():
 
 @APP.route("/registration-kid", methods=["GET", "POST"])
 def registration_kid():
-    """main function"""
+    """Registration kid route"""
     if request.method == "GET":
         return render_template("registration-kid.html")
 
@@ -78,7 +78,7 @@ def registration_kid():
 
 @APP.route("/registration", methods=["GET", "POST"])
 def registration():
-    """parents reg form"""
+    """Parents registration form"""
     if request.method == "GET":
         return render_template("registration.html")
     if request.method == "POST":
@@ -101,12 +101,14 @@ def registration():
 
 @APP.route("/login", methods=["GET"])
 def login():
+    """Login page loading"""
     if request.method == "GET":
         return render_template("login.html")
 
 
 @APP.route("/login-parent", methods=["POST"])
 def login_parent():
+    """Login Parent route"""
     if request.method == "POST":
         pmail = request.form.get('p_email')
         ppassword = request.form.get('password')
@@ -120,6 +122,7 @@ def login_parent():
 
 @APP.route("/login-kid", methods=["POST"])
 def login_kid():
+    """Login Kid route"""
     if request.method == "POST":
         kmail = request.form.get('k_email')
         kpin = request.form.get("pin")
@@ -131,9 +134,12 @@ def login_kid():
         return redirect(url_for('main'))
 
 
-@APP.route("/", methods=["GET", "POST"])
+@APP.route("/", methods=["GET"])
 def main():
-    """main function"""
+    """
+    main function
+    index page
+    """
     if request.method == "GET":
         return render_template("index.html")
 

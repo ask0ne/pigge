@@ -54,11 +54,9 @@ def calculate_id(name, dob):
     yy = str(dob[2:4])
     auto_inc_id = db.engine.execute('select count(id) from kid').scalar() + 1
     auto_inc_id = str("{0:0=3d}".format(auto_inc_id))
-    generated_id += dd
-    generated_id += nn
-    generated_id += yy
-    generated_id += auto_inc_id
+    generated_id += dd + nn + yy + auto_inc_id
     return generated_id
+
 
 def check_unique_user(mobile, email):
     mail = Parent.query.filter_by(parent_email=email).first()
