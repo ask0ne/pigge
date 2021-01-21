@@ -23,6 +23,7 @@ class Parent(db.Model):
     def verify_password(self):
         return bcrypt.checkpw(self.parent_password, self.parent_password_hash)'''
 
+
 class Panel(db.Model):
     """Parent Panel : pay_request, two_f_auth and restrict_bal"""
     __tablename__ = 'panel'

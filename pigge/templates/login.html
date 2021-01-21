@@ -23,11 +23,11 @@
 						<button class="tablinks" onclick="openCity(event, 'kid')">Kid</button>
 					</div>
 				</div>
-				<form class="form-detail" action="#" method="post">
+				<form class="form-detail" action="{{ url_for('login_parent') }}" method="post">
 					<div class="tabcontent" id="parent">
 						<div class="form-row">
 							<label class="form-row-inner">
-								<input type="text" name="your_email" id="your_email" class="input-text" required>
+								<input type="text" name="p_email" id="your_email" class="input-text" required>
 								<span class="label">E-Mail</span>
 								<span class="border"></span>
 							</label>
@@ -45,19 +45,19 @@
 						</div>
 					</div>
 				</form>
-				<form class="form-detail" action="#" method="post">
+				<form class="form-detail" action="{{ url_for('login_kid') }}" method="post">
 					<div class="tabcontent" id="kid">
 
 						<div class="form-row">
 							<label class="form-row-inner">
-								<input type="text" name="your_email_1" id="your_email_1" class="input-text" required>
+								<input type="text" name="k_email" id="your_email_1" class="input-text" required>
 								<span class="label">E-Mail</span>
 								<span class="border"></span>
 							</label>
 						</div>
 						<div class="form-row">
 							<label class="form-row-inner">
-								<input type="password" name="password_1" id="password_1" class="input-text" required>
+								<input type="password" name="pin" id="password_1" class="input-text" required>
 								<span class="label">Enter the Pin</span>
 								<span class="border"></span>
 							</label>

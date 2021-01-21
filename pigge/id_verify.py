@@ -4,7 +4,7 @@ import cv2
 import bcrypt
 import pytesseract
 from datetime import datetime
-from pigge.models import db
+from pigge.models import db, Parent
 ALLOWED_EXTENSIONS = {"png", "jpg", "jpeg"}
 
 
@@ -61,4 +61,9 @@ def calculate_id(name, dob):
     return generated_id
 
 def check_unique_user(mobile, email):
-    pass
+    mail = Parent.query.filter_by(parent_email=email).first()
+    phno = Parent.query.filter_by(phone_number=mobile).first()
+    if mail and phno:
+        return False
+    else:
+        return True
