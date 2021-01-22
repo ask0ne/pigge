@@ -1,7 +1,7 @@
 '''Kid ID Verification Module'''
 import os
 import cv2
-import bcrypt
+#import bcrypt
 import pytesseract
 from datetime import datetime
 from pigge.models import db, Parent
@@ -59,9 +59,7 @@ def calculate_id(name, dob):
 
 
 def check_unique_user(mobile, email):
+    """Returns True if user is unique"""
     mail = Parent.query.filter_by(parent_email=email).first()
     phno = Parent.query.filter_by(phone_number=mobile).first()
-    if mail and phno:
-        return False
-    else:
-        return True
+    return not (mail and phno)

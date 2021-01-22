@@ -4,7 +4,7 @@ import datetime
 from flask import Flask, flash, request, redirect, render_template, url_for
 from werkzeug.utils import secure_filename
 from pigge.models import *
-from pigge.id_verify import verify_id, allowed_file, calculate_id, return_answer, check_unique_user
+from pigge.registration import verify_id, allowed_file, calculate_id, return_answer, check_unique_user
 
 # Flask APP configurations
 APP = Flask(__name__)
@@ -41,24 +41,14 @@ def registration_kid():
         pin = request.form['pin']
         gender = request.form['gender']
         kid_ = calculate_id(name, birthdate)
-        if "file" not in request.files:
-            flash("No file part")
-            return redirect(request.url)
-        file = request.files["file"]
+        file_ = request.files["file"]
 
-        if file.filename == "":
-            flash("No file selected!")
-            return redirect(request.url)
-
-        if name == "":
-            flash("Please enter your name!")
-            return redirect(request.url)
-
-        if name and file and allowed_file(file.filename):
-            filename = secure_filename(file.filename)
+        if name and file_ and allowed_file(file_.filename):
+            filename = secure_filename(file_.filename)
             file_path = os.path.join(APP.config["UPLOAD_FOLDER"], filename)
-            file.save(file_path)
+            file_.save(file_path)
             answer = verify_id(name, file_path)
+            # Kid ID has been verified and can now access his account
             if answer:
                 k_user = Kid(kid_id=kid_, kid_name=name, kid_dob=birthdate,
                              kid_email=email, kid_pin=pin, kid_gender=gender, number_of_tries=0)
@@ -81,6 +71,7 @@ def registration():
     """Parents registration form"""
     if request.method == "GET":
         return render_template("registration.html")
+
     if request.method == "POST":
         # Collect parent form data here
         pname = request.form.get("pname")
@@ -89,14 +80,15 @@ def registration():
         email = request.form.get("email")
         password = request.form.get("psw")
         cr_on = datetime.datetime.now()
+        # Check if email and phone number is unique, add new entry if true
         if check_unique_user(mobile, email):
             p_user = Parent(created_on=cr_on, parent_name=pname, phone_number=mobile,
                             parent_email=email, parent_password=password, acc_status=False)
             db.session.add(p_user)
             db.session.commit()
             return redirect(url_for("registration_kid"))
-        else:
-            return redirect(url_for("registration"))
+
+        return redirect(url_for("registration"))
 
 
 @APP.route("/login", methods=["GET"])
@@ -114,10 +106,16 @@ def login_parent():
         ppassword = request.form.get('password')
         user = Parent.query.filter_by(parent_email=pmail).first()
         password = user.parent_password
+        status = user.acc_status
+        # Incorrect email or password
         if not user or ppassword != password:
             return redirect(url_for('login'))
 
-        return redirect(url_for('main'))
+        # Check account status to check if kid account exists or not
+        if status:
+            return redirect(url_for('parent_dashboard', data=pmail))
+        else:
+            return redirect(url_for('registration_kid'))
 
 
 @APP.route("/login-kid", methods=["POST"])
@@ -128,8 +126,15 @@ def login_kid():
         kpin = request.form.get("pin")
         user = Kid.query.filter_by(kid_email=kmail).first()
         pin = user.kid_pin
-        if not user or kpin != pin:
+        if not user:
             return redirect(url_for('login'))
+        elif kpin != pin:
+            if user.number_of_tries < 5:
+                user.number_of_tries += 1
+                db.session.commit()
+                return redirect(url_for('login'))
+            else:
+                return redirect(url_for('main'))
 
         return redirect(url_for('main'))
 
