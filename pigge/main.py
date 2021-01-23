@@ -19,7 +19,7 @@ def kids_dashboard():
 @APP.route("/dashboard", methods=["GET", "POST"])
 def register_successful():
     """create user session here and ideally redirect to parent dashboard"""
-    return render_template("resultpage.html", result=request.args.get('data'))
+    return render_template("parent_dashboard.html")
 
 
 @APP.route("/registration-kid", methods=["GET", "POST"])
