@@ -5,6 +5,7 @@ from flask import Flask, flash, request, redirect, render_template, url_for
 from werkzeug.utils import secure_filename
 from pigge.models import *
 from pigge.registration import verify_id, allowed_file, calculate_id, return_answer, check_unique_user
+from pigge.session import parent_user
 
 # Flask APP configurations
 APP = Flask(__name__)
@@ -15,10 +16,16 @@ APP.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:admin@localhost/p
 db.init_app(APP)
 
 
-@APP.route("/kids-dashboard", methods=["GET", "POST"])
-def kids_dashboard():
+@APP.route("/kid-dashboard", methods=["GET", "POST"])
+def kid_dashboard():
     """Kid's dashboard code here"""
     return render_template("kids_dash.html")
+
+
+@APP.route("/parent-dashboard", methods=["GET", "POST"])
+def parent_dashboard():
+    """Parent's dashboard code here"""
+    return render_template("parent_dashboard.html")
 
 
 @APP.route("/dashboard", methods=["GET", "POST"])
@@ -113,7 +120,8 @@ def login_parent():
 
         # Check account status to check if kid account exists or not
         if status:
-            return redirect(url_for('parent_dashboard', data=pmail))
+            parent_user(user)
+            return redirect(url_for('parent_dashboard'))
         else:
             return redirect(url_for('registration_kid'))
 
