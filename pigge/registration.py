@@ -6,7 +6,7 @@ import pytesseract
 from datetime import datetime
 from pigge.models import db, Parent
 ALLOWED_EXTENSIONS = {"png", "jpg", "jpeg"}
-
+UPLOAD_FOLDER = "pigge/uploads"
 
 def allowed_file(filename):
     """Check if valid file selected"""

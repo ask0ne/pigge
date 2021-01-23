@@ -1,18 +1,19 @@
 '''pigge'''
 import os
 import datetime
-from flask import Flask, flash, request, redirect, render_template, url_for
+from flask import Flask, flash, request, redirect, render_template, url_for, session
 from werkzeug.utils import secure_filename
 from pigge.models import *
-from pigge.registration import verify_id, allowed_file, calculate_id, return_answer, check_unique_user
-from pigge.session import parent_user
+from pigge.registration import *
+from pigge.session import theParent
 
 # Flask APP configurations
 APP = Flask(__name__)
 APP.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
-UPLOAD_FOLDER = "pigge/uploads"
+APP.config['TEMPLATES_AUTO_RELOAD'] = True
 APP.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 APP.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:admin@localhost/pigge'
+APP.config['SECRET_KEY'] = "893939939dad6325f1ef99d13573cd067196ff2ca89d09ce95fa9a27e6750bd6"
 db.init_app(APP)
 
 
@@ -25,7 +26,9 @@ def kid_dashboard():
 @APP.route("/parent-dashboard", methods=["GET", "POST"])
 def parent_dashboard():
     """Parent's dashboard code here"""
-    return render_template("parent_dashboard.html")
+    mail = session['user_email']
+    user = theParent(mail)
+    return render_template("parent_dashboard.html", user=user.user)
 
 
 @APP.route("/dashboard", methods=["GET", "POST"])
@@ -120,7 +123,7 @@ def login_parent():
 
         # Check account status to check if kid account exists or not
         if status:
-            parent_user(user)
+            session['user_email'] = pmail
             return redirect(url_for('parent_dashboard'))
         else:
             return redirect(url_for('registration_kid'))
@@ -143,9 +146,11 @@ def login_kid():
                 return redirect(url_for('login'))
             else:
                 return redirect(url_for('main'))
-
+        session['user_email'] = kmail
         return redirect(url_for('main'))
 
+def logout():
+    session.clear()
 
 @APP.route("/", methods=["GET"])
 def main():

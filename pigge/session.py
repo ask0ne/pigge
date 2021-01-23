@@ -1,28 +1,17 @@
 """Handling user sessions"""
+from pigge.models import Parent
 
-USER = None
+class theParent:
+    """Initialize parent on login"""
+    def __init__(self, mail):
+        self.user = Parent.query.filter_by(parent_email=mail).first()
 
+    def limit_transaction(self, val):
+        try:
+            self.user.restrict_bal = val
+            return True
+        except NameError:
+            return False
 
-def parent_user(u):
-    global USER
-    USER = u
-
-
-def get_name():
-    return USER.parent_name
-
-
-def get_acc_status():
-    return USER.acc_status
-
-
-def get_ID():
-    return USER.parent_id
-
-
-def limit_transaction(val):
-    try:
-        USER.restrict_bal = val
-        return True
-    except NameError:
-        return False
+    def add_funds(self, val):
+        pass
