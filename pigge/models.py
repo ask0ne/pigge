@@ -1,6 +1,6 @@
 '''Models(Database) Code Here'''
 from flask_sqlalchemy import SQLAlchemy
-import bcrypt
+#import bcrypt
 # Database DB configurations
 db = SQLAlchemy()
 

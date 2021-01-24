@@ -23,7 +23,7 @@
 						<button class="tablinks" onclick="openCity(event, 'kid')">Kid</button>
 					</div>
 				</div>
-				<form class="form-detail" action="{{ url_for('login_parent') }}" method="post">
+				<form class="form-detail" action="{{ url_for('auth_bp.login_parent') }}" method="post">
 					<div class="tabcontent" id="parent">
 						<div class="form-row">
 							<label class="form-row-inner">
@@ -45,7 +45,7 @@
 						</div>
 					</div>
 				</form>
-				<form class="form-detail" action="{{ url_for('login_kid') }}" method="post">
+				<form class="form-detail" action="{{ url_for('auth_bp.login_kid') }}" method="post">
 					<div class="tabcontent" id="kid">
 
 						<div class="form-row">

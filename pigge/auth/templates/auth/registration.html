@@ -18,7 +18,7 @@
 			</div>
 			<div class="form-right">
 
-				<form class="form-detail" action="{{ url_for('registration') }}" enctype=multipart/form-data
+				<form class="form-detail" action="{{ url_for('auth_bp.registration_parent') }}" enctype=multipart/form-data
 					method="post">
 
 					<div class="form-row">
@@ -83,7 +83,6 @@
 	.page-content {
 		width: 100%;
 		margin: 0 auto;
-		background-color: ;
 		display: flex;
 		display: -webkit-flex;
 		justify-content: center;
@@ -199,26 +198,6 @@
 		-webkit-transition: all .2s ease;
 		-o-transition: all .2s ease;
 		-ms-transition: all .2s ease;
-	}
-
-	.form-v8-content .form-row .form-row-inner .border {
-		position: absolute;
-		bottom: 31px;
-		left: 0;
-		height: 1px;
-		width: 100%;
-		background: #53c83;
-		transform: scaleX(0);
-		-moz-transform: scaleX(0);
-		-webkit-transform: scaleX(0);
-		-o-transform: scaleX(0);
-		-ms-transform: scaleX(0);
-		transform-origin: 0 0;
-		transition: all .15s ease;
-		-moz-transition: all .15s ease;
-		-webkit-transition: all .15s ease;
-		-o-transition: all .15s ease;
-		-ms-transition: all .15s ease;
 	}
 
 	.form-v8-content .form-detail .input-text {

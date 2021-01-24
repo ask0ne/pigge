@@ -1,12 +1,12 @@
-'''Kid ID Verification Module'''
+'''Logic for auth module including login & ID verification'''
 import os
 import cv2
 #import bcrypt
 import pytesseract
-from datetime import datetime
 from pigge.models import db, Parent
+
 ALLOWED_EXTENSIONS = {"png", "jpg", "jpeg"}
-UPLOAD_FOLDER = "pigge/uploads"
+
 
 def allowed_file(filename):
     """Check if valid file selected"""
@@ -26,9 +26,9 @@ def check_name(name, scanned_text):
 def return_answer(answer):
     '''Return output'''
     if answer:
-        return "Student Verification Successful"
+        return "Verification Successful. Login to continue."
     else:
-        return "Student Verification Failed. Please upload a better photo or recheck entered name."
+        return "Verification Failed. Login to try again."
 
 
 def verify_id(name, file_path):
@@ -62,4 +62,8 @@ def check_unique_user(mobile, email):
     """Returns True if user is unique"""
     mail = Parent.query.filter_by(parent_email=email).first()
     phno = Parent.query.filter_by(phone_number=mobile).first()
-    return not (mail and phno)
+    
+    if mail and phno:
+        return False
+    
+    return True

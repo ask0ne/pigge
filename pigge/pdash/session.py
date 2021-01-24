@@ -1,8 +1,10 @@
 """Handling user sessions"""
 from pigge.models import Parent
 
-class theParent:
+
+class TheParent:
     """Initialize parent on login"""
+
     def __init__(self, mail):
         self.user = Parent.query.filter_by(parent_email=mail).first()
 
