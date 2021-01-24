@@ -8,35 +8,35 @@ Each feature has been given it's own folder and each feature has it's own templa
 So for example, auth contains all the login/registraion logic and files related to it.
 
 
-├───migrations (DB stuff)
-│
-└───pigge
-    │   config.py               (Flask configuration)
-    │   main.py                 (Where the magic happens)
-    │   models.py               (DB models)
+├───migrations (DB stuff) <br>
+│<br>
+└───pigge<br>
+    │   config.py               (Flask configuration)<br>
+    │   main.py                 (Where the magic happens)<br>
+    │   models.py               (DB models)<br>
+    │<br>
+    ├───auth<br>
+    │   │   auth.py             (Login and registraion view)<br>
+    │   │   registration.py     (Login and registration logic)<br>
+    │   │<br>
+    │   └───templates           (Login and registration HTML files)<br>
+    │<br>
+    ├───kdash<br>
+    │   │   kdash.py            (Kid dashboard code will go here)<br>
+    │   │<br>
+    │   └───templates           (* HTML files)<br>
     │
-    ├───auth
-    │   │   auth.py             (Login and registraion view)
-    │   │   registration.py     (Login and registration logic)
-    │   │
-    │   └───templates           (Login and registration HTML files)
-    │
-    ├───kdash
-    │   │   kdash.py            (Kid dashboard code will go here)
-    │   │
-    │   └───templates           (* HTML files)
-    │
-    ├───pdash
-    │   │   pdash.py            (Parent dashboard)
-    │   │   session.py          (Session for parent login)
-    │   │
-    │   └───templates
-    │
-    ├───static
-    │   ├───css                 (All .css files)
-    │   ├───images              (Images here)
-    │   └───js                  (JS here)
-    │
-    ├───templates               (index.html)
-    │
-    └───uploads                 (Student ID card will be stored here)
+    ├───pdash<br>
+    │   │   pdash.py            (Parent dashboard)<br>
+    │   │   session.py          (Session for parent login)<br>
+    │   │<br>
+    │   └───templates<br>
+    │<br>
+    ├───static<br>
+    │   ├───css                 (All .css files)<br>
+    │   ├───images              (Images here)<br>
+    │   └───js                  (JS here)<br>
+    │<br>
+    ├───templates               (index.html)<br>
+    │<br>
+    └───uploads                 (Student ID card will be stored here)<br>
