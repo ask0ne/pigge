@@ -1,4 +1,4 @@
-"""Handling user sessions"""
+"""Handling parent sessions"""
 from pigge.models import Parent
 
 

@@ -121,7 +121,7 @@ def login_kid():
             else:
                 return redirect(url_for('main'))
         session['user_email'] = kmail
-        return redirect(url_for('main'))
+        return redirect(url_for('kdash.kid_dashboard'))
 
 
 @auth_bp.route("/authenticate/", methods=["GET", "POST"])
