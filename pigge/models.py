@@ -1,6 +1,5 @@
 '''Models(Database) Code Here'''
 from flask_sqlalchemy import SQLAlchemy
-#import bcrypt
 # Database DB configurations
 db = SQLAlchemy()
 
@@ -15,20 +14,16 @@ class Parent(db.Model):
     phone_number = db.Column(db.String)
     parent_email = db.Column(db.String)
     parent_password = db.Column(db.String)
-    acc_status = db.Column(db.Boolean)
-
-    '''@parent_password.setter
-    def parent_password(self, parent_password):
-        self.parent_password_hash = bcrypt.hashpw(parent_password, bcrypt.gensalt())
-    def verify_password(self):
-        return bcrypt.checkpw(self.parent_password, self.parent_password_hash)'''
+    acc_status = db.Column(db.Integer)
 
 
-class Panel(db.Model):
-    """Parent Panel : pay_request, two_f_auth and restrict_bal"""
-    __tablename__ = 'panel'
+class Wallet(db.Model):
+    """Wallet"""
+    __tablename__ = 'wallet'
     id = db.Column(db.Integer, primary_key=True)
-    parent_id = db.Column(db.String)
+    wallet_id = db.Column(db.String)
+    balance = db.Column(db.Integer)
+    generated_on = db.Column(db.DateTime)
     pay_request = db.Column(db.Boolean)
     two_f_auth = db.Column(db.Integer)
     restrict_bal = db.Column(db.Integer)
@@ -45,3 +40,29 @@ class Kid(db.Model):
     kid_email = db.Column(db.String)
     kid_pin = db.Column(db.String)
     number_of_tries = db.Column(db.Integer)
+
+
+class Transaction(db.Model):
+    """
+    Status --
+        -1: Pending
+        0 : Rejected
+        1 : Completed
+    """
+    __tablename__ = 'transaction'
+    id = db.Column(db.Integer, primary_key=True)
+    transaction_id = db.Column(db.String)
+    timestamp = db.Column(db.String)
+    sender_id = db.Column(db.String)
+    receiver_id = db.Column(db.String)
+    amount = db.Column(db.Integer)
+    category = db.Column(db.String)
+    status = db.Column(db.Integer)
+
+
+class Services(db.Model):
+    __tablename__ = "services"
+    id = db.Column(db.Integer, primary_key=True)
+    service_name = db.Column(db.String)
+    service_id = db.Column(db.String)
+    balance = db.Column(db.Integer)

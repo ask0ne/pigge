@@ -4,7 +4,6 @@ from werkzeug.utils import secure_filename
 from pigge.models import *
 from pigge.auth.registration import *
 
-
 auth_bp = Blueprint('auth_bp', __name__, template_folder='templates')
 
 
@@ -21,12 +20,12 @@ def registration_parent():
         mobile = request.form.get("mobile")
         email = request.form.get("email")
         password = request.form.get("psw")
-        cr_on = datetime.now()
+        #password = generate_password(password)
         # Check if email and phone number is unique, add new entry if true
         if check_unique_user(mobile, email):
             session['user_email'] = email
-            p_user = Parent(created_on=cr_on, parent_name=pname, phone_number=mobile,
-                            parent_email=email, parent_password=password, acc_status=False)
+            p_user = Parent(created_on=datetime.now(), parent_name=pname, phone_number=mobile,
+                            parent_email=email, parent_password=password, acc_status=-1)
             db.session.add(p_user)
             db.session.commit()
             return redirect(url_for("auth_bp.registration_kid"))
@@ -60,17 +59,16 @@ def registration_kid():
                 k_user = Kid(kid_id=kid_, kid_name=name, kid_dob=birthdate,
                              kid_email=email, kid_pin=pin, kid_gender=gender, number_of_tries=0)
                 db.session.add(k_user)
-                
+
                 # Update parent table here and create panel
                 pmail = session['user_email']
                 p_user = Parent.query.filter_by(parent_email=pmail).first()
-                p_user.acc_status = True
-                parent_ID = "P"
-                parent_ID += kid_[1:]
-                p_user.parent_id = parent_ID
-                panel = Panel(parent_id=parent_ID, pay_request=False,
-                              two_f_auth=-1, restrict_bal=-1)
-                db.session.add(panel)
+                p_user.acc_status = 1
+                p_user.parent_id = "P" + kid_[1:]
+                wallet_ID = "W" + kid_[1:]
+                wallet = Wallet(wallet_id=wallet_ID, balance=0, generated_on=datetime.now(), pay_request=False,
+                                two_f_auth=-1, restrict_bal=-1)
+                db.session.add(wallet)
                 db.session.commit()
             return redirect(url_for('auth_bp.register_successful', data=return_answer(answer)))
 
@@ -89,14 +87,14 @@ def login_parent():
         pmail = request.form.get('p_email')
         ppassword = request.form.get('password')
         user = Parent.query.filter_by(parent_email=pmail).first()
-        password = user.parent_password
+        password_hash = user.parent_password
         status = user.acc_status
         # Incorrect email or password
-        if not user or ppassword != password:
+        if not user or ppassword != password_hash:
             return redirect(url_for('auth_bp.login'))
 
         # Check account status to check if kid account exists or not
-        if status:
+        if status != -1:
             session['user_email'] = pmail
             return redirect(url_for('pdash.parent_dashboard'))
         else:
@@ -121,6 +119,7 @@ def login_kid():
             else:
                 return redirect(url_for('main'))
         session['user_email'] = kmail
+        user.number_of_tries = 0
         return redirect(url_for('kdash.kid_dashboard'))
 
 
@@ -128,6 +127,7 @@ def login_kid():
 def register_successful():
     """create user session here and ideally redirect to parent dashboard"""
     return render_template("auth/resultpage.html", result=request.args.get('data'))
+
 
 '''@auth_bp.route("")
 def logout():

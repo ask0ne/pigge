@@ -62,8 +62,19 @@ def check_unique_user(mobile, email):
     """Returns True if user is unique"""
     mail = Parent.query.filter_by(parent_email=email).first()
     phno = Parent.query.filter_by(phone_number=mobile).first()
-    
+
     if mail and phno:
         return False
-    
+
     return True
+
+'''
+def generate_password(password):
+    parent_password = bcrypt.hashpw(password, bcrypt.gensalt())
+    print(parent_password)
+    return parent_password
+
+
+def verify_password(ppassword, password_hash):
+    return bcrypt.checkpw(ppassword, password_hash)
+'''

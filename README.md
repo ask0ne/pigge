@@ -8,6 +8,11 @@ Each feature has been given it's own folder and each feature has it's own templa
 So for example, auth contains all the login/registraion logic and files related to it.
 
 
+
+wallet_id - FOR EXTERNAL USE ONLY AKA USED BY KIDS TO PAY OTHER KIDS
+
+Other IDs are used for INTERNAL PURPOSE ONLY
+
 ├───migrations (DB stuff) <br>
 │<br>
 └───pigge<br>

@@ -1,5 +1,5 @@
 """Handling parent sessions"""
-from pigge.models import Parent
+from pigge.models import db, Parent, Wallet
 
 
 class TheParent:
@@ -7,13 +7,9 @@ class TheParent:
 
     def __init__(self, mail):
         self.user = Parent.query.filter_by(parent_email=mail).first()
-
-    def limit_transaction(self, val):
-        try:
-            self.user.restrict_bal = val
-            return True
-        except NameError:
-            return False
+        wallet_id = 'W' + self.user.parent_id[1:]
+        self.wallet = Wallet.query.filter_by(wallet_id = wallet_id).first()
 
     def add_funds(self, val):
-        pass
+        self.wallet.balance += val
+        db.session.commit()

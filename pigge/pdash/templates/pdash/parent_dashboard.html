@@ -4,10 +4,10 @@
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-    *{
-      overflow-x:hidden
+    * {
+      overflow-x: hidden
     }
-    
+
     body {
       background-image: url("{{ url_for('static', filename='images/dash_back.jpg') }}");
       background-repeat: no-repeat;
@@ -358,7 +358,7 @@
 
   <div class="sidebar">
     <img src="{{ url_for('static', filename='images/mylogo1.png') }}" alt="Pigge Logo">
-    <a>Hello, {{ user.parent_name }}</a>.
+    <a>Hello, {{ user.user.parent_name }}</a>.
     <button class="button button1">Dashboard</button>
     <button class="button button1">Logout</button>
   </div>
@@ -366,15 +366,19 @@
   <table>
     <tr>
       <table cellspacing="25">
-        <th style="background-color:#FADBD8">Available Balance</th>
-        <td style="background-color:#FADBD8">Usable Balance</td>
+        <th style="background-color:#FADBD8">Available Balance {{ user.wallet.balance }}</th>
+        <td style="background-color:#FADBD8">Usable Balance {{ user.wallet.restrict_bal }}</td>
     </tr>
 
     <tr>
       <table cellspacing="25">
         <th>Add Funds</th>
-        <td><input type="number" id="Add Funds" placeholder="Enter amount">
-          <button class="button3" style="vertical-align:middle"><span>Add </span></button>
+        <td>
+          <form method="POST" action="{{ url_for('pdash.add_funds') }}">
+            <input type="number" name="add_funds" id="Add Funds" placeholder="Enter amount">
+            <button class="button3" type="submit" style="vertical-align:middle"><span>Add
+              </span></button>
+          </form>
         </td>
     </tr>
     <tr>
