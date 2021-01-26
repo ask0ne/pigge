@@ -1,7 +1,7 @@
 '''Logic for auth module including login & ID verification'''
 import os
 import cv2
-#import bcrypt
+import bcrypt
 import pytesseract
 from pigge.models import db, Parent
 
@@ -68,13 +68,11 @@ def check_unique_user(mobile, email):
 
     return True
 
-'''
+
 def generate_password(password):
     parent_password = bcrypt.hashpw(password, bcrypt.gensalt())
-    print(parent_password)
     return parent_password
 
 
 def verify_password(ppassword, password_hash):
     return bcrypt.checkpw(ppassword, password_hash)
-'''

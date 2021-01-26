@@ -13,7 +13,7 @@ class Parent(db.Model):
     parent_name = db.Column(db.String)
     phone_number = db.Column(db.String)
     parent_email = db.Column(db.String)
-    parent_password = db.Column(db.String)
+    parent_password = db.Column(db.LargeBinary)
     acc_status = db.Column(db.Integer)
 
 

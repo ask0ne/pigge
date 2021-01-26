@@ -19,8 +19,9 @@ def registration_parent():
         pname = pname.upper()
         mobile = request.form.get("mobile")
         email = request.form.get("email")
-        password = request.form.get("psw")
-        #password = generate_password(password)
+        password = bytes(request.form.get("psw"), encoding="UTF-8")
+        # Hashing
+        password = generate_password(password)
         # Check if email and phone number is unique, add new entry if true
         if check_unique_user(mobile, email):
             session['user_email'] = email
@@ -85,12 +86,12 @@ def login_parent():
     """Login Parent route"""
     if request.method == "POST":
         pmail = request.form.get('p_email')
-        ppassword = request.form.get('password')
+        ppassword = bytes(request.form.get('password'), encoding="UTF-8")
         user = Parent.query.filter_by(parent_email=pmail).first()
         password_hash = user.parent_password
         status = user.acc_status
         # Incorrect email or password
-        if not user or ppassword != password_hash:
+        if not (user and verify_password(ppassword, password_hash)):
             return redirect(url_for('auth_bp.login'))
 
         # Check account status to check if kid account exists or not
