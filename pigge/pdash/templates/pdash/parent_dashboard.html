@@ -364,58 +364,69 @@
   </div>
   <br></br><br></br>
   <table>
-    <form method="POST">
-      <tr>
-        <table cellspacing="25">
-          <th style="background-color:#FADBD8">Available Balance {{ user.wallet.balance }}</th>
-          <td style="background-color:#FADBD8">Usable Balance {{ user.wallet.restrict_bal }}</td>
-      </tr>
-      <tr>
-        <table cellspacing="25">
-          <th>Add Funds</th>
-          <td>
+
+    <tr>
+      <table cellspacing="25">
+        <th style="background-color:#FADBD8">Available Balance {{ user.wallet.balance }}</th>
+        <td style="background-color:#FADBD8">Usable Balance {{ user.wallet.restrict_bal }}</td>
+    </tr>
+    <tr>
+      <table cellspacing="25">
+        <th>Add Funds</th>
+        <td>
+          <form method="POST" action="{{ url_for('pdash.add_funds') }}">
             <input type="number" name="add_funds" id="Add Funds" placeholder="Enter amount">
-            <button class="button3" type="submit" style="vertical-align:middle"
-              formaction="{{ url_for('pdash.add_funds') }}"><span>Add
+            <button class="button3" type="submit" style="vertical-align:middle"><span>Add
               </span></button>
-          </td>
-      </tr>
-      <tr>
-        <th>Limit kid's Transaction</th>
-        <td><input type="number" name="min_balance" id="Limit" placeholder="Enter amount">
-          <button class="button3" style="vertical-align:middle" formaction="{{ url_for('pdash.max_spend_limit') }}"><span>OK
-            </span></button>
+          </form>
         </td>
-      </tr>
-      <tr>
-        <th>View Your transactions</th>
-        <td> <button class="button2" style="vertical-align:middle"><span>Click</span></button></td>
-        </td>
-      </tr>
-      <tr>
-        <th>Monitor Kid's Transactions</th>
-        <td> <button class="button2" style="vertical-align:middle"><span>Click</span></button></td>
-        </td>
-      </tr>
-      <tr>
-        <th>Enable Two factor Authentication<br></br>
+    </tr>
+    <tr>
+      <th>
+        <form method="POST" action="{{ url_for('pdash.max_spend_limit')}}">
+          Limit kid's Transaction
+      </th>
+      <td><input type="number" name="min_balance" id="Limit" placeholder="{{ user.wallet.restrict_bal }}">
+        <button class="button3" type="submit" style="vertical-align:middle"><span>OK
+          </span></button>
+      </td>
+      </form>
+    </tr>
+    <tr>
+      <th>View Your transactions</th>
+      <td> <button class="button2" style="vertical-align:middle"><span>Click</span></button></td>
+      </td>
+    </tr>
+    <tr>
+      <th>Monitor Kid's Transactions</th>
+      <td> <button class="button2" style="vertical-align:middle"><span>Click</span></button></td>
+      </td>
+    </tr>
+    <tr>
+      <th>
+        <form method="POST" action="{{ url_for('pdash.two_fac_auth') }}">
+          Enable Two factor Authentication<br></br>
           <label class="switch">
-            <input type="checkbox" id="twofa">
+            <input type="checkbox" name="check_box" id="twofa" {{ user.two_fac_auth }}>
             <span class="slider round"></span>
           </label>
-        </th>
-        <td><input type="number" placeholder="Enter amount" id="auth" disabled>
-          <button class="button3" style="vertical-align:middle"><span>Ok</span></button>
-        </td>
-      </tr>
-      <tr>
+      </th>
+      <td>
+        <input type="number" name="two_f_a" placeholder="{{ user.wallet.two_f_auth }}" id="auth">
+        <button class="button3" type="submit" style="vertical-align:middle"><span>OK</span></button>
+        </form>
+      </td>
+    </tr>
+    <tr>
+      <form method="POST" action="{{ url_for('pdash.wallet_status') }}">
         <th>Disable Wallet</th>
         <td><label class="switch">
-            <input type="checkbox" id="disable"></input>
+            <input type="checkbox" name="wallet_status" id="disable" {{ user.wallet_status }}
+              onChange="this.form.submit()"></input>
             <span class="slider round"></span>
           </label></td>
-      </tr>
-    </form>
+      </form>
+    </tr>
   </table>
 
   <div class="footer">
