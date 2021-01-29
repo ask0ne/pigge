@@ -18,6 +18,7 @@
 
     /* For the header at the top of the page*/
     .header {
+      z-index: 2;
       padding: 1px;
       font-family: "Lucida Console", Monospace;
       text-align: center;
@@ -360,7 +361,7 @@
     <img src="{{ url_for('static', filename='images/mylogo1.png') }}" alt="Pigge Logo">
     <a>Hello, {{ user.user.parent_name }}</a>.
     <button class="button button1">Dashboard</button>
-    <button class="button button1">Logout</button>
+    <button class="button button1" type="submit" formaction="{{url_for('auth.logout')}}">Logout</button>
   </div>
   <br></br><br></br>
   <table>
@@ -403,19 +404,19 @@
       </td>
     </tr>
     <tr>
-      <th>
-        <form method="POST" action="{{ url_for('pdash.two_fac_auth') }}">
+      <form method="POST" action="{{ url_for('pdash.two_fac_auth') }}">
+        <th>
           Enable Two factor Authentication<br></br>
           <label class="switch">
             <input type="checkbox" name="check_box" id="twofa" {{ user.two_fac_auth }}>
             <span class="slider round"></span>
           </label>
-      </th>
-      <td>
-        <input type="number" name="two_f_a" placeholder="{{ user.wallet.two_f_auth }}" id="auth">
-        <button class="button3" type="submit" style="vertical-align:middle"><span>OK</span></button>
-        </form>
-      </td>
+        </th>
+        <td>
+          <input type="number" name="two_f_a" placeholder="{{ user.wallet.two_f_auth }}" id="auth">
+          <button class="button3" type="submit" style="vertical-align:middle"><span>OK</span></button>
+        </td>
+      </form>
     </tr>
     <tr>
       <form method="POST" action="{{ url_for('pdash.wallet_status') }}">

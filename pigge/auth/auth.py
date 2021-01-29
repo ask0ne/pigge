@@ -130,6 +130,7 @@ def register_successful():
     return render_template("auth/resultpage.html", result=request.args.get('data'))
 
 
-'''@auth_bp.route("")
+@auth_bp.route("/", methods=["GET", "POST"])
 def logout():
-    session.clear()'''
+    session.clear()
+    return redirect(url_to('main'))

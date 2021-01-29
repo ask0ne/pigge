@@ -6,20 +6,29 @@ class TheParent:
     """Initialize parent on login"""
 
     def __init__(self, mail):
+        # List of attributes to be displayed on dashboard
         self.user = Parent.query.filter_by(parent_email=mail).first()
-        wallet_id = 'W' + self.user.parent_id[1:]
-        self.wallet = Wallet.query.filter_by(wallet_id=wallet_id).first()
+        self.wallet = Wallet.query.filter_by(wallet_id=calculate_wallet_id(self)).first()
+        self.two_fac_auth = check_two_factor(self)
+        self.wallet_status = check_user_status(self)
+
+    def calculate_wallet_id(self):
+        return 'W' + self.user.parent_id[1:]
+
+    def check_two_factor(self):
         if self.wallet.two_f_auth == -1:
-            self.two_fac_auth = None
+            return None
         else:
-            self.two_fac_auth = "checked"
+            return "checked"
+
+    def check_user_status(self):
         if self.user.acc_status == 0:
-            self.wallet_status = "checked"
+            return "checked"
         else:
-            self.wallet_status = None
-        
+            return None
 
     def add_funds(self, val):
+        # Send into transactions
         self.wallet.balance += val
         db.session.commit()
 
