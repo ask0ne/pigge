@@ -14,15 +14,14 @@ class TheTransaction:
         # Create a branched condition here for P2K, K2K and K2B
 
     def db_commit(self):
-        """Commit"""
+        """Final stage of transaction"""
+        if self.category == "P2K":
+            payment_status = 1
+        else:
+            payment_status = -1
         transaction = Transaction(transaction_id=self.generate_transaction_id(), timestamp=datetime.now(),
-                                  sender_id=self.sender, receiver_id=self.receiver, amount=self.amount, category=self.category, status=int(1))
+                                  sender_id=self.sender, receiver_id=self.receiver, amount=self.amount, category=self.category, status=payment_status)
         db.session.add(transaction)
-        db.session.commit()
-
-
-    def add_funds(self):
-        wallet_id = "W" + self.receiver[1:]
         db.session.commit()
 
     def generate_transaction_id(self):

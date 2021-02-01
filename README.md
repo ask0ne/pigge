@@ -1,5 +1,15 @@
 # pigge
 
+## TODO
+
+<ol>
+<li>Flash messages for errors</li>
+<li>Kid dashboard features</li>
+<li>Payment module (K2K and K2B)</li>
+<li>Tips and quizzes module</li>
+<li>UI/UX fixes</li>
+</ol>
+
 ## Please maintain the project structure
 
 The main project files are inside pigge folder. This is to keep deployment and development files seperate.
@@ -7,41 +17,37 @@ Each feature has been given it's own folder and each feature has it's own templa
 
 So for example, auth contains all the login/registraion logic and files related to it.
 
-
-
-wallet_id - FOR EXTERNAL USE ONLY AKA USED BY KIDS TO PAY OTHER KIDS
+##### Some important notes
+> wallet_id 
+FOR EXTERNAL USE ONLY AKA USED BY KIDS TO PAY OTHER KIDS
 
 Other IDs are used for INTERNAL PURPOSE ONLY
 
-├───migrations (DB stuff) <br>
-│<br>
+> session['user_mail']
+Contains email of current logged in user (parent or kid)
+
+> session['id']
+Contains WALLET ID of the kid. So even if the parent is logged in, kid's wallet ID is accessed.
+
+This is fine for now because either way both fields are public and known to the user. Later we have to find a way to secure this or find some other way.
+
+├───migrations<br>
 └───pigge<br>
-    │   config.py               (Flask configuration)<br>
-    │   main.py                 (Where the magic happens)<br>
-    │   models.py               (DB models)<br>
-    │<br>
     ├───auth<br>
-    │   │   auth.py             (Login and registraion view)<br>
-    │   │   registration.py     (Login and registration logic)<br>
-    │   │<br>
-    │   └───templates           (Login and registration HTML files)<br>
-    │<br>
-    ├───kdash<br>
-    │   │   kdash.py            (Kid dashboard code will go here)<br>
-    │   │<br>
-    │   └───templates           (* HTML files)<br>
-    │
-    ├───pdash<br>
-    │   │   pdash.py            (Parent dashboard)<br>
-    │   │   session.py          (Session for parent login)<br>
-    │   │<br>
     │   └───templates<br>
-    │<br>
+    │       └───auth<br>
+    ├───kdash<br>
+    │   └───templates<br>
+    │       └───kdash<br>
+    ├───payment<br>
+    │   └───templates<br>
+    │       └───payment<br>
+    ├───pdash<br>
+    │   └───templates<br>
+    │       └───pdash<br>
     ├───static<br>
-    │   ├───css                 (All .css files)<br>
-    │   ├───images              (Images here)<br>
-    │   └───js                  (JS here)<br>
-    │<br>
-    ├───templates               (index.html)<br>
-    │<br>
-    └───uploads                 (Student ID card will be stored here)<br>
+    │   ├───css<br>
+    │   ├───images<br>
+    │   └───js<br>
+    ├───templates<br>
+    └───uploads<br>

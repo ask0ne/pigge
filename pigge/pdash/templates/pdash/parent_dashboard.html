@@ -406,11 +406,11 @@
       </td>
     </tr>
     <tr>
-      <form method="POST" action="{{ url_for('pdash.two_fac_auth') }}">
+      <form method="POST" action="{{ url_for('pdash.two_factor_authentication') }}">
         <th>
           Enable Two factor Authentication<br></br>
           <label class="switch">
-            <input type="checkbox" name="check_box" id="twofa" {{ wallet.two_fac_auth }}>
+            <input type="checkbox" name="check_box" id="twofa" {{ wallet.checkbox_2FA }}>
             <span class="slider round"></span>
           </label>
         </th>

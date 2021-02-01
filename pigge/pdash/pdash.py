@@ -35,13 +35,13 @@ def max_spend_limit():
 
 
 @pdash_bp.route("/parent-dashboard-2FA", methods=["POST"])
-def two_fac_auth():
+def two_factor_authentication():
     if request.form.get("check_box") == None:
         val = -1
     else:
         val = request.form.get("two_f_a")
     wallet = TheWallet(session['id'])
-    wallet.two_f_auth(int(val))
+    wallet.change_2FA(int(val))
     return redirect(url_for('pdash.parent_dashboard'))
 
 
