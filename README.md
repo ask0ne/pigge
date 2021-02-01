@@ -18,15 +18,18 @@ Each feature has been given it's own folder and each feature has it's own templa
 So for example, auth contains all the login/registraion logic and files related to it.
 
 ##### Some important notes
-> wallet_id 
+> wallet_id
+
 FOR EXTERNAL USE ONLY AKA USED BY KIDS TO PAY OTHER KIDS
 
 Other IDs are used for INTERNAL PURPOSE ONLY
 
-> session['user_mail']
+> session['user_mail'] 
+
 Contains email of current logged in user (parent or kid)
 
 > session['id']
+
 Contains WALLET ID of the kid. So even if the parent is logged in, kid's wallet ID is accessed.
 
 This is fine for now because either way both fields are public and known to the user. Later we have to find a way to secure this or find some other way.
