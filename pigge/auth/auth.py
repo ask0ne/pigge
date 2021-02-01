@@ -24,12 +24,11 @@ def registration_parent():
         password = generate_password(password)
         # Check if email and phone number is unique, add new entry if true
         if check_unique_user(mobile, email):
-            session['user_email'] = email
             p_user = Parent(created_on=datetime.now(), parent_name=pname, phone_number=mobile,
                             parent_email=email, parent_password=password, acc_status=-1)
             db.session.add(p_user)
             db.session.commit()
-            return redirect(url_for("auth_bp.registration_kid"))
+            return redirect(url_for("auth_bp.login"))
 
         return redirect(url_for("auth_bp.registration_parent"))
 
@@ -118,6 +117,7 @@ def login_kid():
                 db.session.commit()
                 return redirect(url_for('auth_bp.login'))
             else:
+                user.number_of_tries = 0
                 return redirect(url_for('main'))
         session['user_email'] = kmail
         user.number_of_tries = 0
@@ -130,7 +130,7 @@ def register_successful():
     return render_template("auth/resultpage.html", result=request.args.get('data'))
 
 
-@auth_bp.route("/", methods=["GET", "POST"])
+@auth_bp.route("/logout", methods=["POST"])
 def logout():
     session.clear()
-    return redirect(url_to('main'))
+    return redirect(url_for('main'))

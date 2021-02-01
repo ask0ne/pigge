@@ -1,6 +1,9 @@
 """Handles Parent Dashboard functionality"""
 from flask import Blueprint, session, render_template, request, redirect, url_for
 from pigge.pdash.session import TheParent
+from pigge.payment.wallet import TheWallet
+from pigge.payment.payment import p2k
+
 
 pdash_bp = Blueprint('pdash', __name__, template_folder='templates')
 
@@ -9,15 +12,16 @@ pdash_bp = Blueprint('pdash', __name__, template_folder='templates')
 def parent_dashboard():
     """Parent's dashboard code here"""
     user = TheParent(session['user_email'])
-    return render_template("pdash/parent_dashboard.html", user=user)
+    wallet = TheWallet(user.user.parent_id)
+    session['id'] = wallet.wallet.wallet_id
+    return render_template("pdash/parent_dashboard.html", user=user, wallet=wallet)
 
 
 @pdash_bp.route("/parent-dashboard-add-funds", methods=["POST"])
 def add_funds():
     """Add funds endpoint"""
-    val = request.form.get("add_funds")
-    user = TheParent(session['user_email'])
-    user.add_funds(int(val))
+    val = int(request.form.get("add_funds"))
+    p2k(val)
     return redirect(url_for('pdash.parent_dashboard'))
 
 
@@ -25,8 +29,8 @@ def add_funds():
 def max_spend_limit():
     """Limit max spending amount (min) balance"""
     val = int(request.form.get("min_balance"))
-    user = TheParent(session['user_email'])
-    user.spend_limit(val)
+    wallet = TheWallet(session['id'])
+    wallet.spend_limit(val)
     return redirect(url_for("pdash.parent_dashboard"))
 
 
@@ -36,17 +40,17 @@ def two_fac_auth():
         val = -1
     else:
         val = request.form.get("two_f_a")
-    user = TheParent(session['user_email'])
-    user.two_f_auth(int(val))
+    wallet = TheWallet(session['id'])
+    wallet.two_f_auth(int(val))
     return redirect(url_for('pdash.parent_dashboard'))
 
 
 @pdash_bp.route("/parent-dashboard-wallet", methods=["POST"])
 def wallet_status():
     if request.form.get("wallet_status") == None:
-        val = 1 # True aka wallet is active
+        val = 1  # True aka wallet is active
     else:
-        val = 0 # False
+        val = 0  # False
     user = TheParent(session['user_email'])
     user.change_wallet(int(val))
     return redirect(url_for('pdash.parent_dashboard'))

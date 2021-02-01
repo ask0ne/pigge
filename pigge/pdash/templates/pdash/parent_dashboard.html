@@ -359,17 +359,19 @@
 
   <div class="sidebar">
     <img src="{{ url_for('static', filename='images/mylogo1.png') }}" alt="Pigge Logo">
-    <a>Hello, {{ user.user.parent_name }}</a>.
+    <a>Hello, {{ user.user.parent_name }} {{ wallet.wallet.wallet_id }}</a>.
     <button class="button button1">Dashboard</button>
-    <button class="button button1" type="submit" formaction="{{url_for('auth.logout')}}">Logout</button>
+    <form method="POST" action="{{ url_for('auth_bp.logout') }}">
+      <button class="button button1" type="submit">Logout</button>
+    </form>
   </div>
   <br></br><br></br>
   <table>
 
     <tr>
       <table cellspacing="25">
-        <th style="background-color:#FADBD8">Available Balance {{ user.wallet.balance }}</th>
-        <td style="background-color:#FADBD8">Usable Balance {{ user.wallet.restrict_bal }}</td>
+        <th style="background-color:#FADBD8">Available Balance {{ wallet.wallet.balance }}</th>
+        <td style="background-color:#FADBD8">Usable Balance {{ wallet.wallet.restrict_bal }}</td>
     </tr>
     <tr>
       <table cellspacing="25">
@@ -387,7 +389,7 @@
         <form method="POST" action="{{ url_for('pdash.max_spend_limit')}}">
           Limit kid's Transaction
       </th>
-      <td><input type="number" name="min_balance" id="Limit" placeholder="{{ user.wallet.restrict_bal }}">
+      <td><input type="number" name="min_balance" id="Limit" placeholder="{{ wallet.wallet.restrict_bal }}">
         <button class="button3" type="submit" style="vertical-align:middle"><span>OK
           </span></button>
       </td>
@@ -408,12 +410,12 @@
         <th>
           Enable Two factor Authentication<br></br>
           <label class="switch">
-            <input type="checkbox" name="check_box" id="twofa" {{ user.two_fac_auth }}>
+            <input type="checkbox" name="check_box" id="twofa" {{ wallet.two_fac_auth }}>
             <span class="slider round"></span>
           </label>
         </th>
         <td>
-          <input type="number" name="two_f_a" placeholder="{{ user.wallet.two_f_auth }}" id="auth">
+          <input type="number" name="two_f_a" placeholder="{{ wallet.wallet.two_f_auth }}" id="auth">
           <button class="button3" type="submit" style="vertical-align:middle"><span>OK</span></button>
         </td>
       </form>
