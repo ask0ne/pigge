@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, redirect, request, url_for, session
+from flask import Blueprint, render_template, redirect, request, url_for, session, flash
 from datetime import datetime
 from werkzeug.utils import secure_filename
 from pigge.models import *
@@ -29,7 +29,8 @@ def registration_parent():
             db.session.add(p_user)
             db.session.commit()
             return redirect(url_for("auth_bp.login"))
-
+        else:
+            flash("Account already exists! Please login to continue")
         return redirect(url_for("auth_bp.registration_parent"))
 
 
@@ -91,6 +92,7 @@ def login_parent():
         status = user.acc_status
         # Incorrect email or password
         if not (user and verify_password(ppassword, password_hash)):
+            flash("Incorrect email ID or password! ")
             return redirect(url_for('auth_bp.login'))
 
         # Check account status to check if kid account exists or not

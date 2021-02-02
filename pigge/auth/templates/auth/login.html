@@ -26,6 +26,14 @@
 				<form class="form-detail" action="{{ url_for('auth_bp.login_parent') }}" method="post">
 					<div class="tabcontent" id="parent">
 						<div class="form-row">
+							{% for message in get_flashed_messages() %}
+							<div class="alert alert-warning">
+								<button type="button" class="close" data-dismiss="alert">&times;</button>
+								{{ message }}
+							</div>
+							{% endfor %}
+						</div>
+						<div class="form-row">
 							<label class="form-row-inner">
 								<input type="text" name="p_email" id="your_email" class="input-text" required>
 								<span class="label">E-Mail</span>
