@@ -388,8 +388,12 @@
       <th>
         <form method="POST" action="{{ url_for('pdash.max_spend_limit')}}">
           Limit kid's Transaction
+          <label class="switch">
+            <input type="checkbox" name="check_box" id="twofa" {{ wallet.checkbox_limit }}>
+            <span class="slider round"></span>
+          </label>
       </th>
-      <td><input type="number" name="min_balance" id="Limit" placeholder="{{ wallet.wallet.restrict_bal }}">
+      <td><input type="number" name="min_balance" id="Limit" placeholder="{{ wallet.wallet.restrict_bal }}" min="1">
         <button class="button3" type="submit" style="vertical-align:middle"><span>OK
           </span></button>
       </td>

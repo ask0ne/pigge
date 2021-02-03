@@ -22,12 +22,6 @@ def p2k(amount):
     transaction.db_commit()
 
 
-@payment_bp.route("/pay-another-kid", methods=["GET"])
-def kid_2_kid():
-    return render_template('payment/k2k.html')
-
-
-#@payment_bp.route("/paying-another-kid", methods="POST")
 def k2k():
     """
     amount : Amount to be transferred
@@ -35,6 +29,26 @@ def k2k():
     sender = kid currently in session (logged in)
     """
     receiver_wallet = request.form.get('receiver_wallet_id')
-    amount = request.form.get('amount')
+    amount = int(request.form.get('amount'))
     sender_wallet = session['id']
-    pass
+    x = "K" + sender_wallet
+    y = "K" + receiver_wallet
+    transaction = TheTransaction(x, y, amount, category="K2K")
+    s_wallet = TheWallet(sender_wallet)
+    r_wallet = TheWallet(receiver_wallet)
+    if transaction.verify_receiver(receiver_wallet):
+        s_wallet.sub_funds(amount)
+        r_wallet.add_funds(amount)
+        transaction.db_commit()
+    else:
+        flash("Wrong kid ID entered. Please try again!")
+
+
+@payment_bp.route("/pay-another-kid", methods=["GET", "POST"])
+def kid_2_kid():
+    if request.method == "GET":
+        return render_template('payment/k2k.html')
+
+    if request.method == "POST":
+        k2k()
+        return redirect(url_for('kdash.kid_dashboard'))

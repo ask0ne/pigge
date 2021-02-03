@@ -68,7 +68,7 @@ def registration_kid():
                 p_user.parent_id = "P" + kid_[1:]
                 wallet_ID = "W" + kid_[1:]
                 wallet = Wallet(wallet_id=wallet_ID, balance=0, generated_on=datetime.now(), pay_request=False,
-                                two_f_auth=-1, restrict_bal=-1)
+                                two_f_auth=-1, restrict_bal=0)
                 db.session.add(wallet)
                 db.session.commit()
             return redirect(url_for('auth_bp.register_successful', data=return_answer(answer)))
@@ -94,10 +94,10 @@ def login_parent():
         if not (user and verify_password(ppassword, password_hash)):
             flash("Incorrect email ID or password! ")
             return redirect(url_for('auth_bp.login'))
-
+        
+        session['user_email'] = pmail
         # Check account status to check if kid account exists or not
         if status != -1:
-            session['user_email'] = pmail
             return redirect(url_for('pdash.parent_dashboard'))
         else:
             return redirect(url_for('auth_bp.registration_kid'))

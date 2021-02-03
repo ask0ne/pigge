@@ -28,7 +28,10 @@ def add_funds():
 @pdash_bp.route("/parent-dashboard-max-spend-limit", methods=["POST"])
 def max_spend_limit():
     """Limit max spending amount (min) balance"""
-    val = int(request.form.get("min_balance"))
+    if request.form.get("check_box") == None:
+        val = 0
+    else:
+        val = int(request.form.get("min_balance"))
     wallet = TheWallet(session['id'])
     wallet.spend_limit(val)
     return redirect(url_for("pdash.parent_dashboard"))
