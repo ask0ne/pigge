@@ -12,6 +12,8 @@
 
 <body class="form-v8">
 	<div class="page-content">
+		<a class="button" href="{{ url_for('main')}}">
+			<input type="image" id="image" alt="back" src="{{ url_for('static', filename='images/back_button.png') }}"></a>
 		<div class="form-v8-content">
 			<div class="form-left">
 				<img src="{{ url_for('static', filename='images/back1.png') }}" alt="form">
@@ -90,7 +92,13 @@
 	body {
 		margin: 0;
 	}
-
+        input[type=image] {
+     			top:0;
+    			left:0;
+     			position:fixed;
+   			 width: 50px;
+    			 height: 30px;
+				}
 	.page-content {
 		width: 100%;
 		margin: 0 auto;
