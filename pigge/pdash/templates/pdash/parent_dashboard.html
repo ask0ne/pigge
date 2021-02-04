@@ -389,7 +389,7 @@
         <form method="POST" action="{{ url_for('pdash.max_spend_limit')}}">
           Limit kid's Transaction
           <label class="switch">
-            <input type="checkbox" name="check_box" id="twofa" {{ wallet.checkbox_limit }}>
+            <input type="checkbox" name="check_box" id="limit_trans" {{ wallet.checkbox_limit }}>
             <span class="slider round"></span>
           </label>
       </th>
@@ -458,6 +458,25 @@
 
         // if current input is NOT checked -> enabling ALL inputs
         document.querySelectorAll('input[id=auth]').forEach(element => element.disabled = true)
+
+      }
+    }
+    
+        document.querySelectorAll('input[id=limit_trans]').forEach(element => element.addEventListener('click', disableOther))
+    function disableOther(event) {
+      //"event" is current event(click)
+      //"event.target" is our clicked element
+      if (event.target.checked) {
+
+        // if current input is checked -> disable ALL inputs
+        document.querySelectorAll('input[id=Limit]').forEach(element => element.disabled = false)
+        // enabling our current input
+        event.target.disabled = false;
+
+      } else {
+
+        // if current input is NOT checked -> enabling ALL inputs
+        document.querySelectorAll('input[id=Limit]').forEach(element => element.disabled = true)
 
       }
     }
