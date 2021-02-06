@@ -9,19 +9,28 @@ class TheTransaction:
         self.receiver = y
         self.amount = amount
         self.category = category
+        self.payment_status = 0
 
         # Do something here, depending on type of transaction
         # Create a branched condition here for P2K, K2K and K2B
+    def check_dependencies(self):
+        if self.category == "P2K":
+            self.payment_status = 1
+        elif self.category == "K2K":
+            wall_id = "W" + self.sender[1:]
+            check_TFA = Wallet.query.filter_by(wallet_id=wall_id).first()
+            if check_TFA.two_f_auth == 0 or check_TFA.two_f_auth > self.amount:
+                self.payment_status = -1
+                check_TFA.pay_request = True
+                return "Parent confirmation required"
+            else:
+                self.payment_status = 1
+                return "Payment Successful"
 
     def db_commit(self):
         """Final stage of transaction"""
-        if self.category == "P2K":
-            payment_status = 1
-        else:
-            payment_status = -1
-
         transaction = Transaction(transaction_id=self.generate_transaction_id(), timestamp=datetime.now(),
-                                  sender_id=self.sender, receiver_id=self.receiver, amount=self.amount, category=self.category, status=payment_status)
+                                  sender_id=self.sender, receiver_id=self.receiver, amount=self.amount, category=self.category, status=self.payment_status)
         db.session.add(transaction)
         db.session.commit()
 

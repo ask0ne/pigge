@@ -3,11 +3,12 @@
 ## TODO
 
 <ol>
-<li>Flash messages for errors</li>
-<li>Kid dashboard features</li>
-<li>Payment module (K2K and K2B)</li>
-<li>Tips and quizzes module</li>
+<li>Transaction history</li>
+<li>Security fixes -- session, transaction concurrency etc </li>
 <li>UI/UX fixes</li>
+<li>Payment module -- <s>K2K</s> and K2B</li>
+<li>Tips and quizzes module</li>
+<li><s>Flash messages for errors</s></li>
 </ol>
 
 ## Please maintain the project structure

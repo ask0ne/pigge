@@ -31,17 +31,25 @@ def k2k():
     receiver_wallet = request.form.get('receiver_wallet_id')
     amount = int(request.form.get('amount'))
     sender_wallet = session['id']
-    x = "K" + sender_wallet
-    y = "K" + receiver_wallet
+    x = "K" + sender_wallet[1:]
+    y = "K" + receiver_wallet[1:]
     transaction = TheTransaction(x, y, amount, category="K2K")
     s_wallet = TheWallet(sender_wallet)
     r_wallet = TheWallet(receiver_wallet)
     if transaction.verify_receiver(receiver_wallet):
         s_wallet.sub_funds(amount)
         r_wallet.add_funds(amount)
+        data = transaction.check_dependencies()
         transaction.db_commit()
+        return data
+
     else:
         flash("Wrong kid ID entered. Please try again!")
+
+
+@payment_bp.route("/transaction-status", methods=["GET"])
+def transaction_status():
+    return render_template("payment/transaction_status.html", transaction_status=request.args.get('data'))
 
 
 @payment_bp.route("/pay-another-kid", methods=["GET", "POST"])
@@ -50,5 +58,5 @@ def kid_2_kid():
         return render_template('payment/k2k.html')
 
     if request.method == "POST":
-        k2k()
-        return redirect(url_for('kdash.kid_dashboard'))
+        data = k2k()
+        return redirect(url_for("payment.transaction_status", data=data))

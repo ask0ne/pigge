@@ -1,0 +1,22 @@
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Transaction Status</title>
+</head>
+
+<body bgcolor="#90f5fc">
+  <br><br>
+  <h1 align="center">
+    <img src="{{ url_for('static', filename='images/status.gif') }}">
+    <br><br>
+    {{ transaction_status}}
+  </h1>
+</body>
+<script>
+  setTimeout(function () {
+    window.location.href = "{{url_for('kdash.kid_dashboard') }}";
+  }, 5000);
+</script>
+
+</html>

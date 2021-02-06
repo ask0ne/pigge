@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <style>
+    table,
+    td,
+    th {
+      border: 1px solid black;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+  </style>
+</head>
+
+<body>
+
+  <table>
+    <tr>
+      <th>Sr No</th>
+      <th>Transaction ID</th>
+      <th>Date</th>
+      <th>To</th>
+      <th>Amount</th>
+      <th>Status</th>
+    </tr>
+    {% for transaction in transactions %}
+    <tr>
+      <td> {{ transaction }} </td>
+      <td> {{ transaction.id }}</td>
+      <td> {{ transaction.timestamp }}</td>
+      <td> {{ transaction.receiver }}</td>
+      <td> {{ transaction.amount }}</td>
+      <td> {{ transaction.status }}</td>
+    </tr>
+    {% end for %}
+  </table>
+
+</body>
+
+</html>
