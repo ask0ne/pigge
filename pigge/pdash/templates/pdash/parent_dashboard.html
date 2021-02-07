@@ -336,6 +336,105 @@
       font-family: "Lucida Console", Monospace;
 
     }
+     .button5 {                                      /*change*/
+      display: inline-block;
+      border-radius: 4px;
+      background-color: #76448A;
+      border: none;
+      color: #FFFFFF;
+      text-align: center;
+      font-size: 18px;
+      font-family: "Lucida Console", Monospace;
+      padding: 2px;
+      width: 55px;
+      transition: all 0.5s;
+      cursor: pointer;
+      margin: 1px;
+    }
+
+    a2.active {                                  
+      background-color: #4CAF50;
+      color: white;
+    }
+
+    a2:hover:not(.active) {                     
+      background-color: #555;
+      color: white;
+    }
+
+   .overlay {           
+    height: 70%;
+    width:0;
+    position: fixed;
+    z-index: 1;
+    top: 55px;
+    left: 0;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0, 0.9);
+    overflow-x: hidden;
+    transition: 0.5s;
+    }
+
+.overlay-content {
+  font-family: "Lucida Console", Monospace;
+  position: relative;
+  top: 4%;
+  width: 100%;
+  text-align: left;
+  margin-top: 20px;
+  color: #D4AC0D;
+  }
+
+.overlay a {
+  padding: 8px;
+  text-decoration: none;
+  font-size: 20px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+.overlay a:hover, .overlay a:focus {
+  color: #f1f1f1;
+}
+
+.overlay .closebtn {
+  font-family: "Lucida Console", Monospace;
+  position: absolute;
+  top: 10px;
+  right: 45px;
+  font-size: 60px;
+}
+
+
+.overlay a {font-size: 40px}
+.overlay .closebtn {
+  font-family: "Lucida Console", Monospace;
+  font-size: 30px;
+  top: 30px;
+  right: 15px;
+  }
+
+.a1 {
+  margin-left:250px;
+  margin-top:10px;
+  width:17%;
+}
+
+table1 {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+  font-size:19px;
+}
+
+th1, td1 {
+  text-align: left;
+  padding: 16px;
+  margin-bottom:5px;
+  height:40px;
+}
+    
   </style>
 </head>
 
@@ -356,6 +455,32 @@
   <div class="header">
     <h1>Welcome to Pigge Dashboard</h1>
   </div>
+  
+  <div id="myNav" class="overlay">    
+    <h2 style="color:white;text-align:center;font-family: Lucida Console, Monospace; margin-top:40px;">Notification Panel</h2>
+    <img class="a1" src="{{ url_for('static', filename='images/notif_1.gif') }}">
+      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">X</a>
+      <div class="overlay-content">
+        
+     <table1>
+      <tr1>
+        <td1><a2>Your kid has requested for money</td1>
+        <td1><button class="button5" style="vertical-align:middle"><span>Yes</span></button></td1>
+        <td1><button class="button5" style="vertical-align:middle"><span>No</span></button></a2></td1><br></br>
+      </tr1>
+      <tr1>
+        <td1><a2>Your kid has requested for money</td1>
+        <td1><button class="button5" style="vertical-align:middle"><span>Yes</span></button></td1>
+        <td1><button class="button5" style="vertical-align:middle"><span>No</span></button></a2></td1><br></br>
+      </tr1>
+      <tr1>
+        <td1><a2>Your kid has requested for money</a></td1>
+        <td1><button class="button5" style="vertical-align:middle"><span>Yes</span></button></td1>
+        <td1><button class="button5" style="vertical-align:middle"><span>No</span></button></a2></td1><br></br>
+      </tr1>
+    </table1>
+      </div>
+    </div>  
 
   <div class="sidebar">
     <img src="{{ url_for('static', filename='images/mylogo1.png') }}" alt="Pigge Logo">
@@ -480,6 +605,16 @@
 
       }
     }
+  </script>
+
+<script>          
+  function openNav() {
+    document.getElementById("myNav").style.width = "40%";
+  }
+  
+  function closeNav() {
+    document.getElementById("myNav").style.width = "0%";
+  }
   </script>
 
 </body>
