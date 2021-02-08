@@ -487,6 +487,7 @@ th1, td1 {
     <img src="{{ url_for('static', filename='images/mylogo1.png') }}" alt="Pigge Logo">
     <a>Hello, {{ user.user.parent_name }} {{ wallet.wallet.wallet_id }}</a>.
     <button class="button button1">Dashboard</button>
+    <button class="button button1" onclick="openNav()"><span>Notifications</button></span>
     <form method="POST" action="{{ url_for('auth_bp.logout') }}">
       <button class="button button1" type="submit">Logout</button>
     </form>
