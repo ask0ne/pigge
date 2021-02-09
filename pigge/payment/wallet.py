@@ -7,6 +7,7 @@ class TheWallet:
             wallet_id=self.generate_wallet_id(some_id)).first()
         self.checkbox_2FA = self.check_2FA()
         self.checkbox_limit = self.check_rbalance()
+        self.real_wallet = self.wallet.balance + self.wallet.on_hold
 
     def generate_wallet_id(self, some_id):
         return 'W' + some_id[1:]
@@ -22,6 +23,10 @@ class TheWallet:
             self.wallet.restrict_bal -= val
         else:
             flash("Insufficient balance!")
+        db.session.commit()
+
+    def onHold(self, val):
+        self.wallet.on_hold += val
         db.session.commit()
 
     def check_rbalance(self):

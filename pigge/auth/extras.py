@@ -1,9 +1,10 @@
-'''Logic for auth module including login & ID verification'''
+"""
+Contains extra functions necessary for auth module independant of the database.
+"""
 import os
 import cv2
 import bcrypt
 import pytesseract
-from pigge.models import db, Parent
 
 ALLOWED_EXTENSIONS = {"png", "jpg", "jpeg"}
 
@@ -44,29 +45,6 @@ def cal_name(n):
     '''Encode name'''
     order = ord(n) - 64
     return "{0:0=2d}".format(order)
-
-
-def calculate_id(name, dob):
-    """Generate ID in form of Uddnnyy00x"""
-    generated_id = 'K'
-    dd = str(dob[-2:])
-    nn = str(cal_name(name[0]))
-    yy = str(dob[2:4])
-    auto_inc_id = db.engine.execute('select count(id) from kid').scalar() + 1
-    auto_inc_id = str("{0:0=3d}".format(auto_inc_id))
-    generated_id += dd + nn + yy + auto_inc_id
-    return generated_id
-
-
-def check_unique_user(mobile, email):
-    """Returns True if user is unique"""
-    mail = Parent.query.filter_by(parent_email=email).first()
-    phno = Parent.query.filter_by(phone_number=mobile).first()
-
-    if mail and phno:
-        return False
-
-    return True
 
 
 def generate_password(password):

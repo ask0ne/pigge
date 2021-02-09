@@ -3,6 +3,7 @@ from flask import Blueprint, session, render_template, request, redirect, url_fo
 from pigge.kdash.session import TheKid
 from pigge.payment.transaction import TheTransaction
 from pigge.payment.wallet import TheWallet
+from pigge.payment.logs import TransactionLogs
 
 payment_bp = Blueprint('payment', __name__, template_folder='templates')
 
@@ -37,9 +38,16 @@ def k2k():
     s_wallet = TheWallet(sender_wallet)
     r_wallet = TheWallet(receiver_wallet)
     if transaction.verify_receiver(receiver_wallet):
-        s_wallet.sub_funds(amount)
-        r_wallet.add_funds(amount)
+        # s_wallet.sub_funds(amount)
+        # r_wallet.add_funds(amount)
         data = transaction.check_dependencies()
+        if data == "Payment Successful":
+            s_wallet.sub_funds(amount)
+            r_wallet.add_funds(amount)
+        else:
+            s_wallet.sub_funds(amount)
+            # s_wallet.onHold(amount)
+            
         transaction.db_commit()
         return data
 
@@ -60,3 +68,12 @@ def kid_2_kid():
     if request.method == "POST":
         data = k2k()
         return redirect(url_for("payment.transaction_status", data=data))
+
+
+@payment_bp.route("/transactions", methods=["GET"])
+def trasnaction_history():
+    if session["id"]:
+        transactions = TransactionLogs(session["id"])
+        return render_template("payment/history.html", transactions=transactions.history)
+    else:
+        return redirect(url_for("auth_bp.login"))
