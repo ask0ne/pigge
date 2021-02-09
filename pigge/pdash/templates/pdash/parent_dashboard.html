@@ -336,7 +336,8 @@
       font-family: "Lucida Console", Monospace;
 
     }
-     .button5 {                                      
+
+    .button5 {
       display: inline-block;
       border-radius: 4px;
       background-color: #B3224B;
@@ -352,90 +353,94 @@
       margin: 1px;
     }
 
-    a2.active {                                  
+    a2.active {
       background-color: #4CAF50;
       color: white;
     }
 
-    a2:hover:not(.active) {                     
+    a2:hover:not(.active) {
       background-color: #555;
       color: white;
     }
 
-   .overlay {           
-    height: 70%;
-    width:0;
-    position: fixed;
-    z-index: 1;
-    top: 65px;
-    left: 1px;
-    background-color: rgb(0,0,0);
-    background-color: rgba(0,0,0, 0.9);
-    overflow-x: hidden;
-    transition: 0.5s;
-    border-radius:11px;
+    .overlay {
+      height: 70%;
+      width: 0;
+      position: fixed;
+      z-index: 1;
+      top: 65px;
+      left: 1px;
+      background-color: rgb(0, 0, 0);
+      background-color: rgba(0, 0, 0, 0.9);
+      overflow-x: hidden;
+      transition: 0.5s;
+      border-radius: 11px;
     }
 
-.overlay-content {
-  font-family: "Lucida Console", Monospace;
-  position: relative;
-  top: 4%;
-  width: 100%;
-  text-align: left;
-  margin-top: 20px;
-  color: #D4AC0D;
-  }
+    .overlay-content {
+      font-family: "Lucida Console", Monospace;
+      position: relative;
+      top: 4%;
+      width: 100%;
+      text-align: left;
+      margin-top: 20px;
+      color: #D4AC0D;
+    }
 
-.overlay a {
-  padding: 8px;
-  text-decoration: none;
-  font-size: 20px;
-  color: #818181;
-  display: block;
-  transition: 0.3s;
-}
+    .overlay a {
+      padding: 8px;
+      text-decoration: none;
+      font-size: 20px;
+      color: #818181;
+      display: block;
+      transition: 0.3s;
+    }
 
-.overlay a:hover, .overlay a:focus {
-  color: #f1f1f1;
-}
+    .overlay a:hover,
+    .overlay a:focus {
+      color: #f1f1f1;
+    }
 
-.overlay .closebtn {
-  font-family: "Lucida Console", Monospace;
-  position: absolute;
-  top: 10px;
-  right: 45px;
-  font-size: 60px;
-}
+    .overlay .closebtn {
+      font-family: "Lucida Console", Monospace;
+      position: absolute;
+      top: 10px;
+      right: 45px;
+      font-size: 60px;
+    }
 
 
-.overlay a {font-size: 40px}
-.overlay .closebtn {
-  font-family: "Lucida Console", Monospace;
-  font-size: 30px;
-  top: 30px;
-  right: 15px;
-  }
+    .overlay a {
+      font-size: 40px
+    }
 
-.a1 {
-  margin-left:250px;
-  margin-top:10px;
-  width:17%;
-}
+    .overlay .closebtn {
+      font-family: "Lucida Console", Monospace;
+      font-size: 30px;
+      top: 30px;
+      right: 15px;
+    }
 
-table1 {
-  border-collapse: collapse;
-  border-spacing: 0;
-  width: 100%;
-  font-size:19px;
-}
+    .a1 {
+      margin-left: 250px;
+      margin-top: 10px;
+      width: 17%;
+    }
 
-th1, td1 {
-  text-align: left;
-  padding: 16px;
-  margin-bottom:5px;
-  height:40px;
-}
-    
+    table1 {
+      border-collapse: collapse;
+      border-spacing: 0;
+      width: 100%;
+      font-size: 19px;
+    }
+
+    th1,
+    td1 {
+      text-align: left;
+      padding: 16px;
+      margin-bottom: 5px;
+      height: 40px;
+    }
   </style>
 </head>
 
@@ -456,35 +461,33 @@ th1, td1 {
   <div class="header">
     <h1>Welcome to Pigge Dashboard</h1>
   </div>
-  
-  <div id="myNav" class="overlay">    
-    <h2 style="color:white;text-align:center;font-family: Lucida Console, Monospace; margin-top:40px;color:#F3D8E0;">Notification Panel</h2>
+
+  <div id="myNav" class="overlay">
+    <h2 style="color:white;text-align:center;font-family: Lucida Console, Monospace; margin-top:40px;color:#F3D8E0;">
+      Notification Panel</h2>
     <img class="a1" src="{{ url_for('static', filename='images/notif_1.gif') }}">
-      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">X</a>
-      <div class="overlay-content">
-     <table1>
-      <tr1>
-        <a2><td1>Your kid has requested for money</td1>
-        <td1><button class="button5" style="vertical-align:middle"><span>Yes</span></button></td1>
-        <td1><button class="button5" style="vertical-align:middle"><span>No</span></button></td1></a2><br></br>
-      </tr1>
-      <tr1>
-        <a2><td1>Your kid has requested for money</td1>
-        <td1><button class="button5" style="vertical-align:middle"><span>Yes</span></button></td1>
-        <td1><button class="button5" style="vertical-align:middle"><span>No</span></button></td1></a2><br></br>
-      </tr1>
-      <tr1>
-        <a2><td1>Your kid has requested for money</td1>
-        <td1><button class="button5" style="vertical-align:middle"><span>Yes</span></button></td1>
-        <td1><button class="button5" style="vertical-align:middle"><span>No</span></button></td1></a2><br></br>
-      </tr1>
-    </table1>
-      </div>
-    </div>  
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">X</a>
+    <div class="overlay-content">
+      <table1>
+        {% for log in logs.history %}
+        <tr1>
+          <form method="POST" action="{{ url_for('pdash.request_handling') }}">
+            <a2>
+              <td1>Your kid has requested for {{ log.amount }}</td1>
+              <input name="transaction_id" value="{{ log.transaction_id }}" hidden>
+              <td1><button class="button5" type="submit" name="req_button" value="yes" style="vertical-align:middle"><span>Yes</span></button></td1>
+              <td1><button class="button5" type="submit" name="req_button" value="no" style="vertical-align:middle"><span>No</span></button></td1>
+            </a2><br></br>
+          </form>
+        </tr1>
+        {% endfor %}
+      </table1>
+    </div>
+  </div>
 
   <div class="sidebar">
     <img src="{{ url_for('static', filename='images/mylogo1.png') }}" alt="Pigge Logo">
-    <a>Hello, {{ user.user.parent_name }} {{ wallet.wallet.wallet_id }}</a>.
+    <a>Hello, {{ user.user.parent_name }}</a>.
     <button class="button button1">Dashboard</button>
     <button class="button button1" onclick="openNav()"><span>Notifications</button></span>
     <form method="POST" action="{{ url_for('auth_bp.logout') }}">
@@ -496,7 +499,7 @@ th1, td1 {
 
     <tr>
       <table cellspacing="25">
-        <th style="background-color:#FADBD8">Available Balance {{ wallet.real_wallet }}</th>
+        <th style="background-color:#FADBD8">Available Balance {{ wallet.real_balance }}</th>
         <td style="background-color:#FADBD8">Usable Balance {{ wallet.wallet.restrict_bal }}</td>
     </tr>
     <tr>
@@ -587,8 +590,8 @@ th1, td1 {
 
       }
     }
-    
-        document.querySelectorAll('input[id=limit_trans]').forEach(element => element.addEventListener('click', disableOther))
+
+    document.querySelectorAll('input[id=limit_trans]').forEach(element => element.addEventListener('click', disableOther))
     function disableOther(event) {
       //"event" is current event(click)
       //"event.target" is our clicked element
@@ -608,14 +611,14 @@ th1, td1 {
     }
   </script>
 
-<script>          
-  function openNav() {
-    document.getElementById("myNav").style.width = "40%";
-  }
-  
-  function closeNav() {
-    document.getElementById("myNav").style.width = "0%";
-  }
+  <script>
+    function openNav() {
+      document.getElementById("myNav").style.width = "40%";
+    }
+
+    function closeNav() {
+      document.getElementById("myNav").style.width = "0%";
+    }
   </script>
 
 </body>

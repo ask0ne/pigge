@@ -47,7 +47,7 @@ def createWallet(kid_id):
     """Create new wallet entry in database"""
     wallet_ID = "W" + kid_id[1:]
     wallet = Wallet(wallet_id=wallet_ID, balance=0, generated_on=datetime.now(), pay_request=False,
-                    two_f_auth=-1, restrict_bal=0)
+                    two_f_auth=-1, restrict_bal=0, on_hold=0)
     db.session.add(wallet)
     db.session.commit()
 
@@ -62,7 +62,7 @@ def updateParent(parent_mail, kid_id):
 
 def authenticateParent(parent_mail, ppassword):
     """Parent login authentication"""
-    user = Parent.query.filter_by(parent_email=pmail).first()
+    user = Parent.query.filter_by(parent_email=parent_mail).first()
     password_hash = user.parent_password
     status = user.acc_status
     # Incorrect email or password

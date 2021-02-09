@@ -27,7 +27,7 @@ class Wallet(db.Model):
     pay_request = db.Column(db.Boolean)
     two_f_auth = db.Column(db.Integer)
     restrict_bal = db.Column(db.Integer)
-    # on_hold = db.Column(db.Integer)
+    on_hold = db.Column(db.Integer)
 
 
 class Kid(db.Model):

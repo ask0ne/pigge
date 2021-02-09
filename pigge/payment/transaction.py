@@ -19,7 +19,7 @@ class TheTransaction:
         elif self.category == "K2K":
             wall_id = "W" + self.sender[1:]
             check_TFA = Wallet.query.filter_by(wallet_id=wall_id).first()
-            if check_TFA.two_f_auth == 0 or check_TFA.two_f_auth > self.amount:
+            if check_TFA.two_f_auth == 0 or check_TFA.two_f_auth < self.amount:
                 self.payment_status = -1
                 check_TFA.pay_request = True
                 return "Parent confirmation required"

@@ -7,7 +7,7 @@ class TheWallet:
             wallet_id=self.generate_wallet_id(some_id)).first()
         self.checkbox_2FA = self.check_2FA()
         self.checkbox_limit = self.check_rbalance()
-        self.real_wallet = self.wallet.balance + self.wallet.on_hold
+        self.real_balance = self.wallet.balance + self.wallet.on_hold
 
     def generate_wallet_id(self, some_id):
         return 'W' + some_id[1:]

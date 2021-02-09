@@ -3,7 +3,7 @@ from flask import Blueprint, session, render_template, request, redirect, url_fo
 from pigge.pdash.session import TheParent
 from pigge.payment.wallet import TheWallet
 from pigge.payment.payment import p2k
-
+from pigge.payment.logs import PayRequests
 
 pdash_bp = Blueprint('pdash', __name__, template_folder='templates')
 
@@ -14,7 +14,8 @@ def parent_dashboard():
     user = TheParent(session['user_email'])
     wallet = TheWallet(user.user.parent_id)
     session['id'] = wallet.wallet.wallet_id
-    return render_template("pdash/parent_dashboard.html", user=user, wallet=wallet)
+    logs = PayRequests(session['id'])
+    return render_template("pdash/parent_dashboard.html", user=user, wallet=wallet, logs=logs)
 
 
 @pdash_bp.route("/parent-dashboard-add-funds", methods=["POST"])
@@ -57,3 +58,14 @@ def wallet_status():
     user = TheParent(session['user_email'])
     user.change_wallet(int(val))
     return redirect(url_for('pdash.parent_dashboard'))
+
+
+@pdash_bp.route("/parent-dashboard-2FA-authenticate", methods=["POST"])
+def request_handling():
+    pay = PayRequests(session['id'])
+    tr_id = request.form.get("transaction_id")
+    if request.form.get("req_button") == "yes":
+        pay.accept_request(tr_id)
+    elif request.form.get("req_button") == "no":
+        pay.reject_request(tr_id)
+    return redirect(url_for("pdash.parent_dashboard"))

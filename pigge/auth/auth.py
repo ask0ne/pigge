@@ -81,9 +81,9 @@ def login_parent():
         if parent_login > -1:
             # Authenticated.
             session['user_email'] = pmail
-            if parent_login == 1
-            # Kid wallet exists
-            return redirect(url_for('pdash.parent_dashboard'))
+            if parent_login == 1:
+                # Kid wallet exists
+                return redirect(url_for('pdash.parent_dashboard'))
             # Kid wallet not found
             return redirect(url_for('auth_bp.registration_kid'))
         else:
