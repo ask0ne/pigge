@@ -82,7 +82,15 @@
       <td> {{ transaction.timestamp }}</td>
       <td> {{ transaction.receiver_id }}</td>
       <td> {{ transaction.amount }}</td>
-      <td> {{ transaction.status }}</td>
+      <td>
+      {% if transaction.status==1 %}
+      <span>Successful</span>
+      {% elif transaction.status==0 %}
+      <span>Failed</span>
+      {% else %}
+      <span>Waiting</span>
+      <% endif %>
+      </td>
     </tr>
     {% endfor %}
 
