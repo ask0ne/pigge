@@ -46,7 +46,7 @@ def k2k():
             r_wallet.add_funds(amount)
         else:
             s_wallet.sub_funds(amount)
-            # s_wallet.onHold(amount)
+            s_wallet.onHold(amount)
             
         transaction.db_commit()
         return data

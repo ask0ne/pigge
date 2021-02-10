@@ -48,7 +48,7 @@
     }
 
     body {
-      background-color: white;
+      background-color: rgba(39, 39, 39, 0.658);
     }
 
     h2 {
@@ -56,7 +56,6 @@
       font-family: "Georgia";
       color: black;
       text-align: center;
-      color: white;
       text-shadow: 5px 5px 10px yellow;
     }
   </style>
@@ -79,17 +78,17 @@
     <tr>
       <td> {{ transaction.category }} </td>
       <td> {{ transaction.transaction_id }}</td>
-      <td> {{ transaction.timestamp }}</td>
-      <td> {{ transaction.receiver_id }}</td>
+      <td> {{ transaction.timestamp[:-7] }}</td>
+      <td> W{{ transaction.receiver_id[1:] }}</td>
       <td> {{ transaction.amount }}</td>
       <td>
       {% if transaction.status==1 %}
       <span>Successful</span>
       {% elif transaction.status==0 %}
-      <span>Failed</span>
+      <span>Rejected</span>
       {% else %}
       <span>Waiting</span>
-      <% endif %>
+      {% endif %}
       </td>
     </tr>
     {% endfor %}
