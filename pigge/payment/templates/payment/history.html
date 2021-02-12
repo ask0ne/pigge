@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <title>Results</title>
+  <title>Transaction History</title>
   <style>
     table {
       margin-left: auto;
@@ -27,7 +27,6 @@
     }
 
     td {
-      background-color:#F3E85D;
       width: 20%;
       padding: 20px;
       border-radius: 30px;
@@ -38,7 +37,7 @@
     }
 
     th {
-      background-color: #33ffad;
+      background-color: #032d69;
       border-radius: 36px;
     }
 
@@ -48,7 +47,7 @@
     }
 
     body {
-      background-color: rgba(39, 39, 39, 0.658);
+      background-color: white;
     }
 
     h2 {
@@ -56,14 +55,14 @@
       font-family: "Georgia";
       color: black;
       text-align: center;
-      text-shadow: 5px 5px 10px yellow;
+      text-shadow: 5px 5px 10px #F3E2A9;
     }
   </style>
 </head>
 
 <body>
-  <a href="{{url_for('kdash.kid_dashboard')}}"><img src="{{ url_for('static', filename='images/backtohome.png') }}" width="50"
-      alt="back to dashboard"></a>
+  <img src="{{ url_for('static', filename='images/backtohome.png') }}" width="50"
+      alt="back to dashboard" onclick="window.history.back()">
   <h2>TRANSACTION HISTORY</h2><br>
   <table>
     <tr>
