@@ -1,14 +1,16 @@
 from pigge import main
 from pigge.models import db, Transaction, Kid
 from pigge.payment.wallet import TheWallet
-
+from sqlalchemy import join
 
 class TransactionLogs:
     def __init__(self, wallet_id):
         self.k_id = "K" + wallet_id[1:]
-        self.history = Transaction.query.filter_by(sender_id=self.k_id).all()
-        #self.history = Transaction.query.join(Kid, Transaction.receiver_id==Kid.kid_id).filter_by(sender_id=self.k_id).all()
-        #self.history = Transaction.query.join(Kid, Transaction.receiver_id==Kid.kid_id).add_columns(bla bla,Kid.kid_name).filter_by(sender_id=self.k_id).all()
+        #self.history = Transaction.query.filter_by(sender_id=self.k_id).all()
+        self.history = db.session.query(Kid, Transaction).filter(Transaction.receiver_id == Kid.kid_id).filter(Transaction.sender_id==self.k_id).all()
+        print(type(self.history))
+        for h in self.history:
+            print(h[0].kid_name, h[1].amount)
 
 
 class PayRequests:

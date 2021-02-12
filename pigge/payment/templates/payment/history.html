@@ -71,24 +71,20 @@
       <th>Transaction ID</th>
       <th>Time</th>
       <th>To</th>
-      <th>Recipient Name</th>
       <th>Amount</th>
       <th>Status</th>
     </tr>
     {% for transaction in transactions %}
     <tr>
-      <td> {{ transaction.category }} </td>
-      <td> {{ transaction.transaction_id }}</td>
-      <td> {{ transaction.timestamp[:-7] }}</td>
-      <td> W{{ transaction.receiver_id[1:] }}</td>
-      <td> {% k_name=Kid.query.filter_by(kid_id=transaction.receiver_id).first() %}
-      <span>{{k_name.kid_name}}</span>
-      </td>
-      <td> {{ transaction.amount }}</td>
+      <td> {{ transaction[1].category }} </td>
+      <td> {{ transaction[1].transaction_id }}</td>
+      <td> {{ transaction[1].timestamp[:-7] }}</td>
+      <td> {{transaction[0].kid_name }} </td>
+      <td> {{ transaction[1].amount }}</td>
       <td>
-      {% if transaction.status==1 %}
+      {% if transaction[1].status==1 %}
       <span>Successful</span>
-      {% elif transaction.status==0 %}
+      {% elif transaction[1].status==0 %}
       <span>Rejected</span>
       {% else %}
       <span>Waiting</span>
