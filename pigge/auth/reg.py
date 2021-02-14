@@ -3,7 +3,7 @@ Contains functions that access the database such as login and registration.
 """
 
 from pigge.auth.extras import *
-from pigge.models import db, Parent, Kid, Wallet
+from pigge.models import db, Parent, Kid, Wallet, RequestFunds
 from datetime import datetime
 
 
@@ -49,6 +49,8 @@ def createWallet(kid_id):
     wallet = Wallet(wallet_id=wallet_ID, balance=0, generated_on=datetime.now(), pay_request=False,
                     two_f_auth=-1, restrict_bal=0, on_hold=0)
     db.session.add(wallet)
+    something = RequestFunds(wallet_id=wallet_ID, amount=0, message=None)
+    db.session.add(something)
     db.session.commit()
 
 

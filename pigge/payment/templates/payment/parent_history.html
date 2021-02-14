@@ -69,17 +69,15 @@
       
       <th>Transaction ID</th>
       <th>Time</th>
-      <th>To</th>
       <th>Amount</th>
       <th>Status</th>
     </tr>
     {% for transaction in transactions %}
     <tr>
       
-      <td> {{ transaction[1].transaction_id }}</td>
-      <td> {{ transaction[1].timestamp[:-7] }}</td>
-      <td> {{transaction[0].kid_name }} </td>
-      <td> {{ transaction[1].amount }}</td>
+      <td> {{ transaction.transaction_id }}</td>
+      <td> {{ transaction.timestamp[:-7] }}</td>
+      <td> {{ transaction.amount }}</td>
       <td> Successful</td>
     </tr>
     {% endfor %}

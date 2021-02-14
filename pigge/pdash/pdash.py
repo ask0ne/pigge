@@ -73,4 +73,4 @@ def request_handling():
 @pdash_bp.route("/parent_transactions", methods=["GET"])
 def view_transactions():
     logs = ParentLogs(session['id'])
-    return render_template("parents/.html", logs=logs.history)
+    return render_template("payment/parent_history.html", transactions=logs.history)
