@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Transaction History</title>
+  <style>
+    table {
+      margin-left: auto;
+      margin-right: auto;
+      color: black;
+      font-family: arial, sans-serif;
+      border-radius: 36px;
+      width: 70%;
+      height: 60%;
+      border-collapse: separate;
+      border-spacing: 0 10px;
+
+    }
+
+    th {
+      border: 1px solid #dddddd;
+      text-align: center;
+      padding: 27px;
+      border-radius: 30px;
+      width: 20%;
+      font-size: 20px;
+    }
+
+    td {
+      width: 20%;
+      padding: 20px;
+      border-radius: 30px;
+      border: 1px solid #dddddd;
+      text-align: center;
+      font-family: 'Cooper Black';
+      font-size: 16px;
+    }
+
+    th {
+      background-color: #032d69;
+      border-radius: 36px;
+    }
+
+    td {
+      background-color: #F3E2A9;
+      border-radius: 36px;
+    }
+
+    body {
+      background-color: white;
+    }
+
+    h2 {
+      font-size: 22px;
+      font-family: "Georgia";
+      color: black;
+      text-align: center;
+      text-shadow: 5px 5px 10px #F3E2A9;
+    }
+  </style>
+</head>
+
+<body>
+  <img src="{{ url_for('static', filename='images/backtohome.png') }}" width="50"
+      alt="back to dashboard" onclick="window.history.back()">
+  <h2>TRANSACTION HISTORY</h2><br>
+  <table>
+    <tr>
+      
+      <th>Transaction ID</th>
+      <th>Time</th>
+      <th>To</th>
+      <th>Amount</th>
+      <th>Status</th>
+    </tr>
+    {% for transaction in transactions %}
+    <tr>
+      
+      <td> {{ transaction[1].transaction_id }}</td>
+      <td> {{ transaction[1].timestamp[:-7] }}</td>
+      <td> {{transaction[0].kid_name }} </td>
+      <td> {{ transaction[1].amount }}</td>
+      <td> Successful</td>
+    </tr>
+    {% endfor %}
+
+
+  </table>
+</body>
+
+</html>
