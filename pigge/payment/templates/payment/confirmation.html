@@ -1,59 +1,64 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<title>Confirmation Required</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-body {
-  background: #fae8e8;
-}
+  <title>Confirmation Required</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      background: #fae8e8;
+    }
 
-.content {
-  max-width: 600px;
-  margin: auto;
-  background: white;
-  padding: 10px;
-  text-align: center;
-  border-radius: 20%;
+    .content {
+      max-width: 600px;
+      margin: auto;
+      background: white;
+      padding: 10px;
+      text-align: center;
+      border-radius: 20%;
 
-}
-
-
-.button {
-  background-color: #4CAF50; /* Green */
-  border: none;
-  color: white;
-  padding: 20px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 26px;
-  margin: 30px 20px;
-  cursor: pointer;
-  border-radius: 50%;
-}
+    }
 
 
-.DENY {background-color:RED;}
+    .button {
+      background-color: #4CAF50;
+      /* Green */
+      border: none;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 26px;
+      margin: 30px 20px;
+      cursor: pointer;
+      border-radius: 50%;
+    }
 
-</style>
+
+    .DENY {
+      background-color: RED;
+    }
+  </style>
 
 </head>
+
 <body>
 
-<div class="content">
-<h1 style="color:#db5902">Payment Confirmation</h1>
-  <img src="{{ url_for('static', filename='images/pigge.gif') }}" height="250">
-  <h1>{{Name}} </h1> 
-  <br>
-  pigge id : {{}} 
-  <br><br>
-  <h1>&#8377 {{}}</h1> 
-  
-<a href=""><button class="button" >CONFIRM</button></a>
-<a href=""><button class="button DENY">DENY</button></a>
-
-</div>
+  <div class="content">
+    <h1 style="color:#db5902">Payment Confirmation</h1>
+    <img src="{{ url_for('static', filename='images/pigge.gif') }}" height="250">
+    <h1>Verify Transaction Details</h1>
+    <br>
+    {{ data[0] }}
+    <br><br>
+    <h1>&#8377 {{ data[1] }}</h1>
+    <form method="POST" action="{{ url_for('payment.confirmation') }}">
+      <button type="submit" name="confirmation" value="yes" class="button">CONFIRM</button></a>
+      <button type="submit" name="confirmation" value="no" class="button DENY">DENY</button></a>
+    </form>
+  </div>
 
 </body>
+
 </html>

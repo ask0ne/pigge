@@ -1,5 +1,5 @@
 """Handling kid sessions"""
-from pigge.models import db, Kid, Wallet
+from pigge.models import db, Kid
 
 
 class TheKid:

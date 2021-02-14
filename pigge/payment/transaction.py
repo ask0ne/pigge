@@ -1,6 +1,6 @@
 import random
 from datetime import datetime
-from pigge.models import Transaction, Wallet, db
+from pigge.models import Transaction, Wallet, Kid, db
 
 
 class TheTransaction:
@@ -9,23 +9,26 @@ class TheTransaction:
         self.receiver = y
         self.amount = amount
         self.category = category
-        self.payment_status = 0
+        self.payment_status = 1
 
         # Do something here, depending on type of transaction
         # Create a branched condition here for P2K, K2K and K2B
     def check_dependencies(self):
-        if self.category == "P2K":
-            self.payment_status = 1
-        elif self.category == "K2K":
+        """
+        Check payment category.
+        Check 2FA(if enabled) -- return True/False
+        """
+        if self.category == "K2K":
             wall_id = "W" + self.sender[1:]
             check_TFA = Wallet.query.filter_by(wallet_id=wall_id).first()
             if check_TFA.two_f_auth == 0 or check_TFA.two_f_auth < self.amount:
                 self.payment_status = -1
                 check_TFA.pay_request = True
-                return "Parent confirmation required"
+                return True
             else:
                 self.payment_status = 1
-                return "Payment Successful"
+                return False
+
 
     def db_commit(self):
         """Final stage of transaction"""
@@ -47,8 +50,9 @@ class TheTransaction:
             dd + mm + str(random.randint(10**2, 10**3-1))
         return str(transaction_id)
 
-    def verify_receiver(self, wid):
-        """Function to verify that RECEIVER ID is valid aka user exists"""
-        if Wallet.query.filter_by(wallet_id=wid).first():
-            return True
-        return False
+    def fetch_receiver(self, k_id):
+        receiver = Kid.query.filter_by(kid_id=k_id).first()
+        if receiver:
+            return receiver.kid_name
+        else:
+            return False

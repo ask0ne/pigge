@@ -3,7 +3,7 @@ from flask import Blueprint, session, render_template, request, redirect, url_fo
 from pigge.pdash.session import TheParent
 from pigge.payment.wallet import TheWallet
 from pigge.payment.payment import p2k
-from pigge.payment.logs import PayRequests
+from pigge.payment.logs import PayRequests, ParentLogs
 
 pdash_bp = Blueprint('pdash', __name__, template_folder='templates')
 
@@ -69,3 +69,8 @@ def request_handling():
     elif request.form.get("req_button") == "no":
         pay.reject_request(tr_id)
     return redirect(url_for("pdash.parent_dashboard"))
+
+@pdash_bp.route("/parent_transactions", methods=["GET"])
+def view_transactions():
+    logs = ParentLogs(session['id'])
+    return render_template("parents/.html", logs=logs.history)
