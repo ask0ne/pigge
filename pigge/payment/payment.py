@@ -30,20 +30,14 @@ def k2k():
     """
     receiver_wallet = request.form.get('receiver_wallet_id')
     amount = int(request.form.get('amount'))
-    
+
     y = "K" + receiver_wallet[1:]
     receiver = fetch_receiver(y)
     payment_confirmation = [receiver, receiver_wallet, amount, y]
-    #print (payment_confirmation)
     if payment_confirmation[0]:
         return payment_confirmation
     else:
         flash("Wrong kid ID entered. Please try again!")
-
-
-@payment_bp.route("/transaction-status", methods=["GET"])
-def transaction_status():
-    return render_template("payment/transaction_status.html", transaction_status=request.args.get('data'))
 
 
 @payment_bp.route("/pay-another-kid", methods=["GET", "POST"])
@@ -53,8 +47,8 @@ def kid_2_kid():
 
     if request.method == "POST":
         data = k2k()
-        kid_2_kid.info=data
-        print (data)
+        kid_2_kid.info = data
+        print(data)
         return render_template("payment/confirmation.html", data=data)
 
 
@@ -63,31 +57,30 @@ def confirmation():
     if request.method == "POST":
         if request.form.get("confirmation") == "yes":
             # db.session.commit()
-            
-            info=kid_2_kid.info
+            info = kid_2_kid.info
             sender_wallet = session['id']
             x = "K" + sender_wallet[1:]
             y = info[3]
             amount = info[2]
             transaction = TheTransaction(x, y, amount, category="K2K")
             s_wallet = TheWallet(sender_wallet)
-            r_wallet = TheWallet(receiver_wallet)
+            r_wallet = TheWallet(info[1])
             if transaction.check_dependencies():
                 # 2FA ON
-                   s_wallet.sub_funds(amount)
-                   s_wallet.onHold(amount)
-                   payment_confirmation.append("Parent Verification Required!")
+                s_wallet.sub_funds(amount)
+                s_wallet.onHold(amount)
+                data = "Parent Verification Required!"
             else:
                 # 2FA OFF
                 s_wallet.sub_funds(amount)
                 r_wallet.add_funds(amount)
-                payment_confirmation.append('Payment Successful!')
+                data = "Payment Successful!"
             transaction.db_commit()
-            return redirect(url_for("payment.transaction_status", data=request.args.get('data')))
+            return render_template("payment/transaction_status.html", transaction_status=data)
         else:
             # rollback function here I guess
             # db.session.rollback()
-            return redirect(url_for("payment.transaction_status", data=request.args.get('data')))
+            return redirect(url_for("kdash.kid_dashboard"))
 
 
 @payment_bp.route("/transactions", methods=["GET"])
