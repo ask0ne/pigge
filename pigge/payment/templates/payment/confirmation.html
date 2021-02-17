@@ -48,11 +48,13 @@
   <div class="content">
     <h1 style="color:#db5902">Payment Confirmation</h1>
     <img src="{{ url_for('static', filename='images/pigge.gif') }}" height="250">
-    <h1>Verify Transaction Details</h1>
-    <br>
-    {{ data[0] }}
+    <h1>Verify Transaction Details
     <br><br>
-    <h1>&#8377 {{ data[1] }}</h1>
+    {{ data[0] }}</h1>
+    <br>
+    {{ data[1] }}
+    <br><br>
+    <h1>&#8377 {{ data[2] }}</h1>
     <form method="POST" action="{{ url_for('payment.confirmation') }}">
       <button type="submit" name="confirmation" value="yes" class="button">CONFIRM</button></a>
       <button type="submit" name="confirmation" value="no" class="button DENY">DENY</button></a>

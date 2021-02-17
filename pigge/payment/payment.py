@@ -1,6 +1,6 @@
 """Handles Parent Dashboard functionality"""
 from flask import Blueprint, session, render_template, request, redirect, url_for
-from pigge.payment.transaction import TheTransaction
+from pigge.payment.transaction import *
 from pigge.payment.wallet import TheWallet
 from pigge.payment.logs import TransactionLogs
 
@@ -30,27 +30,12 @@ def k2k():
     """
     receiver_wallet = request.form.get('receiver_wallet_id')
     amount = int(request.form.get('amount'))
-    sender_wallet = session['id']
-    x = "K" + sender_wallet[1:]
+    
     y = "K" + receiver_wallet[1:]
-    transaction = TheTransaction(x, y, amount, category="K2K")
-    s_wallet = TheWallet(sender_wallet)
-    r_wallet = TheWallet(receiver_wallet)
-    receiver = transaction.fetch_receiver(y)
-    payment_confirmation = [receiver, amount]
-    print (payment_confirmation)
+    receiver = fetch_receiver(y)
+    payment_confirmation = [receiver, receiver_wallet, amount, y]
+    #print (payment_confirmation)
     if payment_confirmation[0]:
-        if transaction.check_dependencies():
-            # 2FA ON
-            s_wallet.sub_funds(amount)
-            s_wallet.onHold(amount)
-            payment_confirmation.append("Parent Verification Required!")
-        else:
-            # 2FA OFF
-            s_wallet.sub_funds(amount)
-            r_wallet.add_funds(amount)
-            payment_confirmation.append('Payment Successful!')
-        transaction.db_commit()
         return payment_confirmation
     else:
         flash("Wrong kid ID entered. Please try again!")
@@ -68,6 +53,7 @@ def kid_2_kid():
 
     if request.method == "POST":
         data = k2k()
+        kid_2_kid.info=data
         print (data)
         return render_template("payment/confirmation.html", data=data)
 
@@ -77,6 +63,26 @@ def confirmation():
     if request.method == "POST":
         if request.form.get("confirmation") == "yes":
             # db.session.commit()
+            
+            info=kid_2_kid.info
+            sender_wallet = session['id']
+            x = "K" + sender_wallet[1:]
+            y = info[3]
+            amount = info[2]
+            transaction = TheTransaction(x, y, amount, category="K2K")
+            s_wallet = TheWallet(sender_wallet)
+            r_wallet = TheWallet(receiver_wallet)
+            if transaction.check_dependencies():
+                # 2FA ON
+                   s_wallet.sub_funds(amount)
+                   s_wallet.onHold(amount)
+                   payment_confirmation.append("Parent Verification Required!")
+            else:
+                # 2FA OFF
+                s_wallet.sub_funds(amount)
+                r_wallet.add_funds(amount)
+                payment_confirmation.append('Payment Successful!')
+            transaction.db_commit()
             return redirect(url_for("payment.transaction_status", data=request.args.get('data')))
         else:
             # rollback function here I guess

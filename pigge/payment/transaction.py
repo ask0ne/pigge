@@ -2,7 +2,13 @@ import random
 from datetime import datetime
 from pigge.models import Transaction, Wallet, Kid, db
 
-
+def fetch_receiver(k_id):
+        receiver = Kid.query.filter_by(kid_id=k_id).first()
+        if receiver:
+            return receiver.kid_name
+        else:
+            return False
+        
 class TheTransaction:
     def __init__(self, x, y, amount, category):
         self.sender = x
@@ -50,9 +56,4 @@ class TheTransaction:
             dd + mm + str(random.randint(10**2, 10**3-1))
         return str(transaction_id)
 
-    def fetch_receiver(self, k_id):
-        receiver = Kid.query.filter_by(kid_id=k_id).first()
-        if receiver:
-            return receiver.kid_name
-        else:
-            return False
+    
