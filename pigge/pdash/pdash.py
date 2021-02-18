@@ -70,7 +70,11 @@ def request_handling():
         pay.reject_request(tr_id)
     return redirect(url_for("pdash.parent_dashboard"))
 
+
 @pdash_bp.route("/parent_transactions", methods=["GET"])
 def view_transactions():
-    logs = ParentLogs(session['id'])
-    return render_template("payment/parent_history.html", transactions=logs.history)
+    if session["id"]:
+        logs = ParentLogs(session['id'])
+        return render_template("payment/parent_history.html", transactions=logs.history)
+    else:
+        return redirect(url_for("auth_bp.login"))

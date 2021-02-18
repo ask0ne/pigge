@@ -16,6 +16,7 @@ def kid_dashboard():
     session['id'] = wallet.wallet.wallet_id
     return render_template("kdash/kids_dash.html", user=user.user, wallet=wallet)
 
+
 @kdash_bp.route("/transactions", methods=["GET"])
 def trasnaction_history():
     if session["id"]:

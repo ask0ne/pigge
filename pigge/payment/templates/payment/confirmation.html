@@ -56,6 +56,8 @@
     <br><br>
     <h1>&#8377 {{ data[2] }}</h1>
     <form method="POST" action="{{ url_for('payment.confirmation') }}">
+      <input type="text" name="wallet" value={{data[1]}} hidden>
+      <input type="number" name="amount" value={{data[2]}} hidden>
       <button type="submit" name="confirmation" value="yes" class="button">CONFIRM</button></a>
       <button type="submit" name="confirmation" value="no" class="button DENY">DENY</button></a>
     </form>
