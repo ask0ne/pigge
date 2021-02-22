@@ -441,21 +441,21 @@
       margin-bottom: 5px;
       height: 40px;
     }
-    
-    .notif_button {
-  background-color: #4CAF50; /* Green */
-  border: none;
-  color: white;
-  padding: 20px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 18px;
-  margin: 10px 20px;
-  cursor: pointer;
-  border-radius: 50%;
-}
 
+    .notif_button {
+      background-color: #4CAF50;
+      /* Green */
+      border: none;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 18px;
+      margin: 10px 20px;
+      cursor: pointer;
+      border-radius: 50%;
+    }
   </style>
 </head>
 
@@ -490,8 +490,10 @@
             <a2>
               <td1>Your kid has requested for {{ log.amount }}</td1>
               <input name="transaction_id" value="{{ log.transaction_id }}" hidden>
-              <td1><button class="button5" type="submit" name="req_button" value="yes" style="vertical-align:middle"><span>Yes</span></button></td1>
-              <td1><button class="button5" type="submit" name="req_button" value="no" style="vertical-align:middle"><span>No</span></button></td1>
+              <td1><button class="button5" type="submit" name="req_button" value="yes"
+                  style="vertical-align:middle"><span>Yes</span></button></td1>
+              <td1><button class="button5" type="submit" name="req_button" value="no"
+                  style="vertical-align:middle"><span>No</span></button></td1>
             </a2><br></br>
           </form>
         </tr1>
@@ -517,24 +519,24 @@
         <th style="background-color:#FADBD8">Available Balance {{ wallet.real_balance }}</th>
         <td style="background-color:#FADBD8">Usable Balance {{ wallet.wallet.restrict_bal }}</td>
     </tr>
-     
+
     <tr>
-    <td colspan="2" style="background-color:#eefcd4; border-width:6px;  
+      <td colspan="2" style="background-color:#eefcd4; border-width:6px;  
         border-style:dotted solid; border-color: #0553b3;">
 
-    &#128276 <b>Kid is requesting for funds </b>
-    <br><br>
+        &#128276 <b>Kid is requesting for funds </b>
+        <br><br>
 
-    <form action="POST">
-    amount : &#8377 {{amt}}
-    <br><br>
-    <span>{{personalized msg}}</span><br><br>
-    <button type="submit" action="" class="notif_button">Accept</button>
-    <button type="submit" action="" class="notif_button" style="background-color:RED">Deny</button>
-    </form>
+        <form action="POST">
+          Amount : &#8377 {{wallet.real_balance}}
+          <br><br>
+          <span>{{user.user.parent_name}}</span><br><br>
+          <button type="submit" action="" class="notif_button">Accept</button>
+          <button type="submit" action="" class="notif_button" style="background-color:RED">Deny</button>
+        </form>
 
-    </td>
-    </tr> 
+      </td>
+    </tr>
 
     <tr>
       <table cellspacing="25">
@@ -564,12 +566,14 @@
     </tr>
     <tr>
       <th>View Your transactions</th>
-      <td> <a href="{{ url_for('pdash.view_transactions') }}"><button class="button2" style="vertical-align:middle"><span>Click</span></button></a></td>
+      <td> <a href="{{ url_for('pdash.view_transactions') }}"><button class="button2"
+            style="vertical-align:middle"><span>Click</span></button></a></td>
       </td>
     </tr>
     <tr>
       <th>Monitor Kid's Transactions</th>
-      <td> <a href="{{ url_for('kdash.trasnaction_history') }}"><button class="button2" style="vertical-align:middle"><span>Click</span></button></a></td>
+      <td> <a href="{{ url_for('kdash.trasnaction_history') }}"><button class="button2"
+            style="vertical-align:middle"><span>Click</span></button></a></td>
       </td>
     </tr>
     <tr>
