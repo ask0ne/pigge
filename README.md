@@ -3,7 +3,7 @@
 ## TODO
 
 <ol>
-<li>Fix payment </li>
+
 <li>Request Funds </li>
 <li>Payment module -- <s>K2K</s> and K2B</li>
 <li>Security fixes -- session, transaction atomocity etc </li>
@@ -11,6 +11,7 @@
 <li>Tips and quizzes module</li>
 <li><s>Transaction history</s></li>
 <li><s>Flash messages for errors</s></li>
+<li><s>Fix payment </s></li>
 </ol>
 
 ## Some important notes
