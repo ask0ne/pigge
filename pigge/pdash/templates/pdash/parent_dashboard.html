@@ -441,6 +441,21 @@
       margin-bottom: 5px;
       height: 40px;
     }
+    
+    .notif_button {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 18px;
+  margin: 10px 20px;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
   </style>
 </head>
 
@@ -502,6 +517,25 @@
         <th style="background-color:#FADBD8">Available Balance {{ wallet.real_balance }}</th>
         <td style="background-color:#FADBD8">Usable Balance {{ wallet.wallet.restrict_bal }}</td>
     </tr>
+     
+    <tr>
+    <td colspan="2" style="background-color:#eefcd4; border-width:6px;  
+        border-style:dotted solid; border-color: #0553b3;">
+
+    &#128276 <b>Kid is requesting for funds </b>
+    <br><br>
+
+    <form action="POST">
+    amount : &#8377 {{amt}}
+    <br><br>
+    <span>{{personalized msg}}</span><br><br>
+    <button type="submit" action="" class="notif_button">Accept</button>
+    <button type="submit" action="" class="notif_button" style="background-color:RED">Deny</button>
+    </form>
+
+    </td>
+    </tr> 
+
     <tr>
       <table cellspacing="25">
         <th>Add Funds</th>
