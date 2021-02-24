@@ -22,6 +22,7 @@
       padding: 1px;
       font-family: "Lucida Console", Monospace;
       text-align: center;
+      margin-left: 134px;
       background: #1C2833;
       color: white;
       font-size: 10px;
@@ -29,6 +30,7 @@
       height: 40px;
       text-align: center;
       position: fixed;
+      overflow-y: hidden;
     }
 
     /*For navigation bar at the left*/
@@ -324,6 +326,7 @@
 
     /*Second toggle button*/
     .footer {
+      margin-left: 134px;
       position: relative;
       padding: 3px;
       left: 0;
@@ -513,29 +516,27 @@
   </div>
   <br></br><br></br>
   <table>
-
+    {% if frequest.existing_request %}
     <tr>
-      <table cellspacing="25">
-        <th style="background-color:#FADBD8">Available Balance {{ wallet.real_balance }}</th>
-        <td style="background-color:#FADBD8">Usable Balance {{ wallet.wallet.restrict_bal }}</td>
-    </tr>
-
-    <tr>
-      <td colspan="2" style="background-color:#eefcd4; border-width:6px;  
-        border-style:dotted solid; border-color: #0553b3;">
-
+      <td colspan="2" style="background-color: rgba(0, 0, 0, 0.1); border-width:7px;  
+        border-style:dotted solid; border-color:black">
         &#128276 <b>Kid is requesting for funds </b>
         <br><br>
-
-        <form action="POST">
-          Amount : &#8377 {{wallet.real_balance}}
+        <form method="POST" action="{{ url_for('pdash.request_funds') }}">
+          Amount : &#8377 {{frequest.existing_request.amount}}
           <br><br>
-          <span>{{user.user.parent_name}}</span><br><br>
-          <button type="submit" action="" class="notif_button">Accept</button>
-          <button type="submit" action="" class="notif_button" style="background-color:RED">Deny</button>
+          <span>{{frequest.existing_request.message}}</span><br><br>
+          <button type="submit" name="submit" value="yes" class="notif_button">Accept</button>
+          <button type="submit" name="submit" value="no" class="notif_button" style="background-color:RED">Deny</button>
         </form>
 
       </td>
+    </tr>
+    {% endif %}
+    <tr>
+      <table cellspacing="25">
+        <th style="background-color:#FADBD8">Available Balance <br><br>{{ wallet.real_balance }}</th>
+        <td style="background-color:#FADBD8">Usable Balance <br><br>{{ wallet.wallet.restrict_bal }}</td>
     </tr>
 
     <tr>
@@ -553,6 +554,7 @@
       <th>
         <form method="POST" action="{{ url_for('pdash.max_spend_limit')}}">
           Limit kid's Transaction
+          <br><br>
           <label class="switch">
             <input type="checkbox" name="check_box" id="limit_trans" {{ wallet.checkbox_limit }}>
             <span class="slider round"></span>

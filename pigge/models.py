@@ -68,7 +68,7 @@ class Services(db.Model):
     service_id = db.Column(db.String)
     balance = db.Column(db.Integer)
 
-class RequestFunds(db.Model):
+class FundRequests(db.Model):
     __tablename__ = "requestfunds"
     id = db.Column(db.Integer, primary_key=True)
     wallet_id = db.Column(db.String)

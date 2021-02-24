@@ -3,7 +3,7 @@ Contains functions that access the database such as login and registration.
 """
 
 from pigge.auth.extras import *
-from pigge.models import db, Parent, Kid, Wallet, RequestFunds
+from pigge.models import db, Parent, Kid, Wallet
 from datetime import datetime
 
 
