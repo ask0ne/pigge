@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>QUIZ</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+
+body	
+	{
+	background-image: url("quiz_back.jpg");
+	background-repeat: no-repeat;
+	background-size: cover;
+	overflow-x:hidden;
+	margin: 0;
+	max-width:100%; 
+	font-family: "Lucida Console", "Courier New", monospace;
+	color:beige;
+	}
+
+header_anim
+	{
+	position: relative;
+  	animation: mymove 7s infinite; 
+  	animation-direction:alternate-reverse;
+	}
+
+@keyframes mymove 
+	{
+  	from {left: 0px;}
+  	to {left: 180px;}
+	}
+
+box 	
+	{
+  	width: 320px;
+  	padding: 10px;
+  	border: 5px solid gray;
+  	background-color:green;
+	}
+
+.box1
+	{
+	width: 320px
+  	padding: 10px;
+	background-color:#c4b7a6;
+	border: 3px solid gray;
+	border-radius:4px;
+	margin-left:20px;
+	color:black;
+	font-size:20px;
+	}
+
+.submit_btn
+	{
+	width: 150px;
+  	padding: 10px;
+  	border: 5px solid #e6e2d3;
+  	background-color:rgba(99, 61, 86, 0.8);
+	cursor: pointer;
+	color:beige;
+	font-family: "Lucida Console", "Courier New", monospace;
+	font-size:18px;
+	}
+
+* 
+	{
+  	box-sizing: border-box;
+	
+	
+	}
+
+.column 
+	{
+  	float: left;
+  	width: 33.33%;
+  	padding: 15px;
+	}
+
+.row::after 
+	{
+  	content: " ";
+  	clear: both;
+  	display: table;
+	}
+.btn 
+	{
+	cursor: pointer;
+	}
+
+
+
+
+</style>
+
+<body>
+
+	<header_anim>
+		<h1 style="color:beige; text-align:center; font-size:45px; font-style: oblique; margin-bottom:60px;">Welcome to the Quiz</h1>
+	</header_anim>
+	
+	
+	<h2 style="color:beige;margin-left:450px; font-size:30px;"><box>Need Vs Want</box></h2><br></br>
+	<h2 style="color:beige;">Question: If you have sufficient balance in pigge what would be your priority need ?</br></br></h2>
+	<div class="row" style="margin-left:35px;">
+  		<div class="column">
+    		<input type="radio" id="need" name ="image" value="right"> A.<img src="need.png" alt="Need" style="width:480px;height:300px;">
+  		</div>
+  		<div class="column">
+    		<input type="radio" id="want" name ="image" value="wrong"> B.<img src="want.png" alt="Want" style="width:480px;height:300px;">
+  		</div>
+		<div class="column">
+		<button class="submit_btn"  onclick="submitAnswer_3()" style="margin-left:100px; margin-top:160px;">Submit</button><br><br></br></br>
+		</div>
+	</div><br></br>
+	
+	
+
+	
+	<h2 style="color:beige;margin-left:350px; font-size:30px;"><box>Be Alert & Be Aware!</box></h2>
+	<br></br><h2 style="color:beige;">Question: If somebody asks you to share your pin/OTP to help you remember it what would you do ?</h2>
+	<div class="row">
+	<div class="column">
+	<div class="box1" style="width:960px;">
+		<input type="radio" id="wrong_ans" name ="Alert" value="no"><label for="wrong_ans" style="font-size:21px; color:black"> Share my details and be worry-free incase i forget.</label><br></br>
+		<input type="radio" id="correct_ans" name ="Alert" value="yes"><label for="correct_ans" style="font-size:21px; color:black"> Never share my details and note it down to refer if i forget.</label>
+	</div>
+	</div>
+	<div class="column">
+	<button class="submit_btn" onclick="submitAnswer()" style="margin-left:570px; margin-top:20px">Submit</button>
+	</div></div>
+	
+	
+
+
+
+	<br><br></br></br><h2 style="color:beige;margin-left:350px; font-size:30px;"><box>Plan your Savings</box></h2>
+	<br></br><h2 style="color:beige;">Question: You want to buy a playstation using your pigge-wallet balance but it is a little costlier. What would you do? Choose Wisely!</h2>
+	<div class="row">
+	<div class="column">	
+	<div class="box1" style="width:1260px;">
+		<input type="radio" id="save_correct_ans" name ="Savings" value="yes"><label for="save_correct_ans"> Save money every month till you have enough to buy the playstation.</label><br></br>
+		<input type="radio" id="save_wrong_ans" name ="Savings" value="no"><label for="save_wrong_ans"> Ask your parents to add more money in your wallet so that you could buy the playstation immediately.</label>
+	</div>
+	</div>
+	<div class="column">
+	<button class="submit_btn" onclick="submitAnswer_1()" style="margin-left:880px; margin-top:15px">Submit</button>
+	</div></div>
+
+
+
+	<br><br></br></br><h2 style="color:beige;margin-left:350px; font-size:30px;"><box>Manage your Wallet</box></h2>
+	<br></br><h2 style="color:beige;">Question: If given a list of actions, what is/are the most efficient and smart practises of money management?</h2>
+	<div class="row">
+	<div class="column">
+	<div class="box1" style="width:800px">	
+	<input type="checkbox" id="check1" name="check1" value="spend">
+  	<label for="check1" style="font-size:20px">Spend less , Save more</label><br>
+  	<input type="checkbox" id="check2" name="check2" value="check_Wallet">
+  	<label for="check2" style="font-size:20px"> Keep a check on wallet balance</label><br>
+  	<input type="checkbox" id="check3" name="check3" value="no_check">
+  	<label for="check3" style="font-size:20px">Spend without checking wallet balance</label><br>
+  	<input type="checkbox" id="check4" name="check4" value="imp_spendings">
+  	<label for="check4" style="font-size:20px">Give importance on spending money for necessary things first</label>
+	</div>
+	</div>
+	<div class="column">
+	<button class="submit_btn" onclick="submitAnswer_2()" style="margin-left:450px; margin-top:15px;">Submit</button>
+	</div></div>
+
+
+
+	<br><br></br></br><div class="row" style="margin-left:130px;">
+  		<div class="column"  style="width: 30.33%;">
+    		<img src="cashless.gif" alt="cashless" style="width:300px;height:300px;">
+  		</div>
+  		<div class="column"  style="width: 30.33%;">
+    		<img src="digital.gif" alt="digital" style="width:300px;height:300px;">
+		</div>
+		<div class="column"  style="width: 30.33%;">
+		<img src="money.gif" alt="money" style="width:300px;height:300px;">
+  		</div>
+	</div><br></br>
+	
+	<script>
+	function submitAnswer() 
+	{
+   	if (document.getElementById("wrong_ans").checked == false && 
+       document.getElementById("correct_ans").checked == true)
+   	{
+     alert("Correct!");
+   	}
+	else 
+	{
+	alert("Wrong!");
+	}
+	}
+	
+	function submitAnswer_1() 
+	{
+   	if (document.getElementById("save_correct_ans").checked == false && 
+       document.getElementById("save_wrong_ans").checked == true)
+   	{
+     alert("Wrong!");
+   	}
+	else 
+	{
+	alert("Correct!");
+	}
+	}
+
+
+	function submitAnswer_2() 
+	{
+   	if ((document.getElementById("check1").checked == true || 
+       document.getElementById("check2").checked == true ||
+       document.getElementById("check4").checked == true) && (document.getElementById("check3").checked == false))
+   	{
+     alert("Correct!");
+   	}
+	else 
+	{
+	alert("Wrong!");
+	}
+	}
+
+	function submitAnswer_3() 
+	{
+   	if (document.getElementById("need").checked==true)
+   	{
+     alert("Correct!");
+   	}
+	else if (document.getElementById("want").checked==true) 
+	{
+	alert("Wrong!");
+	}
+	}
+	</script>	
+
+	
+
+
+</body>
+</head>
+</html>
