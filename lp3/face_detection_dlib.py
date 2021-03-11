@@ -5,9 +5,9 @@ import numpy as np
 import argparse
 import imutils
 
-ap = argparse.ArgumentParser()
+#ap = argparse.ArgumentParser()
 # ap.add_argument("-i", "--image", required=True, help="path to input image")
-args = vars(ap.parse_args())
+#args = vars(ap.parse_args())
 path = 'shape_predictor_68_face_landmarks.dat'
 
 detector = dlib.get_frontal_face_detector()
