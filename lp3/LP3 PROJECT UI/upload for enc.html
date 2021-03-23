@@ -1,0 +1,65 @@
+<html>
+<head>
+<title>Image Upload</title>
+</head>
+
+<style>
+.img {
+    border: 3px solid blue;
+    display: inline-block;
+    padding: 12px 20px;
+    cursor: pointer;
+    width: 500px;
+    border-radius: 6px;
+    text-align: center;
+    background-color:#e3faf9;
+    margin : 15px;
+    
+
+}
+
+h1{
+margin:10px;
+color: yellow;
+}
+
+.button {
+  background-color: black;
+  border: 3px solid white;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 22px;
+  margin: 4px 10px;
+  cursor: pointer;
+  border-radius: 50%;
+}
+</style>
+<form>
+<body align="center" background="enc.jpg" >
+<h1 > Upload a Picture ! </h1>
+<div class="img"><input type="file" accept="image/*" name="file" onchange="loadFile(event)" required></div>
+<br>
+<br>
+
+<button class="button" name="enc">ENCYPT</button>
+<button class="button" name="decrpt">DECRYPT</button>
+</form>
+
+<img id="output" style="height: 65%; width: 80%; 
+object-fit: contain;"/>
+
+<script>
+  var loadFile = function(event) {
+  var output = document.getElementById('output');
+  output.src = URL.createObjectURL(event.target.files[0]);
+  output.onload = function() {
+  URL.revokeObjectURL(output.src)
+  }
+  };
+</script>
+
+</body>
+</html>
