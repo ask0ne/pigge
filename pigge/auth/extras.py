@@ -7,6 +7,7 @@ import bcrypt
 import pytesseract
 
 ALLOWED_EXTENSIONS = {"png", "jpg", "jpeg"}
+pytesseract.pytesseract.tesseract_cmd = 'C:\\Users\\kawad\\AppData\\Local\\Tesseract-OCR\\tesseract.exe'
 
 
 def allowed_file(filename):
@@ -35,8 +36,8 @@ def return_answer(answer):
 def verify_id(name, file_path):
     '''Input name and file path. Output is string to be displayed'''
     img = cv2.imread(file_path)
-    cv2.Canny(img, 100, 200)
-    scanned_text = pytesseract.image_to_string(img)
+    canny_img = cv2.Canny(img, 100, 200)
+    scanned_text = pytesseract.image_to_string(canny_img)
     result = check_name(name, scanned_text)
     return result
 

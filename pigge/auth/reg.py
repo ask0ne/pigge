@@ -49,8 +49,6 @@ def createWallet(kid_id):
     wallet = Wallet(wallet_id=wallet_ID, balance=0, generated_on=datetime.now(), pay_request=False,
                     two_f_auth=-1, restrict_bal=0, on_hold=0)
     db.session.add(wallet)
-    something = RequestFunds(wallet_id=wallet_ID, amount=0, message=None)
-    db.session.add(something)
     db.session.commit()
 
 
@@ -81,12 +79,14 @@ def authenticateParent(parent_mail, ppassword):
 def authenticateKid(kmail, kpin):
     """Kid login authentication"""
     user = Kid.query.filter_by(kid_email=kmail).first()
-    pin = user.kid_pin
     auth = 0
     if not user:
         # Incorrect email
-        auth = 0
-    elif kpin != pin:
+        return 0
+    else:
+        pin = user.kid_pin
+    
+    if kpin != pin:
         # Incorrect pin
         if user.number_of_tries < 5:
             user.number_of_tries += 1

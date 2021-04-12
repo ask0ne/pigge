@@ -25,6 +25,9 @@ def main():
     if request.method == "GET":
         return render_template("index.html")
 
+@APP.route("/quiz", methods=["GET", "POST"])
+def load_quiz():
+    return render_template("quiz_page.html")
 
 if __name__ == "__main__":
     APP.run()

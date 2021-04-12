@@ -17,8 +17,6 @@ class TheTransaction:
         self.category = category
         self.payment_status = 1
 
-        # Do something here, depending on type of transaction
-        # Create a branched condition here for P2K, K2K and K2B
     def check_dependencies(self):
         """
         Check payment category.
@@ -27,13 +25,14 @@ class TheTransaction:
         if self.category == "K2K":
             wall_id = "W" + self.sender[1:]
             check_TFA = Wallet.query.filter_by(wallet_id=wall_id).first()
-            if check_TFA.two_f_auth == 0 or check_TFA.two_f_auth < self.amount:
+            if check_TFA.two_f_auth == -1:
+                self.payment_status = 1
+                return False
+            elif check_TFA.two_f_auth == 0 or check_TFA.two_f_auth < self.amount:
                 self.payment_status = -1
                 check_TFA.pay_request = True
                 return True
-            else:
-                self.payment_status = 1
-                return False
+                
 
 
     def db_commit(self):

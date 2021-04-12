@@ -294,6 +294,9 @@
     <img src="{{ url_for('static', filename='images/mylogo1.png') }}" alt="Pigge Logo">
     <a>Hello, {{ user.kid_name }}</a>.
     <button class="button button1">Dashboard</button>
+    <form method="POST" action="{{ url_for('load_quiz')}}">
+      <button class="button button1" type="submit">Quiz</button>
+    </form>
     <form method="POST" action="{{ url_for('auth_bp.logout') }}">
       <button type="submit" class="button button1">Logout</button>
     </form>

@@ -3,15 +3,14 @@
 ## TODO
 
 <ol>
-
-<li>Request Funds </li>
+<li>Frame flow design</li>
 <li>Payment module -- <s>K2K</s> and K2B</li>
 <li>Security fixes -- session, transaction atomocity etc </li>
 <li>UI/UX fixes</li>
-<li>Tips and quizzes module</li>
 <li><s>Transaction history</s></li>
 <li><s>Flash messages for errors</s></li>
 <li><s>Fix payment </s></li>
+<li><s>Request Funds</s></li>
 </ol>
 
 ## Some important notes
