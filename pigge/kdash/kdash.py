@@ -30,9 +30,7 @@ def trasnaction_history():
 def request_funds():
     amount = int(request.form.get('amount'))
     message = request.form.get('message')
-    print(amount, message)
     new_request = RequestFunds(session['id'])
-    print(amount, message)
     if new_request.is_unique():
         new_request.create(amount, message)
         new_request.execute_request()
