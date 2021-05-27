@@ -1,4 +1,4 @@
-from pigge.models import db, Wallet
+from pigge.models import db, Wallet, Services
 
 
 class TheWallet:
@@ -21,8 +21,6 @@ class TheWallet:
         if self.wallet.restrict_bal >= val:
             self.wallet.balance -= val
             self.wallet.restrict_bal -= val
-        else:
-            flash("Insufficient balance!")
         db.session.commit()
 
     def onHold(self, val):
@@ -51,3 +49,13 @@ class TheWallet:
     def change_2FA(self, val):
         self.wallet.two_f_auth = val
         db.session.commit()
+
+
+class TheService:
+    def __init__(self, category):
+        # Category - Fun, Food, Travel, Stationary
+        print(category)
+        self.service = Services.query.filter_by(service_id=str(category)).first()
+
+    def checkout(self, amount):
+        self.service.balance += amount

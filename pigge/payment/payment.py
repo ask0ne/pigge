@@ -1,7 +1,9 @@
 """Handles Parent Dashboard functionality"""
-from flask import Blueprint, session, render_template, request, redirect, url_for
+from flask import Blueprint, session, render_template, request, redirect, url_for, flash
+from pigge.payment import wallet
+from pigge.payment import transaction
 from pigge.payment.transaction import *
-from pigge.payment.wallet import TheWallet
+from pigge.payment.wallet import TheService, TheWallet
 from pigge.payment.logs import TransactionLogs
 
 payment_bp = Blueprint('payment', __name__, template_folder='templates')
@@ -37,7 +39,24 @@ def k2k(receiver_wallet, amount):
         flash("Wrong kid ID entered. Please try again!")
 
 
-def execute_transaction(transaction, r_wallet, s_wallet, amount):
+def k2b(amount, cat):
+    """
+    amount : Amount to be transferred
+    category : Fun, Food, Travel, Stationary
+    """
+    wallet_id = session['id']
+    kid_id = "K" + wallet_id[1:]
+    s_wallet = TheWallet(wallet_id)
+    s_wallet.sub_funds(amount)
+    receiver = TheService(cat)
+    transaction = TheTransaction(kid_id, cat, amount, category="K2B")
+    transaction_status = execute_transaction(transaction, s_wallet, amount)
+    receiver.checkout(amount)
+    transaction.db_commit()
+    return render_template("payment/transaction_status.html", transaction_status=transaction_status)
+
+
+def execute_transaction(transaction, s_wallet, amount):
     if transaction.check_dependencies():
         # 2FA ON
         s_wallet.sub_funds(amount)
@@ -46,7 +65,6 @@ def execute_transaction(transaction, r_wallet, s_wallet, amount):
     else:
         # 2FA OFF
         s_wallet.sub_funds(amount)
-        r_wallet.add_funds(amount)
         return "Payment Successful!"
 
 
@@ -77,7 +95,8 @@ def confirmation():
             s_wallet = TheWallet(x)
             r_wallet = TheWallet(y)
             transaction_status = execute_transaction(
-                transaction, r_wallet, s_wallet, amount)
+                transaction, s_wallet, amount)
+            r_wallet.add_funds(amount)
             transaction.db_commit()
             return render_template("payment/transaction_status.html", transaction_status=transaction_status)
         else:

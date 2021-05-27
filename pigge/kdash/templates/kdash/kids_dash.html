@@ -308,7 +308,6 @@
         <td colspan="2" style="background-color:#FADBD8">Available Balance {{wallet.wallet.restrict_bal}}</td>
 
     </tr>
-
     <th>Pay my buddy</th>
     <td>
       <a href="{{ url_for('payment.kid_2_kid') }}">
@@ -317,21 +316,22 @@
     </td>
     </td>
     </tr>
-
     <tr>
-      <th>Pay Services</th>
-      <td>
-        <select name="Services"
-          style="background-color:#D7CCC8; border-radius:4px; font-family:Lucida Console, Monospace;">
-          <option value="Food" style="background-color:#FFCDD2;">Food</option>
-          <option value="Travel" style="background-color:#EF9A9A;">Travel</option>
-          <option value="Stationary" style="background-color:#BBDEFB;">Stationary</option>
-          <option value="Fun" style="background-color:#B2DFDB;">Fun</option>
-        </select><br><br>
+      <form method="POST" action="{{ url_for('kdash.pay_services') }}">
+        <th>Pay Services</th>
+        <td>
+          <select name="Services"
+            style="background-color:#D7CCC8; border-radius:4px; font-family:Lucida Console, Monospace;">
+            <option value="101" style="background-color:#B2DFDB;">Fun</option>
+            <option value="102" style="background-color:#FFCDD2;">Food</option>
+            <option value="103" style="background-color:#EF9A9A;">Travel</option>
+            <option value="104" style="background-color:#BBDEFB;">Stationary</option>
+          </select><br><br>
 
-        <input type="number" id="Pay_Services" placeholder="Enter amount">
-        <button class="button3" style="vertical-align:middle"><span>Pay</span></button>
-      </td>
+          <input name="amount" type="number" id="Pay_Services" placeholder="Enter amount">
+          <button type="submit" class="button3" style="vertical-align:middle"><span>Pay</span></button>
+        </td>
+      </form>
     </tr>
 
     <tr>
@@ -341,7 +341,7 @@
           <textarea name="message" id="textarea" maxlength="40"
             style="width:80%;height:90%;background-color:#D7CCC8; border-radius:4px;"
             placeholder="Enter purpose"></textarea>
-            <br>
+          <br>
           <div id="count">
             <span id="current_count">0</span>
             <span id="maximum_count">/ 40</span>
@@ -374,7 +374,6 @@
       current_count.text(characterCount);
     });
   </script>
-
 </body>
 
 </html>

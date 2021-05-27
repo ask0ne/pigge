@@ -76,7 +76,7 @@
     <tr>
       
       <td> {{ transaction.transaction_id }}</td>
-      <td> {{ transaction.timestamp[:-7] }}</td>
+      <td> {{ transaction.timestamp[:16] }}</td>
       <td> {{ transaction.amount }}</td>
       <td> Successful</td>
     </tr>

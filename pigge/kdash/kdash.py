@@ -1,6 +1,8 @@
 """Handles Kid Dashboard functionality"""
 from flask import Blueprint, session, render_template, request, flash, redirect, url_for
 from pigge.kdash.session import TheKid
+from pigge.payment import wallet
+from pigge.payment.payment import k2b
 from pigge.payment.wallet import TheWallet
 from pigge.payment.logs import TransactionLogs, RequestFunds
 
@@ -17,11 +19,19 @@ def kid_dashboard():
     return render_template("kdash/kids_dash.html", user=user.user, wallet=wallet)
 
 
+@kdash_bp.route("/pay-services", methods=["POST"])
+def pay_services():
+    val = int(request.form.get('amount'))
+    category = int(request.form.get('Services'))
+    k2b(val, category)
+    return redirect(url_for('kdash.kid_dashboard'))
+
+
 @kdash_bp.route("/transactions", methods=["GET"])
 def trasnaction_history():
     if session["id"]:
         transactions = TransactionLogs(session["id"])
-        return render_template("payment/history.html", transactions=transactions.history)
+        return render_template("payment/history.html", transactions=transactions)
     else:
         return redirect(url_for("auth_bp.login"))
 

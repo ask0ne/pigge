@@ -1,99 +1,113 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
 
 <head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+    integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
   <title>Transaction History</title>
   <style>
-    table {
-      margin-left: auto;
-      margin-right: auto;
-      color: black;
-      font-family: arial, sans-serif;
-      border-radius: 36px;
-      width: 70%;
-      height: 60%;
-      border-collapse: separate;
-      border-spacing: 0 10px;
 
-    }
-
-    th {
-      border: 1px solid #dddddd;
-      text-align: center;
-      padding: 27px;
-      border-radius: 30px;
-      width: 20%;
-      font-size: 20px;
-    }
-
-    td {
-      width: 20%;
-      padding: 20px;
-      border-radius: 30px;
-      border: 1px solid #dddddd;
-      text-align: center;
-      font-family: 'Cooper Black';
-      font-size: 16px;
-    }
-
-    th {
-      background-color: #032d69;
-      border-radius: 36px;
-    }
-
-    td {
-      background-color: #F3E2A9;
-      border-radius: 36px;
-    }
-
-    body {
-      background-color: white;
-    }
-
-    h2 {
-      font-size: 22px;
-      font-family: "Georgia";
-      color: black;
-      text-align: center;
-      text-shadow: 5px 5px 10px #F3E2A9;
-    }
   </style>
 </head>
 
-<body>
-  <img src="{{ url_for('static', filename='images/backtohome.png') }}" width="50"
-      alt="back to dashboard" onclick="window.history.back()">
-  <h2>TRANSACTION HISTORY</h2><br>
-  <table>
-    <tr>
-      <th>Category</th>
-      <th>Transaction ID</th>
-      <th>Time</th>
-      <th>To</th>
-      <th>Amount</th>
-      <th>Status</th>
-    </tr>
-    {% for transaction in transactions %}
-    <tr>
-      <td> {{ transaction[1].category }} </td>
-      <td> {{ transaction[1].transaction_id }}</td>
-      <td> {{ transaction[1].timestamp[:-7] }}</td>
-      <td> {{transaction[0].kid_name }} </td>
-      <td> {{ transaction[1].amount }}</td>
-      <td>
-      {% if transaction[1].status==1 %}
-      <span>Successful</span>
-      {% elif transaction[1].status==0 %}
-      <span>Rejected</span>
-      {% else %}
-      <span>Waiting</span>
-      {% endif %}
-      </td>
-    </tr>
-    {% endfor %}
+<body style="overflow-x: hidden;">
+  <div class="row">
+    <div class="col-4 fixed-top">
+      <img src="{{ url_for('static', filename='images/backtohome.png') }}" width="50" alt="back to dashboard"
+        onclick="window.history.back()">
+      <div id="piechart" align="center"></div>
+    </div>
+    <div class="col-8 offset-4">
+      <br>
+      <br>
+      <h2>TRANSACTION HISTORY</h2>
+      <br>
+      <table class="table table-hover">
+        <tr>
+          <th scope="col">Category</th>
+          <th scope="col">Transaction ID</th>
+          <th scope="col">Date & Time</th>
+          <th scope="col">Name</th>
+          <th scope="col">Amount</th>
+          <th scope="col">Status</th>
+        </tr>
+        {% for transaction in transactions.history %}
+        <tr>
+          <th scope="row"> {{ transaction[1].category }} </td>
+          <td> {{ transaction[1].transaction_id }}</td>
+          <td> {{ transaction[1].timestamp[:16] }}</td>
+          <td> {% if transaction[1].category == "K2K"%}
+            <span>{{ transaction[0].kid_name.title() }}</span>
+            {% else %}
+            <span>{{ transaction[0].service_name }}</span>
+            {% endif %}
+          </td>
+          <td>
+            {% if transaction[1].sender_id == transactions.k_id %}
+            <span style="color: red; font-weight: bold;">-{{ transaction[1].amount }}</span>
+            {% else %}
+            <span style="color: green;  font-weight: bold;">+{{ transaction[1].amount }}</span>
+            {% endif %}
+          </td>
+          <td>
+            {% if transaction[1].status==1 %}
+            <span>Successful</span>
+            {% elif transaction[1].status==0 %}
+            <span>Rejected</span>
+            {% else %}
+            <span>Waiting</span>
+            {% endif %}
+          </td>
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
+  </div>
 
 
-  </table>
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+  <script type="text/javascript">
+    // Load google charts
+    google.charts.load('current', { 'packages': ['corechart'] });
+    google.charts.setOnLoadCallback(drawChart);
+
+    // Draw the chart and set the chart values
+    function drawChart() {
+      var data = google.visualization.arrayToDataTable([
+        ['Category', 'Spends'],
+        ['My Buddies', {{ transactions.pie[0] }} ],
+    ['Stationary', {{ transactions.pie[1] }}],
+      ['Food', {{ transactions.pie[2] }}],
+      ['Travel', {{ transactions.pie[3] }}],
+      ['Fun', {{ transactions.pie[4] }}]
+  ]);
+
+    // Optional; add a title and set the width and height of the chart
+    var options = { 'width': 550, 'height': 500, is3D: true, backgroundColor: 'transparent', 'legend': { 'position': 'bottom' }, 'chartArea': { 'width': '100%', 'height': '80%' } };
+
+    // Display the chart inside the <div> element with id="piechart"
+    var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+    chart.draw(data, options);
+  }
+  </script>
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+    integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+    integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+    crossorigin="anonymous"></script>
 </body>
 
 </html>

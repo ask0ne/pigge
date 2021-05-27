@@ -1,9 +1,10 @@
 """Handles Parent Dashboard functionality"""
+from pigge.payment import transaction
 from flask import Blueprint, session, render_template, request, redirect, url_for
 from pigge.pdash.session import TheParent
 from pigge.payment.wallet import TheWallet
 from pigge.payment.payment import p2k
-from pigge.payment.logs import PayRequests, ParentLogs, RequestFunds
+from pigge.payment.logs import PayRequests, ParentLogs, RequestFunds, TransactionLogs
 
 pdash_bp = Blueprint('pdash', __name__, template_folder='templates')
 
@@ -76,7 +77,7 @@ def request_handling():
 def view_transactions():
     if session["id"]:
         logs = ParentLogs(session['id'])
-        return render_template("payment/parent_history.html", transactions=logs.history)
+        return render_template("payment/parent_history.html", logs=logs.history)
     else:
         return redirect(url_for("auth_bp.login"))
 
