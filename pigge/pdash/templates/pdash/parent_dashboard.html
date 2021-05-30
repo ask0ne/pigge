@@ -3,6 +3,7 @@
 
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard</title>
   <style>
     * {
       overflow-x: hidden
@@ -509,9 +510,9 @@
     <img src="{{ url_for('static', filename='images/mylogo1.png') }}" alt="Pigge Logo">
     <a>Hello, {{ user.user.parent_name }}</a>.
     <button class="button button1">Dashboard</button>
-    <button class="button button1" onclick="openNav()"><span>Notifications</button></span>
+    <button class="button button1" onclick="openNav()" name="notify"><span>Notifications</button></span>
     <form method="POST" action="{{ url_for('auth_bp.logout') }}">
-      <button class="button button1" type="submit">Logout</button>
+      <button class="button button1" type="submit" name="logout">Logout</button>
     </form>
   </div>
   <br></br><br></br>
@@ -545,7 +546,7 @@
         <td>
           <form method="POST" action="{{ url_for('pdash.add_funds') }}">
             <input type="number" name="add_funds" id="Add Funds" placeholder="Enter amount">
-            <button class="button3" type="submit" style="vertical-align:middle"><span>Add
+            <button class="button3" type="submit" style="vertical-align:middle" name="FundsTransfer"><span>Add
               </span></button>
           </form>
         </td>
@@ -569,13 +570,13 @@
     <tr>
       <th>View Your transactions</th>
       <td> <a href="{{ url_for('pdash.view_transactions') }}"><button class="button2"
-            style="vertical-align:middle"><span>Click</span></button></a></td>
+            style="vertical-align:middle" name="view_transactions"><span>Click</span></button></a></td>
       </td>
     </tr>
     <tr>
       <th>Monitor Kid's Transactions</th>
       <td> <a href="{{ url_for('kdash.trasnaction_history') }}"><button class="button2"
-            style="vertical-align:middle"><span>Click</span></button></a></td>
+            style="vertical-align:middle" name="kids_history"><span>Click</span></button></a></td>
       </td>
     </tr>
     <tr>
