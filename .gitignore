@@ -1,7 +1,7 @@
-pigge/uploads
+**/uploads/*
 .pytest_cache
 .vscode
-__pycache__
+**/__pycache__
 migrations
 uploads/.gitkeep
 tests/
