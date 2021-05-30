@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+  <title>My Transactions</title>
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -20,7 +21,7 @@
   <div class="row">
     <div class="col-4 fixed-top">
       <img src="{{ url_for('static', filename='images/backtohome.png') }}" width="50" alt="back to dashboard"
-        onclick="window.history.back()">
+        onclick="window.history.back()" name="back_to_home">
       <div id="piechart" align="center"></div>
     </div>
     <div class="col-8 offset-4">
