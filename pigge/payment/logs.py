@@ -8,16 +8,24 @@ class TransactionLogs:
     def __init__(self, wallet_id):
         self.k_id = "K" + wallet_id[1:]
 
-        self.history = db.session.query(Kid, Transaction).filter(Transaction.receiver_id == Kid.kid_id).filter(Transaction.sender_id == self.k_id).all()
-        self.history += db.session.query(Kid, Transaction).filter(Transaction.sender_id == Kid.kid_id).filter(Transaction.receiver_id == self.k_id).filter(Transaction.status == 1).all()
-        self.history += db.session.query(Services, Transaction).filter(Transaction.receiver_id == Services.service_id).filter(Transaction.sender_id == self.k_id).all()
+        self.history = db.session.query(Kid, Transaction).filter(
+            Transaction.receiver_id == Kid.kid_id).filter(Transaction.sender_id == self.k_id).all()
+        self.history += db.session.query(Kid, Transaction).filter(Transaction.sender_id == Kid.kid_id).filter(
+            Transaction.receiver_id == self.k_id).filter(Transaction.status == 1).all()
+        self.history += db.session.query(Services, Transaction).filter(
+            Transaction.receiver_id == Services.service_id).filter(Transaction.sender_id == self.k_id).all()
 
         # For pie chart
-        k2k = db.session.query(func.sum(Transaction.amount)).filter(Transaction.sender_id == self.k_id).filter(Transaction.category=="K2K").all()
-        food = db.session.query(func.sum(Transaction.amount)).filter(Transaction.sender_id == self.k_id).filter(Transaction.receiver_id=="102").all()
-        fun = db.session.query(func.sum(Transaction.amount)).filter(Transaction.sender_id == self.k_id).filter(Transaction.receiver_id=="101").all()
-        travel = db.session.query(func.sum(Transaction.amount)).filter(Transaction.sender_id == self.k_id).filter(Transaction.receiver_id=="103").all()
-        stationary = db.session.query(func.sum(Transaction.amount)).filter(Transaction.sender_id == self.k_id).filter(Transaction.receiver_id=="104").all()
+        k2k = db.session.query(func.sum(Transaction.amount)).filter(
+            Transaction.sender_id == self.k_id).filter(Transaction.category == "K2K").all()
+        food = db.session.query(func.sum(Transaction.amount)).filter(
+            Transaction.sender_id == self.k_id).filter(Transaction.receiver_id == "102").all()
+        fun = db.session.query(func.sum(Transaction.amount)).filter(
+            Transaction.sender_id == self.k_id).filter(Transaction.receiver_id == "101").all()
+        travel = db.session.query(func.sum(Transaction.amount)).filter(
+            Transaction.sender_id == self.k_id).filter(Transaction.receiver_id == "103").all()
+        stationary = db.session.query(func.sum(Transaction.amount)).filter(
+            Transaction.sender_id == self.k_id).filter(Transaction.receiver_id == "104").all()
         self.pie = []
         self.pie.append(k2k.pop()[0])
         self.pie.append(stationary.pop()[0])
@@ -27,14 +35,16 @@ class TransactionLogs:
         for i in range(5):
             if self.pie[i] is None:
                 self.pie[i] = 0
-            print(self.pie[i])
-        
+
 
 class ParentLogs:
     def __init__(self, wallet_id):
         self.p_id = "P" + wallet_id[1:]
-        self.history = Transaction.query.filter_by(sender_id=self.p_id).all()
-
+        self.history = db.session.query(Transaction).filter_by(sender_id=self.p_id).all()
+        print(self.p_id, self.history)
+        for transaction in self.history:
+            print(transaction.amount)
+            print(transaction.transaction_id)
 
 class PayRequests:
     def __init__(self, wallet_id):

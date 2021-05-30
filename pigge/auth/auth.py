@@ -1,3 +1,4 @@
+import os
 from flask import Blueprint, render_template, redirect, request, url_for, session, flash
 from werkzeug.utils import secure_filename
 from pigge.models import *

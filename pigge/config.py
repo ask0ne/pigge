@@ -10,3 +10,4 @@ UPLOAD_FOLDER = "pigge/uploads"
 SECRET_KEY = os.urandom(24)
 SQLALCHEMY_DATABASE_URI = 'postgresql://postgres:admin@localhost/pigge'
 SQLALCHEMY_TRACK_MODIFICATIONS = True
+TESSERACT_LOCATION = 'C:\\Users\\kawad\\AppData\\Local\\Tesseract-OCR\\tesseract.exe'

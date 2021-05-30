@@ -1,13 +1,13 @@
 """
 Contains extra functions necessary for auth module independant of the database.
 """
-import os
 import cv2
 import bcrypt
 import pytesseract
+from pigge.config import TESSERACT_LOCATION
 
 ALLOWED_EXTENSIONS = {"png", "jpg", "jpeg"}
-pytesseract.pytesseract.tesseract_cmd = 'C:\\Users\\kawad\\AppData\\Local\\Tesseract-OCR\\tesseract.exe'
+pytesseract.pytesseract.tesseract_cmd = TESSERACT_LOCATION
 
 
 def allowed_file(filename):
