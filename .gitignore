@@ -1,5 +1,6 @@
-uploads/*
-.vscode/
+pigge/uploads
+.pytest_cache
+.vscode
 __pycache__
 migrations
 uploads/.gitkeep
