@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<title>Payments</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
 body {
@@ -35,13 +36,13 @@ input[type=submit]{
 </style>
 </head>
 <body>
-<a href="{{ url_for('kdash.kid_dashboard')}}"><img src="{{ url_for('static', filename='images/backtohome.png') }}" width="50" alt="back to dashboard"></a>
+<a href="{{ url_for('kdash.kid_dashboard')}}"><img src="{{ url_for('static', filename='images/backtohome.png') }}" width="50" alt="back to dashboard" name="backhome"></a>
 <div class="content">
   <img src="{{ url_for('static', filename='images/trans.gif') }}" width="400">
   <form method="POST">
   <h1>ID</h1><input type="text" name="receiver_wallet_id" placeholder="Enter PIGGE ID of your buddy" minlength="10" maxlength="10" required><br>
   <h1>&#8377</h1> <input type="number" name="amount" placeholder="Enter amount to pay" required min="1"><br><br><br>
-  <input type="submit" value="GO">
+  <input type="submit" value="GO" name="GO">
   </form>
 </div>
 
