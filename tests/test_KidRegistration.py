@@ -27,19 +27,19 @@ def test_KidRegistration_blankEntries(setup):
     driver.get(URL)
     driver.find_element_by_name("name").send_keys("Barry")
     driver.find_element_by_name("birthdate").send_keys("")
-    driver.find_element_by_name("gender").send_keys("Male")
+    driver.find_element_by_xpath("//input[@value='B']").click()
     driver.find_element_by_name("email").send_keys("barry@mail.com")
-    driver.find_element_by_name("pin").send_keys("")
+    driver.find_element_by_name("pin").send_keys("5651")
     driver.find_element_by_name("register_kid").click()
     assert driver.title == "Kid's Registration"
 
 
 def test_KidRegistration_invalidEntries(setup):
     driver.get(URL)
-    driver.find_element_by_name("name").send_keys("Ron14")
-    driver.find_element_by_name("birthdate").send_keys("6/6/12")
-    driver.find_element_by_name("gender").send_keys("Female")
+    driver.find_element_by_name("name").send_keys("Ronie14")
+    driver.find_element_by_name("birthdate").send_keys("02-01-2011")
+    driver.find_element_by_xpath("//input[@value='G']").click()
     driver.find_element_by_name("email").send_keys("ron14@gmail.com")
-    driver.find_element_by_name("pin").send_keys("24788")
+    driver.find_element_by_name("pin").send_keys("247")
     driver.find_element_by_name("register_kid").click()
     assert driver.title == "Kid's Registration"  # check..
