@@ -34,11 +34,11 @@ def test_Valid_Parent_Registration():
 
 def test_Valid_Kid_Registration():
     driver.find_element_by_name("name").send_keys("Jasper")
-    driver.find_element_by_name("birthdate").send_keys("06/06/2010")
-    driver.find_element_by_name("gender").send_keys("Male")
+    driver.find_element_by_name("birthdate").send_keys("12-07-2009")
+    driver.find_element_by_xpath("//input[@value='B']").click()
     driver.find_element_by_name("email").send_keys("jasper@mail.com")
     driver.find_element_by_name("pin").send_keys("1234")
-    driver.find_element_by_name("file").send_keys("id_1.png")
+    driver.find_element_by_name("file").send_keys("C:\myfile\id_1.png") # try to write entire path
     driver.find_element_by_name("register_kid").click()
     assert driver.title == "Login"
 
@@ -111,8 +111,9 @@ def test_KDash_Pay_Back():
 
 
 def test_KDash_Pay_Initiate():
-    driver.find_element_by_name("receiver_wallet_id").click()
-    driver.find_element_by_name("amount").click()
+    driver.find_element_by_name("pay_buddy").click()
+    driver.find_element_by_name("receiver_wallet_id").send_keys("W") # fill some exsisting
+    driver.find_element_by_name("amount").send_keys("250")
     driver.find_element_by_name("GO").click()
     assert driver.title == "Confirmation Required"
 
@@ -125,15 +126,14 @@ def test_KDash_PayConfirm():
 
 
 def test_KDash_PayServices():
-    driver.find_element_by_name("Services").send_keys("10")
-    driver.find_element_by_id("Pay_Services").send_keys("20")
+    driver.find_element_by_name("Services").send_keys("food")
+    driver.find_element_by_id("Pay_Services").send_keys("399")
     driver.find_element_by_name("K2B").click()
     assert driver.title == "My Dashboard"
 
 
 def test_KDash_RequestFunds():
-    driver.find_element_by_name("message").send_keys(
-        "Hi, Dad. I need money to buy my new set of school books.")
+    driver.find_element_by_name("message").send_keys("Hi, Dad. I need money to buy my new set of school books.")
     driver.find_element_by_name("req_amount").send_keys("2099")
     driver.find_element_by_name("Request").click()
     assert driver.title == "My Dashboard"
