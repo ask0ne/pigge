@@ -28,7 +28,7 @@
 						<button class="tablinks" onclick="openCity(event, 'parent')" id="defaultOpen">Parent</button>
 					</div>
 					<div class="tab-inner">
-						<button class="tablinks" onclick="openCity(event, 'kid')">Kid</button>
+						<button name="kid_login" class="tablinks" onclick="openCity(event, 'kid')">Kid</button>
 					</div>
 				</div>
 				<form class="form-detail" action="{{ url_for('auth_bp.login_parent') }}" method="post">
