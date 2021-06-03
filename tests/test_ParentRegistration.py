@@ -24,7 +24,6 @@ def test_ParentRegistration_valid(setup):
     sleep(5)
     assert driver.title == "Login"  # check..
 
-
 def test_ParentRegistration_blankEntries(setup):
     driver.get(URL)
     driver.find_element_by_name("pname").send_keys("Jimmy")

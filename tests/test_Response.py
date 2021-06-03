@@ -10,69 +10,61 @@ def setup():
     driver = webdriver.Chrome(executable_path="chromedriver.exe")
     driver.maximize_window()
 
+
 def test_HOME_page(setup):
     driver.get(URL)
     assert driver.title == "Pigge Home Page"
 
 
 def test_Registration_page():
-    sleep(2)
     driver.find_element_by_name("Register").click()
     assert driver.title == "Parent's Registration"
 
-def back_button():
-    sleep(2)
-    driver.find_element_by_name("").click()
-    assert driver.title == "Pigge Home Page"
 
 def test_LOGIN_page():
-    sleep(2)
+    driver.get(URL)
     driver.find_element_by_name("Login").click()
     assert driver.title == "Login"
 
+
 def test_Parent_login():
-    sleep(2)
+    sleep(1)
     driver.find_element_by_name("p_email").send_keys("bob@mail.com")
     driver.find_element_by_name("password").send_keys("Bob@12345")
-    driver.find_element_by_name("Log_me_in").click()
+    driver.find_element_by_name("register").click()
     assert driver.title == "Dashboard"
 
+
 def test_PDash_AddFunds():
-    sleep(2)
-    driver.find_element_by_name("add_funds").send_keys("300")
+    sleep(1)
+    driver.find_element_by_name("add_funds").send_keys("1000")
     driver.find_element_by_name("FundsTransfer").click()
     assert driver.title == "Dashboard"
 
 
 def test_PDash_Trans_History():
-    sleep(2)
+    sleep(1)
     driver.find_element_by_name("view_transactions").click()
     assert driver.title == "Transaction History"
 
 
 def test_PDash_Back_fromHistory():
-    sleep(2)
+    sleep(1)
     driver.find_element_by_name("back_home").click()
     assert driver.title == "Dashboard"
 
 
 def test_PDash_KidHistory():
-    sleep(2)
+    sleep(1)
     driver.find_element_by_name("kids_history").click()
     assert driver.title == "My Transactions"
 
 
 def test_PDash_Back_KidHistory():
-    sleep(2)
+    sleep(1)
     driver.find_element_by_name("back_to_home").click()
     assert driver.title == "Dashboard"
 
-
-def test_PDash_Notifications():
-    sleep(2)
-    driver.find_element_by_name("notify").click()
-    # try this,can't find any way to test this.. else put dashboard
-    assert driver.find_element_by_id("myNav")
 
 
 def test_PDash_Logout():
@@ -81,8 +73,11 @@ def test_PDash_Logout():
     assert driver.title == "Pigge Home Page"
 
 
-def test_Kid_login(setup):
-    driver.get(URL + "/login")  # login url
+def test_Kid_login():
+    sleep(5)
+    driver.find_element_by_name("Login").click()
+    sleep(10)
+    driver.find_element_by_name("kid_login").click()
     driver.find_element_by_name("k_email").send_keys("aditi@mail.com")
     driver.find_element_by_name("pin").send_keys("1234")
     driver.find_element_by_name("Log_me_in").click()
@@ -105,7 +100,7 @@ def test_KDash_Pay_Initiate():
     sleep(1)
     driver.find_element_by_name("pay_buddy").click()
     driver.find_element_by_name("receiver_wallet_id").send_keys(
-        "W")  # fill some exsisting
+        "W111808003")  # fill some exsisting
     driver.find_element_by_name("amount").send_keys("250")
     driver.find_element_by_name("GO").click()
     assert driver.title == "Confirmation Required"
@@ -115,7 +110,7 @@ def test_KDash_PayConfirm():
     sleep(1)
     driver.find_element_by_id("confirm").click()
     # time lapse, sufficient ?
-    time.sleep(15)
+    sleep(15)
     assert driver.title == "My Dashboard"
 
 
@@ -132,6 +127,7 @@ def test_KDash_RequestFunds():
     driver.find_element_by_name("message").send_keys("Hi, Dad. I need money to buy my new set of school books.")
     driver.find_element_by_name("req_amount").send_keys("2099")
     driver.find_element_by_name("Request").click()
+    sleep(10)
     assert driver.title == "My Dashboard"
 
 
