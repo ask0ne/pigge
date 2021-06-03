@@ -485,7 +485,7 @@
     <h2 style="color:white;text-align:center;font-family: Lucida Console, Monospace; margin-top:40px;color:#F3D8E0;">
       Notification Panel</h2>
     <img class="a1" src="{{ url_for('static', filename='images/notif_1.gif') }}">
-    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">X</a>
+    <a href="javascript:void(0)" name="close_notification" class="closebtn" onclick="closeNav()">X</a>
     <div class="overlay-content">
       <table1>
         {% for log in logs.history %}

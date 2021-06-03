@@ -38,7 +38,7 @@ def trasnaction_history():
 
 @kdash_bp.route("/requesting_funds", methods=["POST"])
 def request_funds():
-    amount = int(request.form.get('amount'))
+    amount = int(request.form.get('req_amount'))
     message = request.form.get('message')
     new_request = RequestFunds(session['id'])
     if new_request.is_unique():
