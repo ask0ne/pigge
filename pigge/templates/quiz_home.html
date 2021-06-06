@@ -1,96 +1,101 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<title>QUIZ</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<style>
+	<title>QUIZ</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<style>
+		body {
+			background-image: url("{{ url_for('static', filename='quiz_back.jpg') }}");
+			background-repeat: no-repeat;
+			background-size: cover;
+			overflow-x: hidden;
+			margin: 0;
+			max-width: 100%;
+			font-family: "Lucida Console", "Courier New", monospace;
+			color: beige;
+		}
 
-body	
-	{
-	background-image: url("quiz_back.jpg");
-	background-repeat: no-repeat;
-	background-size: cover;
-	overflow-x:hidden;
-	margin: 0;
-	max-width:100%; 
-	font-family: "Lucida Console", "Courier New", monospace;
-	color:beige;
-	}
+		header_anim {
+			position: relative;
+			animation: mymove 7s infinite;
+			animation-direction: alternate-reverse;
+		}
 
-header_anim
-	{
-	position: relative;
-  	animation: mymove 7s infinite; 
-  	animation-direction:alternate-reverse;
-	}
+		@keyframes mymove {
+			from {
+				left: 0px;
+			}
 
-@keyframes mymove 
-	{
-  	from {left: 0px;}
-  	to {left: 180px;}
-	}
+			to {
+				left: 180px;
+			}
+		}
 
-.column 
-	{
-  	 flex: 33.33%;
-  	 padding: 5px;
-	}
+		.column {
+			flex: 33.33%;
+			padding: 5px;
+		}
 
-.row 
-	{
-  	  display: flex;
-	  background-image:url("bcg.jpg");	
-}
+		.row {
+			display: flex;
+			background-image: url("{{ url_for('static', filename='bcg.jpg') }}");
+		}
 
-.my
-{
-text-align:center;
-}
+		.my {
+			text-align: center;
+		}
 
 
-figcaption {
-  background-color: black;
-  color: white;
-  font-size:15px;
-  padding: 2px;
-  text-align: center;
-}</style>
+		figcaption {
+			background-color: black;
+			color: white;
+			font-size: 15px;
+			padding: 2px;
+			text-align: center;
+		}
+	</style>
 
 <body>
-<a href="{{url_for('kdash.kid_dashboard')}}"><img src="backtohome.png" width="40" alt="back to dashboard" name="backtoDash"></a>
+	<a href="{{url_for('kdash.kid_dashboard')}}"><img src="{{url_for('static', filename='images/back_button.png')}}"
+			width="40" alt="back to dashboard" name="backtoDash"></a>
 
 	<header_anim>
-		<h1 style="color:beige; text-align:center; font-size:45px; font-style: oblique; margin-bottom:60px;">Welcome to the Quiz</h1>
+		<h1 style="color:beige; text-align:center; font-size:45px; font-style: oblique; margin-bottom:60px;">Welcome to
+			the Quiz</h1>
 	</header_anim>
-<div class="my">
-	<h1>
-Hello, {{Kid_User}}</h1>
-<h2>
-<br> Think you are a finance whizz.<br>
-Take up this fun quiz to assess yourself !
-</h2>
-<img src="playnow.gif" width="270">	
+	<div class="my">
+		<h1>
+			Hello, Kiddo</h1>
+		<h2>
+			<br> Think you are a finance whizz.<br>
+			Take up this fun quiz to assess yourself !
+		</h2>
+		<img src="{{ url_for ('static', filename='playnow.gif') }}" width="270">
 
-<br><br>
-	<div class="row">
-		<div class="column"  style="width:100%;">
-		<img src="money.gif" alt="money" style="width:200px;height:200px;">
-		<figcaption>Saving</figcaption>
-  		</div>
-  		<div class="column"  style="width:100%;">
-    		<img src="cashless.gif" alt="cashless" style="width:200px;height:200px;">
-		<figcaption>Spending</figcaption>
+		<br><br>
+		<div class="row">
+			<div class="column" style="width:100%;">
+				<img src="{{ url_for ('static', filename='money.gif') }}" alt="money" style="width:200px;height:200px;">
+				<figcaption>Saving</figcaption>
+			</div>
+			<div class="column" style="width:100%;">
+				<img src="{{ url_for ('assets', filename='cashless.gif') }}" alt="cashless"
+					style="width:200px;height:200px;">
+				<figcaption>Spending</figcaption>
 
-  		</div>
-  		<div class="column"  style="width:100%;">
-    		<img src="digital.gif" alt="digital" style="width:200px;height:200px;">
-		<figcaption>Sharing</figcaption>
+			</div>
+			<div class="column" style="width:100%;">
+				<img src="{{ url_for ('static', filename='digital.gif') }}" alt="digital"
+					style="width:200px;height:200px;">
+				<figcaption>Sharing</figcaption>
 
+			</div>
 		</div>
-</div>
 	</div>
-	
-		
+
+
 </body>
 </head>
+
 </html>

@@ -203,7 +203,8 @@
 </head>
 
 <body>
-  <a href="{{ url_for('kdash.kid_dashboard')}}"><img src="{{ url_for('static', filename='images/backtohome.png') }}" width="40" title="back to dashboard"></a>
+  <a href="{{ url_for('kdash.kid_dashboard')}}"><img src="{{ url_for('static', filename='images/backtohome.png') }}"
+      width="40" title="back to dashboard"></a>
 
   <div class="slideshow-container">
 
@@ -302,10 +303,11 @@
         <img src="{{ url_for('static', filename='images/qz.gif') }}" width="100px">
 
         <h2 style="color:beige;">If you have sufficient balance in pigge <br>what would be your priority need ?<br></h2>
-        <input type="radio" id="need" name="image"> A.<img src="{{ url_for('static', filename='images/need.png') }} " alt="Need" style="width:200px; height:150px;">
+        <input type="radio" id="need" name="image"> A.<img src="{{ url_for('static', filename='images/need.png') }} "
+          alt="Need" style="width:200px; height:150px;">
 
-        <input type="radio" id="want" name="image" style="margin-left:100px"> B.<img src="{{ url_for('static', filename='images/want.png') }}" alt="Want"
-          style="width:200px; height:150px;"><br>
+        <input type="radio" id="want" name="image" style="margin-left:100px"> B.<img
+          src="{{ url_for('static', filename='images/want.png') }}" alt="Want" style="width:200px; height:150px;"><br>
 
         <button class="submit_btn" onclick="submitAnswer_4()">Check</button>
       </div>
@@ -348,11 +350,11 @@
         <img src="{{ url_for('static', filename='images/qz.gif') }}" width="100px">
 
         <h2 style="color:beige;">Which of the follwing offers can<br> bag you more discounted rates ?<br></h2>
-        <input type="radio" id="upto" name="img" value="right"> A.<img src="{{ url_for('static', filename='images/upto.png') }}" alt="upto"
-          style="width:200px; height:150px;">
+        <input type="radio" id="upto" name="img" value="right"> A.<img
+          src="{{ url_for('static', filename='images/upto.png') }}" alt="upto" style="width:200px; height:150px;">
 
-        <input type="radio" id="flat" name="img" value="wrong" style="margin-left:100px"> B.<img src="{{ url_for('static', filename='images/flat.png') }}"
-          alt="flat" style="width:200px; height:150px;"><br>
+        <input type="radio" id="flat" name="img" value="wrong" style="margin-left:100px"> B.<img
+          src="{{ url_for('static', filename='images/flat.png') }}" alt="flat" style="width:200px; height:150px;"><br>
 
         <button class="submit_btn" onclick="submitAnswer_6()">Check</button>
       </div>
