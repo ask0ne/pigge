@@ -20,6 +20,8 @@ def test_KidRegistration_valid(setup):
     driver.find_element_by_xpath("//input[@value='B']").click()
     driver.find_element_by_name("email").send_keys("jhonK@mail.com")
     driver.find_element_by_name("pin").send_keys("4110")
+    driver.find_element_by_name("file").send_keys("id_1.jpg")
+    driver.find_element_by_name("register_kid").click()
     assert driver.title == "Kid's Registration"  # check..
 
 
@@ -30,6 +32,7 @@ def test_KidRegistration_blankEntries(setup):
     driver.find_element_by_xpath("//input[@value='B']").click()
     driver.find_element_by_name("email").send_keys("barry@mail.com")
     driver.find_element_by_name("pin").send_keys("5651")
+     driver.find_element_by_name("file").send_keys("")
     driver.find_element_by_name("register_kid").click()
     assert driver.title == "Kid's Registration"
 
@@ -41,5 +44,6 @@ def test_KidRegistration_invalidEntries(setup):
     driver.find_element_by_xpath("//input[@value='G']").click()
     driver.find_element_by_name("email").send_keys("ron14@gmail.com")
     driver.find_element_by_name("pin").send_keys("247")
+     driver.find_element_by_name("file").send_keys("id_stud.jpg")
     driver.find_element_by_name("register_kid").click()
     assert driver.title == "Kid's Registration"  # check..
