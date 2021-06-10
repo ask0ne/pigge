@@ -22,7 +22,7 @@ def kid_dashboard():
 @kdash_bp.route("/pay-services", methods=["POST"])
 def pay_services():
     val = int(request.form.get('amount'))
-    category = int(request.form.get('Services'))
+    category = request.form.get('Services')
     k2b(val, category)
     return redirect(url_for('kdash.kid_dashboard'))
 

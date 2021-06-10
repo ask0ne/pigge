@@ -8,24 +8,21 @@ class TransactionLogs:
     def __init__(self, wallet_id):
         self.k_id = "K" + wallet_id[1:]
 
-        k2k_history = db.session.query(Kid, Transaction).filter(
-            Transaction.receiver_id == Kid.kid_id).filter(Transaction.sender_id == self.k_id).all()
-        history_k2k = db.session.query(Kid, Transaction).filter(Transaction.sender_id == Kid.kid_id).filter(
-            Transaction.receiver_id == self.k_id).filter(Transaction.status == 1).all()
-        k2b_history = db.session.query(Services, Transaction).filter(
-            Transaction.receiver_id == Services.service_id).filter(Transaction.sender_id == self.k_id).all()
+        k2k_history = db.session.query(Kid, Transaction).filter(Transaction.receiver_id == Kid.kid_id).filter(Transaction.sender_id == self.k_id).all()
+        history_k2k = db.session.query(Kid, Transaction).filter(Transaction.sender_id == Kid.kid_id).filter(Transaction.receiver_id == self.k_id).filter(Transaction.status == 1).all()
+        k2b_history = db.session.query(Services, Transaction).filter(Transaction.receiver_id == Services.service_id).filter(Transaction.sender_id == self.k_id).all()
         self.history = k2k_history + history_k2k + k2b_history
         # For pie chart
         k2k = db.session.query(func.sum(Transaction.amount)).filter(
             Transaction.sender_id == self.k_id).filter(Transaction.category == "K2K").all()
         food = db.session.query(func.sum(Transaction.amount)).filter(
-            Transaction.sender_id == self.k_id).filter(Transaction.receiver_id == "102").all()
+            Transaction.sender_id == self.k_id).filter(Transaction.receiver_id == "S202102").all()
         fun = db.session.query(func.sum(Transaction.amount)).filter(
-            Transaction.sender_id == self.k_id).filter(Transaction.receiver_id == "101").all()
+            Transaction.sender_id == self.k_id).filter(Transaction.receiver_id == "S202101").all()
         travel = db.session.query(func.sum(Transaction.amount)).filter(
-            Transaction.sender_id == self.k_id).filter(Transaction.receiver_id == "103").all()
+            Transaction.sender_id == self.k_id).filter(Transaction.receiver_id == "S202104").all()
         stationary = db.session.query(func.sum(Transaction.amount)).filter(
-            Transaction.sender_id == self.k_id).filter(Transaction.receiver_id == "104").all()
+            Transaction.sender_id == self.k_id).filter(Transaction.receiver_id == "S202103").all()
         self.pie = []
         self.pie.append(k2k.pop()[0])
         self.pie.append(stationary.pop()[0])

@@ -15,6 +15,9 @@ class TheTransaction:
         self.receiver = y
         self.amount = amount
         self.category = category
+        if self.category == "K2K":
+            self.receiver = "K" + y[1:]
+              
         self.payment_status = 1
 
     def check_dependencies(self):

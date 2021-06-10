@@ -323,10 +323,10 @@
         <td>
           <select name="Services"
             style="background-color:#D7CCC8; border-radius:4px; font-family:Lucida Console, Monospace;">
-            <option value="101" style="background-color:#B2DFDB;">Fun</option>
-            <option value="102" style="background-color:#FFCDD2;">Food</option>
-            <option value="103" style="background-color:#EF9A9A;">Travel</option>
-            <option value="104" style="background-color:#BBDEFB;">Stationary</option>
+            <option value="S202101" style="background-color:#B2DFDB;">Fun</option>
+            <option value="S202102" style="background-color:#FFCDD2;">Food</option>
+            <option value="S202103" style="background-color:#BBDEFB;">Stationary</option>
+            <option value="S202104" style="background-color:#EF9A9A;">Travel</option>
           </select><br><br>
 
           <input name="amount" type="number" id="Pay_Services" placeholder="Enter amount">
@@ -348,15 +348,16 @@
             <span id="maximum_count">/ 40</span>
           </div>
           <br><br><input type="number" name="req_amount" id="Request Funds" placeholder="Enter amount">
-          <button class="button2" style="vertical-align:middle" type="submit" name="Request"><span>Request</span></button>
+          <button class="button2" style="vertical-align:middle" type="submit"
+            name="Request"><span>Request</span></button>
         </td>
       </form>
     </tr>
 
     <tr>
       <th>View Your transactions</th>
-      <td><a href="{{ url_for('kdash.trasnaction_history') }}"> <button class="button2"
-            style="vertical-align:middle" name="my_spends"><span>Click</span></button></a></td>
+      <td><a href="{{ url_for('kdash.trasnaction_history') }}"> <button class="button2" style="vertical-align:middle"
+            name="my_spends"><span>Click</span></button></a></td>
       </td>
     </tr>
     <tr>

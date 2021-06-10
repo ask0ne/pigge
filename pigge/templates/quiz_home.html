@@ -6,7 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<style>
 		body {
-			background-image: url("{{ url_for('static', filename='quiz_back.jpg') }}");
+			background-image: url("{{ url_for('static', filename='images/quiz_back.jpg') }}");
 			background-repeat: no-repeat;
 			background-size: cover;
 			overflow-x: hidden;
@@ -71,22 +71,23 @@
 			<br> Think you are a finance whizz.<br>
 			Take up this fun quiz to assess yourself !
 		</h2>
-		<img src="{{ url_for ('static', filename='playnow.gif') }}" width="270">
-
+		<a href="{{ url_for('load_actual_quiz')}}">
+		<img src="{{ url_for ('static', filename='images/playnow.gif') }}" width="270">
+	</a>
 		<br><br>
 		<div class="row">
 			<div class="column" style="width:100%;">
-				<img src="{{ url_for ('static', filename='money.gif') }}" alt="money" style="width:200px;height:200px;">
+				<img src="{{ url_for ('static', filename='images/money.gif') }}" alt="money" style="width:200px;height:200px;">
 				<figcaption>Saving</figcaption>
 			</div>
 			<div class="column" style="width:100%;">
-				<img src="{{ url_for ('assets', filename='cashless.gif') }}" alt="cashless"
+				<img src="{{ url_for ('static', filename='images/cashless.gif') }}" alt="cashless"
 					style="width:200px;height:200px;">
 				<figcaption>Spending</figcaption>
 
 			</div>
 			<div class="column" style="width:100%;">
-				<img src="{{ url_for ('static', filename='digital.gif') }}" alt="digital"
+				<img src="{{ url_for ('static', filename='images/digital.gif') }}" alt="digital"
 					style="width:200px;height:200px;">
 				<figcaption>Sharing</figcaption>
 

@@ -56,6 +56,7 @@ class TheService:
         # Category - Fun, Food, Travel, Stationary
         print(category)
         self.service = Services.query.filter_by(service_id=str(category)).first()
+        print(self.service)
 
     def checkout(self, amount):
         self.service.balance += amount
