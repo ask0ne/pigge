@@ -8,13 +8,13 @@ class TransactionLogs:
     def __init__(self, wallet_id):
         self.k_id = "K" + wallet_id[1:]
 
-        self.history = db.session.query(Kid, Transaction).filter(
+        k2k_history = db.session.query(Kid, Transaction).filter(
             Transaction.receiver_id == Kid.kid_id).filter(Transaction.sender_id == self.k_id).all()
-        self.history += db.session.query(Kid, Transaction).filter(Transaction.sender_id == Kid.kid_id).filter(
+        history_k2k = db.session.query(Kid, Transaction).filter(Transaction.sender_id == Kid.kid_id).filter(
             Transaction.receiver_id == self.k_id).filter(Transaction.status == 1).all()
-        self.history += db.session.query(Services, Transaction).filter(
+        k2b_history = db.session.query(Services, Transaction).filter(
             Transaction.receiver_id == Services.service_id).filter(Transaction.sender_id == self.k_id).all()
-
+        self.history = k2k_history + history_k2k + k2b_history
         # For pie chart
         k2k = db.session.query(func.sum(Transaction.amount)).filter(
             Transaction.sender_id == self.k_id).filter(Transaction.category == "K2K").all()
