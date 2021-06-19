@@ -293,7 +293,8 @@
 
   <div class="sidebar">
     <img src="{{ url_for('static', filename='images/mylogo1.png') }}" alt="Pigge Logo">
-    <a>Hello, {{ user.kid_name }}</a>.
+    <a>Hello,<br>{{ user.kid_name }}</a>
+    <a>{{ wallet.wallet.wallet_id }}</a>
     <button class="button button1">Dashboard</button>
     <form method="POST" action="{{ url_for('load_quiz')}}">
       <button class="button button1" type="submit" name="my_quiz">Quiz</button>

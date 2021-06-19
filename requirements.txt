@@ -36,7 +36,6 @@ bcrypt == 3.2.0
 opencv_python == 4.5.1.48
 
 # D:\PythonProjects\pigge\pigge\auth\extras.py: 6
-pytesseract == 0.3.7
 
 # D:\PythonProjects\pigge\tests\test_Login.py: 3
 # D:\PythonProjects\pigge\tests\test_ParentRegistration.py: 2

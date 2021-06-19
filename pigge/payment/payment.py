@@ -47,25 +47,29 @@ def k2b(amount, cat):
     wallet_id = session['id']
     kid_id = "K" + wallet_id[1:]
     s_wallet = TheWallet(wallet_id)
-    s_wallet.sub_funds(amount)
-    receiver = TheService(cat)
-    transaction = TheTransaction(kid_id, cat, amount, category="K2B")
-    transaction_status = execute_transaction(transaction, s_wallet, amount)
-    receiver.checkout(amount)
-    transaction.db_commit()
+    if s_wallet.sub_funds(amount):
+        receiver = TheService(cat)
+        transaction = TheTransaction(kid_id, cat, amount, category="K2B")
+        transaction_status = execute_transaction(transaction, s_wallet, amount)
+        receiver.checkout(amount)
+        transaction.db_commit()
     return render_template("payment/transaction_status.html", transaction_status=transaction_status)
 
 
 def execute_transaction(transaction, s_wallet, amount):
     if transaction.check_dependencies():
         # 2FA ON
-        s_wallet.sub_funds(amount)
-        s_wallet.onHold(amount)
-        return "Parent Verification Required!"
+        if s_wallet.sub_funds(amount):
+            s_wallet.onHold(amount)
+            return "Parent Verification Required!"
+        else:
+            return "Insufficient Balance"
     else:
         # 2FA OFF
-        s_wallet.sub_funds(amount)
-        return "Payment Successful!"
+        if s_wallet.sub_funds(amount):
+            return "Payment Successful!"
+        else:
+            return "Insufficient Balance"
 
 
 @payment_bp.route("/pay-another-kid", methods=["GET", "POST"])

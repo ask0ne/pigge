@@ -1,3 +1,4 @@
+import re
 from pigge.models import db, Wallet, Services
 
 
@@ -21,7 +22,12 @@ class TheWallet:
         if self.wallet.restrict_bal >= val:
             self.wallet.balance -= val
             self.wallet.restrict_bal -= val
-        db.session.commit()
+            db.session.commit()
+            return True
+        else:
+            return False
+
+        
 
     def onHold(self, val):
         self.wallet.on_hold += val
@@ -54,9 +60,7 @@ class TheWallet:
 class TheService:
     def __init__(self, category):
         # Category - Fun, Food, Travel, Stationary
-        print(category)
         self.service = Services.query.filter_by(service_id=str(category)).first()
-        print(self.service)
 
     def checkout(self, amount):
         self.service.balance += amount
